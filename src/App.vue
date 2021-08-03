@@ -29,6 +29,9 @@ input:focus{
 textarea:focus{
   outline: none;
 }
+ul li{
+  list-style: none;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
