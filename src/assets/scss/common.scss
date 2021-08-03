@@ -1,0 +1,38 @@
+/* 
+---색상 설정---
+*/
+$main-txt: #222;
+
+$black: #000;
+
+$gray-1: #eaeaea;
+$gray-2: #ccc;
+$gray-3: #999;
+$gray-4: #666;
+
+/* 
+---기본 HTML 설정---
+*/
+html {
+  font-size: 16px;
+
+  input:focus {
+    outline: none;
+  }
+
+  textarea:focus {
+    outline: none;
+  }
+
+  ul li {
+    list-style: none;
+  }
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $main-txt;
+}

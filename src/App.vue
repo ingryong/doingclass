@@ -18,19 +18,22 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 html {
   font-size:16px;
-}
-input:focus{
-  outline: none;
-}
-textarea:focus{
-  outline: none;
-}
-ul li{
-  list-style: none;
+
+  input:focus{
+    outline: none;
+  }
+
+  textarea:focus{
+    outline: none;
+  }
+
+  ul li{
+    list-style: none;
+  }
 }
 
 #app {
@@ -38,6 +41,7 @@ ul li{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $main-txt;
 }
+
 </style>
