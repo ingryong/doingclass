@@ -4,7 +4,7 @@
         <router-link id="nav_home" to="/">Home</router-link>
     </li>
     <li>
-        <router-link id="nav_about" to="/oclist">온라인 클래스</router-link>
+        <router-link id="nav_oclist" to="/oclist">온라인 클래스</router-link>
     </li>
     <li>
         <router-link id="nav_about" to="/about">어바웃</router-link>

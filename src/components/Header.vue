@@ -8,8 +8,8 @@
         <div class="nav_top2">
           <input type="text" placeholder="배우고 싶은 것이 있나요?"/><i class="fas fa-search"></i></div>
         <div class="nav_top3">
-          <a> 로그인 </a>
-          <a> 회원가입 </a>
+          <router-link to="/login"> 로그인 </router-link>
+          <router-link to="/join"> 회원가입 </router-link>
         </div>
       </div>
       <div class="nav_btm">
