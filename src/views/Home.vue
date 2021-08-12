@@ -1,64 +1,51 @@
 <template>
   <div>
     <TitleBaner></TitleBaner>
-    <div id="home-list01">
-      <h1 class="ListTitle">Let's do it! <span class="sub_title">바로 수강 가능한 클래스</span></h1>
+    <div id="home-list01-bg">
       <HomeList01></HomeList01>
     </div>
-    <div id="home-list-bg">
-      <div id="home-list02">
-        <h1 class="ListTitle">NEW & BEST <span class="sub_title">신규/베스트 VOD</span></h1>
-        <HomeList01></HomeList01>
-      </div>
+    <div id="home-list02-bg">
+        <HomeList02></HomeList02>
+    </div>
+    <div id="home-oclist-bg">
+      <OCList></OCList>
     </div>
   </div>
-
 </template>
 
 <script>
-import HomeList01 from '@/components/CardList/List01.vue'
-import TitleBaner from '@/components/CardList/TitleBaner.vue'
+import HomeList01 from '@/components/Home/List01.vue'
+import HomeList02 from '@/components/Home/List02.vue'
+import TitleBaner from '@/components/Home/TitleBaner.vue'
+import OCList from '@/components/Home/OCList.vue'
+import OnlineClass from '@/assets/data/onlineclass.js'
 
-export default { components: { HomeList01, TitleBaner } }
+export default {
+  data () {
+    return {
+      OnlineClass: OnlineClass
+    }
+  },
+  components: { HomeList01, HomeList02, TitleBaner, OCList }
+}
 </script>
 
 <style lang="scss">
 
-#home-list01{
-  width:1200px;
-  margin:auto;
-  padding: 50px 0px;
+#home-list01-bg{
+  background:white;
+  padding-bottom:50px;
+}
+.ListTitle{
   text-align: left;
-  overflow: hidden;
 
-  .ListTitle{
-    text-align: left;
-
-    .sub_title{
-        font-size:1.1rem;
-        font-weight: 400;
-      }
+  .sub_title{
+      font-size:1.1rem;
+      font-weight: 400;
   }
 }
-#home-list-bg {
+#home-list02-bg{
   background: $gray-1;
-
-  #home-list02{
-    width:1000px;
-    margin:auto;
-    padding: 50px 0px;
-    text-align: left;
-    overflow: hidden;
-
-    .ListTitle{
-      text-align: left;
-
-      .sub_title{
-          font-size:1.1rem;
-          font-weight: 400;
-        }
-    }
-  }
+  padding-bottom:50px;
 }
-
 </style>

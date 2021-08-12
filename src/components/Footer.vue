@@ -3,7 +3,7 @@
     <div id="footer">
         <div class="left">
             <h3>SITEMAP</h3>
-            <MenuList/>
+            <MenuList style="dispaly:table; margin-left:0px;"/>
         </div>
         <div class="center">
             <h3>SERVICE</h3>
