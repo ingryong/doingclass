@@ -3,16 +3,18 @@
     <h1 class="ListTitle">온라인 클래스 <span class="sub_title">전문가들의 OnlineClass</span></h1>
     <ul>
         <li v-for="list in OnlineClass" :key="list.id">
-        <img :src="list.리스트이미지"/>
-        <span class="ctg">{{ list.카테고리1 }} | {{list.카테고리2}} </span>
-        <span class="tt">{{ list.제목 }}</span>
+        <a :href="`/ocdetail/${list.id}`">
+        <img :src="list.listimg"/>
+        <span class="ctg">{{ list.category1 }} | {{list.category2}} </span>
+        <span class="tt">{{ list.title }}</span>
         <p style="padding-block-start:0px;">
-            <span v-if="list.태그1 === '수강가능'" class="tag-open">{{ list.태그1 }}</span>
-            <span v-else-if="list.태그1 === '준비중'" class="tag-ready">{{ list.태그1 }}</span>
-            <span v-else-if="list.태그1 === '모집종료'" class="tag-close">{{ list.태그1 }}</span>
-            <span v-if="list.태그2 === '1:1코칭'" class="tag-coaching">{{list.태그2}}</span>
-            <span v-if="list.태그3 === '준비물'" class="tag-goods">{{list.태그3}}</span>
+            <span v-if="list.tag1 === '수강가능'" class="tag-open">{{ list.tag1 }}</span>
+            <span v-else-if="list.tag1 === '준비중'" class="tag-ready">{{ list.tag1 }}</span>
+            <span v-else-if="list.tag1 === '모집종료'" class="tag-close">{{ list.tag1 }}</span>
+            <span v-if="list.tag2 === '1:1코칭'" class="tag-coaching">{{list.tag2}}</span>
+            <span v-if="list.tag3 === '준비물'" class="tag-goods">{{list.tag3}}</span>
         </p>
+        </a>
         </li>
     </ul>
 </div>
@@ -45,10 +47,16 @@ export default {
     grid-gap: 10px;
 
     li{
+      a{
+        color:#222;
+      }
 
       img{
         width:100%;
         border-radius:6px;
+      }
+      img:hover{
+        transform: scale(1.05);
       }
       span{
         display: block;

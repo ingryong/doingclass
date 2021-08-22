@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-import About from '@/views/About.vue'
 import Login from '@/views/Login.vue'
 import Join from '@/views/Join.vue'
-import OnlineClassList from '@/views/OnlineClass/OnlineClassList'
+import OnlineClassList from '@/views/OnlineClass/OCList'
+import OnlineClassDetail from '@/views/OnlineClass/OCDetail'
 
 Vue.use(VueRouter)
 
@@ -35,9 +35,9 @@ const routes = [
     component: OnlineClassList
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/ocdetail/:id',
+    name: 'ocdetail',
+    component: OnlineClassDetail
   }
 ]
 
