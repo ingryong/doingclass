@@ -10,6 +10,8 @@ $gray-2: #ccc;
 $gray-3: #999;
 $gray-4: #666;
 
+$dct-title : #13b896;
+
 
 /* 
 ---강좌 태그 설정---
@@ -87,6 +89,10 @@ html {
 }
 a{
   text-decoration: none;
+}
+
+blank{
+  width:100%; height:150px;
 }
 
 #app {

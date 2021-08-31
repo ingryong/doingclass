@@ -1,27 +1,72 @@
 <template>
-  <div>
-    <div class="detail_title_banner" style="background-color:url('${OnlineClass[$route.params.id - 1 ].bgimg}')">
-      <ul>
-        <li>
-          <img :src="OnlineClass[$route.params.id - 1 ].listimg"/>
-        </li>
-        <li>
-          <span>{{ OnlineClass[$route.params.id - 1 ].title }}</span>
-          <span></span>
-          <span></span>
-        </li>
-      </ul>
-    </div>
-    <div class="detail_container">
+  <section>
+    <!-- 상단 타이틀 배너 컨테이너 -->
+    <header class="title_container">
+      <div class="detail_title_banner">
+        <div class="banner_left">
+          <img :src="OnlineClass[$route.params.id - 1 ].detail_banner_img1"/>
+        </div>
+        <div class="banner_right_top">
+          <img :src="OnlineClass[$route.params.id - 1 ].detail_banner_img2"/>
+        </div>
+        <div class="banner_right_bottom1">
+          <img :src="OnlineClass[$route.params.id - 1 ].detail_banner_img3"/>
+        </div>
+        <div class="banner_right_bottom2">
+          <img :src="OnlineClass[$route.params.id - 1 ].detail_banner_img4"/>
+        </div>
+      </div>
+    </header>
+    <article class="detail_container">
+      <!-- 메인 컨텐츠 컨테이너 -->
       <div class="left_container">
         <p class="class_info">
         <strong>클래스 정보</strong><br/>
         <span>수강가능 <span class="values">{{ OnlineClass[$route.params.id - 1 ].tag1 }}</span></span>
         </p>
         <hr/>
+        <blank></blank>
         <img :src="OnlineClass[$route.params.id - 1 ].posterimg"/>
+        <div class="description_container" v-if="OnlineClass[$route.params.id - 1 ].detail_description1 !== ''">
+          <h4>| 이런 걸 배울 거에요</h4>
+          <p v-html="OnlineClass[$route.params.id - 1 ].detail_description1"></p>
+          <hr/>
+        </div>
+        <div class="description_container" v-if="OnlineClass[$route.params.id - 1 ].detail_description2 !== ''">
+          <h4>| 클래스의 장점</h4>
+          <p v-html="OnlineClass[$route.params.id - 1 ].detail_description2"></p>
+          <hr/>
+        </div>
+        <div class="description_container" v-if="OnlineClass[$route.params.id - 1 ].detail_description3 !== ''">
+          <h4>| 이 클래스를 끝내면 무엇을 할 수 있게 되나요?</h4>
+          <p v-html="OnlineClass[$route.params.id - 1 ].detail_description3"></p>
+          <hr/>
+        </div>
+        <div class="description_container" v-if="OnlineClass[$route.params.id - 1 ].detail_description4 !== ''">
+          <h4>| 이런분들께 이 강좌를 추천합니다</h4>
+          <p v-html="OnlineClass[$route.params.id - 1 ].detail_description4" style="margin-bottom:50px; padding:20px; background-color:#fbfbfb;"></p>
+          <hr/>
+        </div>
+        <div class="description_container">
+          <h4>| 강의 커리큘럼</h4>
+          <div v-for="cur in OnlineClass[$route.params.id - 1 ].detail_curriculum" :key="cur">
+            <h5>#{{ cur.cur_id }} {{ cur.title }}</h5>
+            <ul style="display:flex;">
+              <li>
+                <img :src="cur.cur_img" style="width:200px; height:100px;">
+              </li>
+              <ul class="cur_study_container">
+                <li class="cur_study" v-for="(cur_study, nums) in cur.study" :key="cur_study">
+                  {{ nums + 1 }}. {{ cur_study }}
+                </li>
+              </ul>
+            </ul>
+          </div>
+          <hr/>
+        </div>
       </div>
-      <div class="right_container">
+      <!-- 우측 플로팅 컨테이너 -->
+      <aside class="right_container">
         <div class="float_window">
           <p class="window_category">
             <span>{{ OnlineClass[$route.params.id - 1 ].category1 }} | {{ OnlineClass[$route.params.id - 1 ].category2 }}</span>
@@ -41,10 +86,11 @@
           <span>수강기간</span>
           <span>구매 후 {{ OnlineClass[$route.params.id - 1 ].learningdays }}일간 무제한 수강</span>
         </p>
+        <a class="btn_lg btn_black" href="/">클래스 신청하기</a>
         </div>
-      </div>
-    </div>
-  </div>
+      </aside>
+    </article>
+  </section>
 </template>
 
 <script>
@@ -66,15 +112,73 @@ export default {
 </script>
 
 <style lang="scss">
-.detail_title_banner{
+.btn_lg{
+  display: block;
+  padding:14px 10px;
+  text-align: center;
+  align-items: center;
+  border:1px solid black;
+}
+.btn_black{
+  background-color:black;
+  border-color: black;
+  color:white;
+}
+.btn_black:hover{
+  background-color: white;
+  color:black;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.title_container{
   width:100%;
-  height:400px;
-  background:teal;
-  ul{
-    margin:0;
-    padding-top:20px;
+  background:#222;
+
+  .detail_title_banner{
+    width:100%;
+    min-width: 1200px;
+    max-width: 1920px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-rows: 350px 350px;
+    grid-template-areas:
+      "left right right"
+      "left right1 right2";
+
     img{
-      width:400px;
+      width:100%;
+      height:350px;
+      object-fit: cover;
+    }
+    img:hover{
+      animation-duration: 1s;
+      animation-name:fadeOut;
+      animation-fill-mode: both;
+    }
+
+    .banner_left{
+      grid-area: left;
+      img{
+        height:700px;
+      }
+    }
+    .banner_right_top{
+      grid-area: right;
+    }
+    .banner_right_bottom1{
+      grid-area: right1;
+    }
+    .banner_right_bottom2{
+      grid-area: right2;
     }
   }
 }
@@ -103,6 +207,23 @@ export default {
         color:$gray-3;
       }
     }
+    .description_container{
+      h4{
+        font-size:1.4rem;
+        color: $dct-title;
+      }
+      .cur_study_container{
+        width:100%;
+
+        .cur_study{
+          border:1px solid $gray-2;
+          padding: 6px 10px;
+          margin: 0px 0px 5px 5px;
+          border-radius: 4px;
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
   .right_container{
     width:330px;
@@ -110,7 +231,7 @@ export default {
     .float_window{
       z-index: 100;
       border:1px solid $gray-1;
-      padding:10px 10px;
+      padding:14px 14px;
       margin-top:10px;
       font-size:0.9rem;
 

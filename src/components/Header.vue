@@ -1,5 +1,5 @@
 <template>
-<div>
+<header>
     <div id="nav">
       <div class="nav_top">
         <div class="nav_top1">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="top_blank" style="width:100%; height:110px;"></div>
-</div>
+</header>
 </template>
 
 <script>

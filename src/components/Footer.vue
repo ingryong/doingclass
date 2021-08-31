@@ -1,5 +1,5 @@
 <template>
-<div style="width:100%; height:250px; background-color: #333; bottom:0px; left:0px;">
+<footer style="width:100%; height:250px; background-color: #333; bottom:0px; left:0px;">
     <div id="footer">
         <div class="left">
             <h3>SITEMAP</h3>
@@ -23,7 +23,7 @@
             <span>이용약관 ㅣ 개인정보처리방침 ㅣ 사업자정보확인</span>
         </div>
     </div>
-</div>
+</footer>
 </template>
 
 <script>
@@ -45,6 +45,7 @@ export default {
     display: flex;
     justify-content: space-between;
     background-color: #333;
+    font-size: 0.86rem;
 }
 #footer .left{
     display: flex;
