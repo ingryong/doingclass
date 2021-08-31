@@ -17,7 +17,7 @@
         </div>
       </div>
     </header>
-    <article class="detail_container">
+    <article class="detail_container" style="padding:0px 8px;">
       <!-- 메인 컨텐츠 컨테이너 -->
       <div class="left_container">
         <p class="class_info">
@@ -49,11 +49,11 @@
         </div>
         <div class="description_container">
           <h4>| 강의 커리큘럼</h4>
-          <div v-for="cur in OnlineClass[$route.params.id - 1 ].detail_curriculum" :key="cur">
-            <h5>#{{ cur.cur_id }} {{ cur.title }}</h5>
+          <div class="cur_container" v-for="cur in OnlineClass[$route.params.id - 1 ].detail_curriculum" :key="cur">
+            <p class="cur_title">#{{ cur.cur_id }} {{ cur.title }}</p>
             <ul style="display:flex;">
               <li>
-                <img :src="cur.cur_img" style="width:200px; height:100px;">
+                <img class="cur_img" :src="cur.cur_img">
               </li>
               <ul class="cur_study_container">
                 <li class="cur_study" v-for="(cur_study, nums) in cur.study" :key="cur_study">
@@ -207,20 +207,37 @@ export default {
         color:$gray-3;
       }
     }
+    .cur_title{
+      font-size:1.1rem;
+      font-weight: bolder;
+      color: $cur-title-text;
+      margin-bottom:0px;
+    }
+    .cur_img{
+      object-fit: cover;
+      width:200px;
+      height:110px;
+      border-radius: 4px;
+    }
+
     .description_container{
       h4{
         font-size:1.4rem;
         color: $dct-title;
       }
-      .cur_study_container{
-        width:100%;
+      .cur_container{
+        padding-bottom:10px;
 
-        .cur_study{
-          border:1px solid $gray-2;
-          padding: 6px 10px;
-          margin: 0px 0px 5px 5px;
-          border-radius: 4px;
-          font-size: 0.9rem;
+        .cur_study_container{
+          width:100%;
+
+          .cur_study{
+            border:1px solid $gray-2;
+            padding: 6px 10px;
+            margin: 0px 0px 5px 5px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+          }
         }
       }
     }

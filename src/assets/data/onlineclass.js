@@ -89,31 +89,37 @@ export default [
       {
         cur_id: 1,
         title: '글쓰기 준비 단계',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/be171c5cb9c7f.jpg',
         study: ['글쓰기의 두려움을 극복하는 방법과 환경 조성하는 방법', '좋은 글, 잘 쓴 글의 정의와 두 가지 핵심 : 타겟팅과 목적']
       },
       {
         cur_id: 2,
         title: '모든 글의 시작 : 초고 쓰는 법',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/ab711c5eb1270.jpg',
         study: ['초고 쓰기가 중요한 이유와 초안 잡는 방법']
       },
       {
         cur_id: 3,
         title: '구조화된 글쓰기',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/8dc1b53d1797e.jpg',
         study: ['글쓰기에 구조화가 필요한 이유와 종류', '구조화된 글쓰기 실전 1부', '구조화된 글쓰기 실전 2부']
       },
       {
         cur_id: 4,
         title: '독자에게 최면 걸기',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/64eed1f262142.jpg',
         study: ['YES-Set, Truism 기법, SCQ를 활용한 리드 작성법']
       },
       {
         cur_id: 5,
         title: '글감 찾기',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/edd835a6249ec.jpg',
         study: ['글 재주도 없고, 글감 찾기도 어려운 당신을 위한 훈련법']
       },
       {
         cur_id: 6,
         title: '글의 완성도를 높이는 기술',
+        cur_img: 'https://cdn.imweb.me/thumbnail/20210107/105787c1ba3c4.jpg',
         study: ['글의 완성도를 높이는 퇴고의 기술 : 기본 원칙과 순서', '글쓰기 실력을 비약적으로 발전시키는 훈련법']
       }
     ]
