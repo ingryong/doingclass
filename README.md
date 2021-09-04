@@ -1,6 +1,6 @@
 <img src="/src/assets/imgs/logo_color.png" width="300">
 
-## Project setup
+## 프로젝트 셋업
 
 ```
 npm install
