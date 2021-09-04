@@ -29,11 +29,9 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-
 ## 프로젝트 설치
 ### vue-cli 설치
 ### scss 사용
-
 
 
 ## 프로젝트 개발
