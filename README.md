@@ -1,5 +1,5 @@
 # doing
-
+<img src="@/assets/imgs/logo_color.png"  width="700" height="370">
 ## Project setup
 
 ```
