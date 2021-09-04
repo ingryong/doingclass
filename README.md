@@ -30,20 +30,20 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
-### 프로젝트 설치
-# vue-cli 설치
-# scss 사용
+## 프로젝트 설치
+### vue-cli 설치
+### scss 사용
 
 
 
-### 프로젝트 개발
+## 프로젝트 개발
 
-## index(Home)페이지
+### index(Home)페이지
 - 기존 doingclass의 페이지 성격을 유지
 
 - `assets/onlineclass.js`에 온라인클래스의 DB에 속하는 데이터 입력 후 받아와 리스트로 보여준다.
 
-## detail 페이지
+### detail 페이지
 - 리스트에서 타겟을 클릭하면 타겟의 세부 정보를 보여주는 상세페이지이다.
 
 - 리스트를 나열할때와는 다르게 타겟의 id에 해당되는 세부 데이터만을 보여줘야 하므로 `OnlineClass[$route.params.id - 1]`를 매번 붙여주면서 사용을 했으나 추 후 가독성이 좋지 않아보여 `comupted` 에서 `class_detail` 함수를 만들어 사용했다.
