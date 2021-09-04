@@ -45,7 +45,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## detail 페이지
 - 리스트에서 타겟을 클릭하면 타겟의 세부 정보를 보여주는 상세페이지이다.
 
-- 리스트를 나열할때와는 다르게 타겟의 id에 해당되는 세부 데이터만을 보여줘야 하므로 `OnlineClass[$route.params.id - 1]`를 매번 붙여주면서 사용을 했다.
+- 리스트를 나열할때와는 다르게 타겟의 id에 해당되는 세부 데이터만을 보여줘야 하므로 `OnlineClass[$route.params.id - 1]`를 매번 붙여주면서 사용을 했다.<br>
 추 후 가독성이 좋지 않아보여 `comupted` 에서 `class_detail` 함수를 만들어 사용했다.
 
 - `side-container`의 일정 높이부터 플로팅되는 컨텐츠를 구현하는데 생각보다 오랜 시간이 걸렸다.
