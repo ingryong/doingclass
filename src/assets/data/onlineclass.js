@@ -17,6 +17,22 @@ export default [
     detail_banner_img2: require('@/assets/imgs/onlineclass/001-bannerimg2.jpg'),
     detail_banner_img3: require('@/assets/imgs/onlineclass/001-bannerimg3.jpg'),
     detail_banner_img4: require('@/assets/imgs/onlineclass/001-bannerimg4.jpg'),
+    creator_profile_img: require('@/assets/imgs/onlineclass/001-profile.png'),
+    creator_profile_name: '최원대',
+    creator_profile_txt: `
+      <p><em>상대가 한글만 안다면 누구라도 설득할 수 있게 만들어드리겠습니다.<br>
+      유일한 조건입니다. 당신과 독자가 한글을 알아야 한다는 것. 나머지는 제가 책임지겠습니다.</em><br>
+      <br>
+      브랜드 전략 컨설팅 그룹 &lt;마인드 트리_마케팅 진료실&gt; 대표<br>
+      브랜드 스토리텔러<br><br>
+      문예창작학 전공<br><br>
+      퍼스널 브랜드 컨설턴트 (한국능률협회)<br>
+      퍼스널 브랜드 강사 양성 자격 (한국퍼스널브랜드 컨설턴트 협회)<br>
+      국제공인 NLP Practitioner &amp; Master Practitioner<br>
+      Nonverbal Language Specialist (비언어 커뮤니케이션 전문가)<br>
+      ICRU 커뮤니케이션 유형진단 &nbsp;프로그램 강사 Trainer<br>
+      계간지 &lt;한국문학&gt;, 단편소설 &lt;몽상곡&gt;으로 데뷔<br>
+      `,
     detail_description1: `
       <h6><span style="font-size: 16px;">글쓰기는 수영과 비슷합니다. 무턱대고 물에 들어간다고 수영 실력이 늘지 않습니다.</span></h6>
       <h6><span style="font-size: 16px;">어깨에 힘 빼는 법부터 배우고, 제대로 된 자세까지 배워야 물에 뜨고, 헤엄칠 수 있습니다.</span></h6>
@@ -78,7 +94,16 @@ export default [
     <p><img src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/2714.svg" style="width:16px;"> 강사, 교사로 누군가를 가르치는 직업을 가진 분.</p>
     <p><img src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/2714.svg" style="width:16px;"> 영업직, 서비스직 종사자로 누군가에게 상품을 소개하거나 설득하는 등 커뮤니케이션 역량이 중요한 분.</p>
     `,
-    detail_description5: '',
+    detail_description5: `
+    <p><strong>글쓰기의 90%는 자신감입니다.</strong><br>
+    용기를 드리려고 하는 소리가 아닙니다.&nbsp;<br>
+    강의 때 뇌과학을 통해 증명해드리겠습니다.<br>
+    <br>
+    1강만 들어도 이미 90%의 자신감은 채워져 있을 겁니다.<br>
+    그다음 강의부터는 나머지 10%에 대한 이야기입니다.<br>
+    <br>
+    <span style="color: rgb(102, 91, 211);">하루에 딱 10분씩만 투자하세요. 10분이면 충분합니다.</span><br>
+    `,
     detail_curriculum: [
       {
         cur_id: 0,

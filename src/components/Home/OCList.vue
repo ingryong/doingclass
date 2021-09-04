@@ -55,9 +55,6 @@ export default {
         width:100%;
         border-radius:6px;
       }
-      img:hover{
-        transform: scale(1.05);
-      }
       span{
         display: block;
         text-align: left;
@@ -75,6 +72,9 @@ export default {
         font-size:0.95rem;
         margin: 0px 5px;
       }
+    }
+    li:hover{
+      transform: scale(1.01);
     }
   }
 }
