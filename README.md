@@ -1,5 +1,5 @@
-# doing
-<img src="/src/assets/imgs/logo_color.png">
+<img src="/src/assets/imgs/logo_color.png" width="300">
+
 ## Project setup
 
 ```
