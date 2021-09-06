@@ -4,16 +4,16 @@
     <header class="title_container">
       <div class="detail_title_banner">
         <div class="banner_left">
-          <img :src="class_detail.detail_banner_img1"/>
+          <img :src="class_detail.detail_banner_img[0]"/>
         </div>
         <div class="banner_right_top">
-          <img :src="class_detail.detail_banner_img2"/>
+          <img :src="class_detail.detail_banner_img[1]"/>
         </div>
         <div class="banner_right_bottom1">
-          <img :src="class_detail.detail_banner_img3"/>
+          <img :src="class_detail.detail_banner_img[2]"/>
         </div>
         <div class="banner_right_bottom2">
-          <img :src="class_detail.detail_banner_img4"/>
+          <img :src="class_detail.detail_banner_img[3]"/>
         </div>
       </div>
     </header>
@@ -25,27 +25,18 @@
         <span>수강가능 <span class="values">{{ class_detail.tag1 }}</span></span>
         </p>
         <hr/>
-        <img :src="class_detail.posterimg"/>
-        <div class="description_container" v-if="class_detail.detail_description1 !== ''">
-          <h4>| 이런 걸 배울 거에요</h4>
-          <p v-html="class_detail.detail_description1"></p>
-          <hr/>
+        <img class="detail_poster_img" :src="class_detail.posterimg"/>
+        <hr/>
+        <!-- description 영역 -->
+        <div v-for="(des, des_num) in class_detail.detail_description" :key="des_num">
+          <div class="description_container" v-if="class_detail.detail_description1 !== ''">
+            <h4>| {{ des.title }}</h4>
+            <p class="point" v-html="des.description" v-if="des.class === 'point'"></p>
+            <p class="detail_description" v-html="des.description" v-if="des.class === ''"></p>
+            <hr/>
+          </div>
         </div>
-        <div class="description_container" v-if="class_detail.detail_description2 !== ''">
-          <h4>| 클래스의 장점</h4>
-          <p v-html="class_detail.detail_description2"></p>
-          <hr/>
-        </div>
-        <div class="description_container" v-if="class_detail.detail_description3 !== ''">
-          <h4>| 이 클래스를 끝내면 무엇을 할 수 있게 되나요?</h4>
-          <p v-html="class_detail.detail_description3"></p>
-          <hr/>
-        </div>
-        <div class="description_container" v-if="class_detail.detail_description4 !== ''">
-          <h4>| 이런분들께 이 강좌를 추천합니다</h4>
-          <p v-html="class_detail.detail_description4" style="margin-bottom:50px; padding:20px; background-color:#fbfbfb;"></p>
-          <hr/>
-        </div>
+        <!-- 강의 커리큘럼 -->
         <div class="description_container">
           <h4>| 강의 커리큘럼</h4>
           <div class="cur_container" v-for="(cur, chapnum) in class_detail.detail_curriculum" :key="chapnum">
@@ -63,20 +54,22 @@
           </div>
           <hr/>
         </div>
+        <!-- 크리에이터 소개 -->
         <div class="description_container">
           <h4>| 크리에이터 소개</h4>
           <div class="creator_container" style="flex;">
-            <img :src="class_detail.creator_profile_img"/>
+            <img :src="class_detail.creator_profile[0]"/>
             <div>
-              <h3>{{ class_detail.creator_profile_name }}</h3>
-              <p v-html="class_detail.creator_profile_txt"></p>
+              <h3>{{ class_detail.creator_profile[1] }}</h3>
+              <p v-html="class_detail.creator_profile[2]"></p>
             </div>
           </div>
           <hr/>
         </div>
-        <div class="description_container">
+        <!-- 크리에이터의 한 마디 -->
+        <div class="description_container" v-if="class_detail.detail_lastmessage !== ''">
           <h4>| 크리에이터의 한 마디</h4>
-          <p v-html="class_detail.detail_description5" style="text-align:center; line-height:1.5;"></p>
+          <p class="detail_description" v-html="class_detail.detail_lastmessage" style="text-align:center; line-height:1.5;"></p>
           <div style="height:50px;"></div>
         </div>
       </div>
@@ -225,15 +218,16 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  width:1200px;
+  min-width:800px;
+  max-width:1150px;
   margin:auto;
   text-align: left;
 
   .left_container{
-    width:850px;
+    max-width:800px;
 
-    img{
-      margin: auto;
+    .detail_poster_img{
+      width:100%;
     }
 
     .class_info{
@@ -259,6 +253,13 @@ export default {
     }
 
     .description_container{
+      hr{
+        margin-top: 50px;
+      }
+      .point{
+        background-color:#eee;
+        padding: 20px 20px;
+      }
       h4{
         font-size:1.4rem;
         color: $dct-title;
@@ -292,6 +293,9 @@ export default {
             font-size:1.8rem
           }
         }
+      }
+      .detail_description{
+        padding: 0px 10px;
       }
     }
   }
