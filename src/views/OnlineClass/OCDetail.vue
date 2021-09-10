@@ -46,8 +46,7 @@
                 <img class="cur_img" :src="cur.cur_img">
               </li>
               <ul class="cur_study_container">
-                <li class="cur_study" v-for="(cur_study, nums) in cur.study" :key="nums">
-                  {{ nums + 1 }}. {{ cur_study }}
+                <li class="cur_study" v-for="(cur_study, nums) in cur.study" :key="nums" v-html="nums+1 + '. ' + cur_study">
                 </li>
               </ul>
             </ul>
@@ -55,19 +54,19 @@
           <hr/>
         </div>
         <!-- 크리에이터 소개 -->
-        <div class="description_container">
+        <div class="description_container" v-for="(profiles, pnum) in class_detail.creator_profile" :key="pnum">
           <h4>| 크리에이터 소개</h4>
           <div class="creator_container" style="flex;">
-            <img :src="class_detail.creator_profile[0]"/>
+            <img :src="profiles.img"/>
             <div>
-              <h3>{{ class_detail.creator_profile[1] }}</h3>
-              <p v-html="class_detail.creator_profile[2]"></p>
+              <h3>{{ profiles.cname }}</h3>
+              <p v-html="profiles.cdescription"></p>
             </div>
           </div>
           <hr/>
         </div>
         <!-- 크리에이터의 한 마디 -->
-        <div class="description_container" v-if="class_detail.detail_lastmessage !== ''">
+        <div class="description_container" v-if="class_detail.detail_lastmessage !== undefined">
           <h4>| 크리에이터의 한 마디</h4>
           <p class="detail_description" v-html="class_detail.detail_lastmessage" style="text-align:center; line-height:1.5;"></p>
           <div style="height:50px;"></div>
@@ -180,14 +179,14 @@ export default {
     margin:auto;
     display: grid;
     grid-template-columns: 50% 25% 25%;
-    grid-template-rows: 350px 350px;
+    grid-template-rows: 250px 250px;
     grid-template-areas:
       "left right right"
       "left right1 right2";
 
     img{
       width:100%;
-      height:350px;
+      height:250px;
       object-fit: cover;
     }
     img:hover{
@@ -199,7 +198,7 @@ export default {
     .banner_left{
       grid-area: left;
       img{
-        height:700px;
+        height:500px;
       }
     }
     .banner_right_top{
@@ -257,7 +256,7 @@ export default {
         margin-top: 50px;
       }
       .point{
-        background-color:#eee;
+        background-color:#fafafa;
         padding: 20px 20px;
       }
       h4{

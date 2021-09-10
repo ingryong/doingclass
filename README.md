@@ -49,8 +49,22 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - `assets/onlineclass.js`에 온라인클래스의 DB에 속하는 데이터 입력 후 받아와 리스트로 보여준다.
 
+- 기존 doingclass사이트에서는 이미지안에 크리에이터 프로필사진/이름이 박혀 있지만 이 사이트에서는 이미지와 프로필내용이 분리되어 있어 프로필이미지와 이름이 변경되면 한번에 바뀌게 된다.
+프로필부분의 배경은 `gradient`와 `opacity`를 모두 주어 배경 이미지가 밝더라도 흰 텍스트가 보일 수 있도록 하였다.
+
 ### detail 페이지
 - 리스트에서 타겟을 클릭하면 타겟의 세부 정보를 보여주는 상세페이지이다.
+
+- 상단의 4개의 배너 이미지는 `grid`를 사용하여 제작했다.
+`grid-template-areas`를 사용하여 직관적으로 그리드의 형태를 확인할 수 있도록 하였다.
+```
+display: grid;
+grid-template-columns: 50% 25% 25%;
+grid-template-rows: 350px 350px;
+grid-template-areas:
+    "left right right"
+    "left right1 right2";
+```
 
 - 리스트를 나열할때와는 다르게 타겟의 id에 해당되는 세부 데이터만을 보여줘야 하므로 `OnlineClass[$route.params.id - 1]`를 매번 붙여주면서 사용을 했으나 추 후 가독성이 좋지 않아보여 `comupted` 에서 `class_detail` 함수를 만들어 사용했다.
 

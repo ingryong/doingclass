@@ -1,7 +1,7 @@
 <template>
     <div id="main_carousel">
-      <Carousel class="title-baner" :dots="false" :loof="true" :autoplay="true" :items=1 :nav="false" :rewind="true">
-        <div style="background-color:orange;">
+      <Carousel class="title-baner" :dots="false" :loop="true" :autoplay="true" :items=1 :nav="false" :rewind="true">
+        <div class="tlcs_bg">
           <table class="noBorder">
             <tbody>
               <tr>
@@ -45,7 +45,6 @@
             </tbody>
           </table>
         </div>
-        <div style="width:100%; height:500px; background-color:yellow;"></div>
       </Carousel>
     </div>
 </template>
@@ -57,22 +56,22 @@ export default { components: { Carousel } }
 </script>
 
 <style lang="scss">
-.btn-lg{
-  padding:10px 30px;
-  border:1px solid #fff;
-  border-radius: 10px;
-  color:#fff;
-  font-weight: bold;
-}
-.btn-lg:hover{
-  background-color:#fff;
-  color:orange;
-}
 .title-baner{
   div{
     width:100%;
     height:500px;
-    background-color:orange;
+
+    .btn-lg{
+      padding:10px 30px;
+      border:1px solid #fff;
+      border-radius: 10px;
+      color:#fff;
+      font-weight: bold;
+    }
+    .btn-lg:hover{
+      background-color:#fff;
+      color:orange;
+    }
 
     table{
       width: 100%;
@@ -101,6 +100,13 @@ export default { components: { Carousel } }
           }
         }
       }
+    }
+  }
+  .tlcs_bg{
+    background-image: url("~@/assets/imgs/tlcs_bg.png");
+    .btn-lg:hover{
+      background-color:#fff;
+      color:purple;
     }
   }
 }

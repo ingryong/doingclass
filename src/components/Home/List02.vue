@@ -1,13 +1,13 @@
 <template>
 <div id="home-list02">
     <h1 class="ListTitle">NEW & BEST <span class="sub_title">신규/베스트 VOD</span></h1>
-    <Carousel class="list-carousel-slide01" :margin=14 :dots="false" :loof="true" :autoplay="true" :items=3 :nav="false" :rewind="true">
-      <img src="@/assets/imgs/home-list01/003.jpg">
-      <img src="@/assets/imgs/home-list01/002.jpg">
-      <img src="@/assets/imgs/home-list01/001.jpg">
-      <img src="@/assets/imgs/home-list01/003.jpg">
-      <img src="@/assets/imgs/home-list01/002.jpg">
-      <img src="@/assets/imgs/home-list01/001.jpg">
+    <Carousel class="list-carousel-slide01" :margin=14 :dots="false" :loop="true" :autoplay="true" :items=3 :nav="false" :rewind="true">
+      <img src="@/assets/imgs/home-list01/003.png">
+      <img src="@/assets/imgs/home-list01/002.png">
+      <img src="@/assets/imgs/home-list01/001.png">
+      <img src="@/assets/imgs/home-list01/003.png">
+      <img src="@/assets/imgs/home-list01/002.png">
+      <img src="@/assets/imgs/home-list01/001.png">
     </Carousel>
 </div>
 </template>
