@@ -4,17 +4,25 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "cross-env NODE_PATH=src vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "vue-cli-service test --env=jsdom",
+    "heroku-postbuild": "cross-env NODE_PATH=src npm run build",
+    "watch": "nodemon server"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^2.0.2",
+    "axios": "^0.21.4",
     "core-js": "^3.6.5",
+    "firebase": "^9.0.2",
+    "json-server": "^0.16.3",
+    "nodemon": "^2.0.12",
     "sass-loader": "^10.2.0",
     "vue": "^2.6.11",
+    "vue-cookies": "^1.7.4",
     "vue-owl-carousel": "^2.0.3",
     "vue-router": "^3.2.0",
     "vueperslides": "^2.15.2",

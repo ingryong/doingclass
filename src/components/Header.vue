@@ -56,6 +56,7 @@ export default {
       padding: 0px 14px;
 
       .nav_top2 {
+        min-width:280px;
         height: 26px;
         border-bottom: 1px solid $gray-2;
 
@@ -66,6 +67,7 @@ export default {
       }
 
       .nav_top3 {
+        width:240px;
         a {
           font-size: 0.9rem;
           font-weight: 400;

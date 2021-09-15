@@ -1,6 +1,6 @@
 <template>
   <ul id="nav_menu">
-      <li v-for="menu in menulist" :key="menu.id">
+      <li v-for="(menu, index) in menulist" :key="index">
           <router-link id="nav_home" :to="menu.url">{{ menu.menuname }}</router-link>
       </li>
   </ul>

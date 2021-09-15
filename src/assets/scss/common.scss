@@ -6,12 +6,14 @@ $cur-title-text : #665bd3;
 
 $black: #000;
 
+$gray-0: #f1f1f1;
 $gray-1: #eaeaea;
 $gray-2: #ccc;
 $gray-3: #999;
 $gray-4: #666;
 
 $dct-title : #13b896;
+$primary : #00b8ff;
 
 
 /* 
@@ -62,10 +64,6 @@ $dct-title : #13b896;
   font-size:10px; 
   font-weight:bold;
 }
-.fixed{ 
-  position:fixed; 
-}
-
 /* 
 ---기본 HTML 설정---
 */
@@ -102,4 +100,44 @@ a{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $main-txt;
+}
+
+/* 
+---기타 설정---
+*/
+.fixed{ 
+  position:fixed; 
+}
+
+.flex{
+  display: flex;
+}
+
+.between{
+  justify-content: space-between;
+}
+
+.f-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.f-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.m-auto{
+  margin:auto;
+}
+
+.btn-s{
+  padding:4px 8px;
+  font-weight: bold;
+}
+.btn-l{
+  width:100%;
+  padding:10px 0px;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
