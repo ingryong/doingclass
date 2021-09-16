@@ -3,9 +3,9 @@
     <h1>SignUp</h1>
     <div class="login_group">
       <div class="input_group f-column m-auto">
-        <input type="text" class="form-control" placeholder="이메일" ref="user_id" v-model="user_id">
+        <input type="text" class="form-control" placeholder="이메일" ref="user_id" v-model="user_id" v-on:keyup.enter="signup">
         <input type="password" class="form-control" placeholder="비밀번호" ref="user_pw" v-model="user_pw">
-        <input type="password" class="form-control" placeholder="비밀번호 확인" ref="confirm" v-model="confirm">
+        <input type="password" class="form-control" placeholder="비밀번호 확인" ref="confirm" v-model="confirm" v-on:keyup.enter="signup">
       </div>
       <div class="btn_group">
         <button class="btn-l" @click="signup">회원가입</button>
@@ -41,7 +41,7 @@ export default {
         })
         .catch((error) => {
           if (!this.user_id) {
-            alert('아이디를 입력해주시기 바랍니다.')
+            alert('이메일을 입력해주시기 바랍니다.')
             this.$refs.user_id.focus()
             return
           } else if (!this.user_pw) {
@@ -56,8 +56,13 @@ export default {
             this.$refs.confirm.focus()
           } else if (error.code === 'auth/invalid-email') {
             alert('올바른 이메일주소를 입력해주세요.')
+            this.$refs.user_id.focus()
+          } else if (error.code === 'auth/email-already-in-use') {
+            alert('이미 사용중인 이메일주소 입니다.')
+            this.$refs.user_id.focus()
           } else if (error.code === 'auth/weak-password') {
             alert('입력하신 비밀번호가 너무 짧습니다. \n6자 이상의 비밀번호를 설정해주세요')
+            this.$refs.user_pw.focus()
           } else {
             alert(error.message)
           }
