@@ -7,14 +7,17 @@
         </div>
         <div class="nav_top2">
           <input type="text" placeholder="배우고 싶은 것이 있나요?"/><i class="fas fa-search"></i></div>
-        <div class="nav_top3">
+        <div class="nav_top3" v-if="loginCheck === false">
           <router-link to="/login"> 로그인 </router-link>
           <router-link to="/join"> 회원가입 </router-link>
+        </div>
+        <div class="nav_top3" v-if="loginCheck === true">
+          <router-link to="/logout"> 로그아웃 </router-link>
         </div>
       </div>
       <div class="nav_btm">
         <div class="nav_btm1">
-          <a><i class="fas fa-bars"></i></a>
+          <a @click="open_drawer"><i class="fas fa-bars"></i></a>
         </div>
         <div class="nav_btm2">
           <MenuList/>
@@ -27,18 +30,39 @@
 
 <script>
 import MenuList from '@/components/MenuList.vue'
+// import { onAuthStateChanged } from '@firebase/auth'
 export default {
   name: 'App',
+  data () {
+    return {
+      loginCheck: false,
+      drawer: false
+    }
+  },
   components: {
     MenuList
+  },
+  methods: {
+    open_drawer () {
+      document.getElementById('Drawer').style = 'display: block;'
+      document.getElementById('Drawer_Content').style = 'display: block;'
+    }
   }
 }
+/*
+onAuthStateChanged(function (user) {
+  if (user) {
+    // 조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어있는 user의 key값을 이용해 불러옴
+    this.loginCheck = true
+  }
+})
+*/
 </script>
 
 <style lang="scss">
   #nav {
     position: fixed;
-    z-index: 100;
+    z-index: 99;
     width: 100%;
     height: 110px;
     background: #fff;

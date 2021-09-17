@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Drawer/>
     <Header/>
     <router-view/>
     <Footer/>
@@ -8,11 +9,13 @@
 
 <script>
 import Header from '@/components/Header.vue'
+import Drawer from '@/components/Drawer.vue'
 import Footer from '@/components/Footer.vue'
 export default {
   name: 'App',
   components: {
     Header,
+    Drawer,
     Footer
   }
 }

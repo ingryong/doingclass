@@ -48,12 +48,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### index(Home)페이지
 - 기존 doingclass의 페이지 성격을 유지
 
-- `vue-owl-carousel`을 사용하여 캐러셀 기능 구현
-
 - `assets/onlineclass.js`에 온라인클래스의 DB에 속하는 데이터 입력 후 받아와 리스트로 보여준다.
 
 - 기존 doingclass사이트에서는 이미지안에 크리에이터 프로필사진/이름이 박혀 있지만 이 사이트에서는 이미지와 프로필내용이 분리되어 있어 프로필이미지와 이름이 변경되면 한번에 바뀌게 된다.
 프로필부분의 배경은 `gradient`와 `opacity`를 모두 주어 배경 이미지가 밝더라도 흰 텍스트가 보일 수 있도록 하였다.
+
+#### 진행사항
+- [x] `vue-owl-carousel`을 사용하여 캐러셀 기능 구현
+- [x] 메뉴 좌측의 햄버거 아이콘을 통한 `drawer bar` 추가
 
 ### detail 페이지
 - 리스트에서 타겟을 클릭하면 타겟의 세부 정보를 보여주는 상세페이지이다.
@@ -88,6 +90,10 @@ javascript와 vue의 라이프사이클에 대한 이해가 부족하여 무작�
 #### 설치
 - axios
 - firebase v9.0 설치
+
+
+#### 참고 유튜브 
+https://www.youtube.com/watch?v=8fOtImRz_HY&list=PLjpTKic1SLZsWckh_DZ6tYH17MM6hBAc7&index=3&ab_channel=memidev
 
 #### 진행사항
 - [x] 이메일 주소를 통한 회원가입과 로그인 기능 추가

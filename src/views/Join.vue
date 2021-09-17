@@ -41,15 +41,15 @@ export default {
         })
         .catch((error) => {
           if (!this.user_id) {
-            alert('이메일을 입력해주시기 바랍니다.')
+            alert('이메일을 입력해주세요.')
             this.$refs.user_id.focus()
             return
           } else if (!this.user_pw) {
-            alert('비밀번호를 입력해주시기 바랍니다.')
+            alert('비밀번호를 입력해주세요.')
             this.$refs.user_pw.focus()
             return
           } else if (!this.confirm) {
-            alert('비밀번호 확인을 입력해주시기 바랍니다.')
+            alert('비밀번호 확인을 입력해주세요.')
             this.$refs.confirm.focus()
           } else if (this.user_pw !== this.confirm) {
             alert('입력하신 비밀번호가 일치하지 않습니다.')
