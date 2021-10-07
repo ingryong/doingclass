@@ -2,7 +2,7 @@
 ---색상 설정---
 */
 $main-txt: #222;
-$cur-title-text : #665bd3;
+$cur-title-text: #665bd3;
 
 $black: #000;
 
@@ -12,63 +12,75 @@ $gray-2: #ccc;
 $gray-3: #999;
 $gray-4: #666;
 
-$dct-title : #13b896;
-$primary : #00b8ff;
+$dct-title: #13b896;
+$primary: #00b8ff;
 
+$blue: #00b8ff;
+$purple: #665bd3;
 
 /* 
 ---강좌 태그 설정---
 */
-.tag-open{
-  margin-left:5px; 
-  margin-top:5px; 
-  padding:3px 6px; 
-  background-color:#00b8ff; 
-  color:#fff; 
-  font-size:10px; 
-  font-weight:bold;
+.tag-open {
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  background-color: #00b8ff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 }
-.tag-ready{
-  margin-left:5px; 
-  margin-top:5px; 
-  padding:3px 6px; 
-  background-color:#ffae00; 
-  color:#fff; 
-  font-size:10px; 
-  font-weight:bold;
+.tag-ready {
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  background-color: #ffae00;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 }
-.tag-close{ 
-  margin-left:5px; 
-  margin-top:5px; 
-  padding:3px 6px; 
-  background-color:#999; 
-  color:#fff; 
-  font-size:10px; 
-  font-weight:bold;
+.tag-close {
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  background-color: #999;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 }
-.tag-coaching{
-  margin-left:5px; 
-  margin-top:5px; 
-  padding:3px 6px; 
-  background-color:black; 
-  color:#fff; 
-  font-size:10px; 
-  font-weight:bold;
+.tag-coaching {
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  background-color: black;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 }
-.tag-goods{
-  margin-left:5px; 
-  margin-top:5px; 
-  padding:3px 6px; 
-  background-color:palevioletred; 
-  color:#fff; 
-  font-size:10px; 
-  font-weight:bold;
+.tag-goods {
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  background-color: palevioletred;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 }
 /* 
 ---기본 HTML 설정---
 */
-@mixin content-area {max-width: 1200px; min-width: 800px; margin:auto; padding: 0px 10px;}
-@mixin content-area2 {max-width: 1000px; min-width: 600px; margin:auto; padding: 0px 10px;}
+@mixin content-area {
+  max-width: 1200px;
+  min-width: 800px;
+  margin: auto;
+  padding: 0px 10px;
+}
+@mixin content-area2 {
+  max-width: 1000px;
+  min-width: 600px;
+  margin: auto;
+  padding: 0px 10px;
+}
 
 html {
   font-size: 16px;
@@ -77,21 +89,21 @@ html {
     outline: none;
   }
 
-  ul 
-  {
+  ul {
     padding-inline-start: 0px;
     list-style: none;
     li {
-    list-style: none;
+      list-style: none;
     }
   }
 }
-a{
+a {
   text-decoration: none;
 }
 
-.blank{
-  width:100%; height:150px;
+.blank {
+  width: 100%;
+  height: 150px;
 }
 
 #app {
@@ -105,39 +117,39 @@ a{
 /* 
 ---기타 설정---
 */
-.fixed{ 
-  position:fixed; 
+.fixed {
+  position: fixed;
 }
 
-.flex{
+.flex {
   display: flex;
 }
 
-.between{
+.between {
   justify-content: space-between;
 }
 
-.f-row{
+.f-row {
   display: flex;
   flex-direction: row;
 }
 
-.f-column{
+.f-column {
   display: flex;
   flex-direction: column;
 }
 
-.m-auto{
-  margin:auto;
+.m-auto {
+  margin: auto;
 }
 
-.btn-s{
-  padding:4px 8px;
+.btn-s {
+  padding: 4px 8px;
   font-weight: bold;
 }
-.btn-l{
-  width:100%;
-  padding:10px 0px;
+.btn-l {
+  width: 100%;
+  padding: 10px 0px;
   font-weight: bold;
   font-size: 1.2rem;
 }

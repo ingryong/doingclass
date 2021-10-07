@@ -1,40 +1,45 @@
 <template>
   <div id="app">
-    <Drawer/>
-    <Header/>
-    <router-view/>
-    <Footer/>
+    <Drawer />
+    <Header />
+    <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import Drawer from '@/components/Drawer.vue'
-import Footer from '@/components/Footer.vue'
+import Header from "@/components/Header.vue";
+import Drawer from "@/components/Drawer.vue";
+import Footer from "@/components/Footer.vue";
+import store from "./store";
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      store
+    };
+  },
   components: {
     Header,
     Drawer,
     Footer
   }
-}
+};
 </script>
 
 <style lang="scss">
-
 html {
-  font-size:16px;
+  font-size: 16px;
 
-  input:focus{
+  input:focus {
     outline: none;
   }
 
-  textarea:focus{
+  textarea:focus {
     outline: none;
   }
 
-  ul li{
+  ul li {
     list-style: none;
   }
 }
@@ -46,5 +51,4 @@ html {
   text-align: center;
   color: $main-txt;
 }
-
 </style>

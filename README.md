@@ -13,10 +13,16 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 웹 호스팅 전 빌드
 
 ```
 npm run build
+```
+
+### 파이어베이스 웹 게시
+
+```
+firebase deploy
 ```
 
 ### Lints and fixes files
@@ -90,6 +96,10 @@ javascript와 vue의 라이프사이클에 대한 이해가 부족하여 무작�
 #### 설치
 - axios
 - firebase v9.0 설치
+
+#### 2021.09.23 firebase 호스팅 시작
+- `npm install -g firebase-tools`로 파이어베이스 툴 전역 다운
+- 파이어베이스 로그인과 `firebase init`으로 앱 루트 디렉토리 설정
 
 
 #### 참고 유튜브 
