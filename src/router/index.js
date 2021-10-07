@@ -1,9 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Login from "@/views/Login.vue";
-import Join from "@/views/Join.vue";
+import Login from "@/views/Auth/Login.vue";
+import Join from "@/views/Auth/Join.vue";
 import Home from "@/views/Home.vue";
+import Profile from "@/views/Auth/Profile.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 
@@ -21,9 +22,9 @@ const routes = [
     component: Login
   },
   {
-    path: "/logout",
-    name: "Logout",
-    component: { template: "<div>Logout</div>" }
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   },
   {
     path: "/join",

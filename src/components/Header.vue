@@ -28,7 +28,7 @@
             />
             <a><i v-if="!$store.state.user.phothURL" class="fas fa-user"/></a>
           </div>
-          <router-link to="/logout">
+          <router-link to="/profile">
             {{ $store.state.user.email }}
           </router-link>
         </div>
