@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    title: "원래 제목",
     user: null,
     token: ""
   },

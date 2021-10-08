@@ -12,6 +12,8 @@ import Header from "@/components/Header.vue";
 import Drawer from "@/components/Drawer.vue";
 import Footer from "@/components/Footer.vue";
 import store from "./store";
+import "@/firebase";
+
 export default {
   name: "App",
   data() {

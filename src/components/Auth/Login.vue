@@ -25,7 +25,7 @@
       </div>
       <div class="flex between">
         <a href="/join">회원가입</a>
-        <apan>비밀번호 찾기</apan>
+        <span>비밀번호 찾기</span>
       </div>
     </div>
   </div>
@@ -42,8 +42,7 @@ export default {
     // 현재 컴포넌트에서 사용할 데이터셋
     return {
       user_id: "",
-      user_pw: "",
-      inSignin: false
+      user_pw: ""
     };
   },
   methods: {
@@ -57,7 +56,7 @@ export default {
         this.$refs.user_pw.focus();
         return;
       }
-      var auth = getAuth();
+      const auth = getAuth();
       signInWithEmailAndPassword(auth, this.user_id, this.user_pw)
         .then(user => {
           console.log("User", user);

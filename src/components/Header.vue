@@ -29,7 +29,7 @@
             <a><i v-if="!$store.state.user.phothURL" class="fas fa-user"/></a>
           </div>
           <router-link to="/profile">
-            {{ $store.state.user.email }}
+            {{ $store.state.user.displayName }}
           </router-link>
         </div>
       </div>

@@ -4,7 +4,7 @@
     <div class="login_group">
       <div class="input_group f-column m-auto">
         <input
-          type="text"
+          type="email"
           class="form-control"
           placeholder="이메일"
           ref="user_id"
@@ -26,20 +26,33 @@
           v-model="confirm"
           v-on:keyup.enter="signup"
         />
+        <input
+          id="input-name"
+          type="text"
+          class="form-control"
+          placeholder="이름(닉네임)"
+          ref="displayname"
+          v-model="displayname"
+          v-on:keyup.enter="signup"
+        />
       </div>
       <div class="btn_group">
         <button class="btn-l" @click="signup">회원가입</button>
       </div>
       <div class="flex between">
         <a href="/login">로그인</a>
-        <apan>아이디/비밀번호 찾기</apan>
+        <span>아이디/비밀번호 찾기</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile
+} from "firebase/auth";
 
 export default {
   data() {
@@ -47,7 +60,8 @@ export default {
     return {
       user_id: "",
       user_pw: "",
-      confirm: ""
+      confirm: "",
+      displayname: ""
     };
   },
   methods: {
@@ -55,12 +69,17 @@ export default {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.user_id, this.user_pw)
         .then(userCredential => {
+          // 회원가입 성공 시
+          updateProfile(auth.currentUser, {
+            displayName: this.displayname
+          });
           const user = userCredential.user;
           console.log("User", user);
-          alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
-          this.$router.replace("/login");
+          alert("회원가입이 완료되었습니다.");
+          this.$router.replace("/");
         })
         .catch(error => {
+          // 회원가입 실패 시
           if (!this.user_id) {
             alert("이메일을 입력해주세요.");
             this.$refs.user_id.focus();
@@ -72,6 +91,10 @@ export default {
           } else if (!this.confirm) {
             alert("비밀번호 확인을 입력해주세요.");
             this.$refs.confirm.focus();
+          } else if (!this.displayname) {
+            alert("이름(닉네임)을 입력해주세요.");
+            this.$refs.displayname.focus();
+            return;
           } else if (this.user_pw !== this.confirm) {
             alert("입력하신 비밀번호가 일치하지 않습니다.");
             this.$refs.confirm.focus();
