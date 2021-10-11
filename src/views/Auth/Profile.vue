@@ -1,12 +1,12 @@
 <template>
   <div class="profile-container">
-    <h1>내 정보</h1>
+    <h1>{{ useremail }}내 정보</h1>
     <div class="profile_group f-column m-auto">
       <input
         id="profile_email"
         type="text"
         class="form-control"
-        placeholder="profile.email"
+        :placeholder="useremail"
         ref="useremail"
         v-model="useremail"
         disabled
@@ -18,7 +18,7 @@
         placeholder="이름"
         ref="username"
         v-model="username"
-        value="2"
+        value="d"
       />
       <button class="btn-l btn-red" @click="signOut">logout</button>
     </div>
@@ -30,20 +30,31 @@ import { getAuth, updateProfile, signOut } from "firebase/auth";
 const auth = getAuth();
 const user = auth.currentUser;
 
-if (user !== null) {
-  user.providerData.forEach(profile => {
-    profile.email;
-    profile.displayName;
-  });
-}
 export default {
   data() {
     // 현재 컴포넌트에서 사용할 데이터셋
     return {
-      useremail: "",
-      username: "",
+      useremail: "umail",
+      username: "uname",
       userpw: ""
     };
+  },
+  async created() {
+    const user = await auth.currentUser;
+    if (user) {
+      user.providerData.forEach(profile => {
+        this.useremail = profile.email;
+        this.username = profile.displayName;
+      });
+    }
+  },
+  async computed() {
+    if (user) {
+      await user.providerData.forEach(profile => {
+        this.useremail = profile.email;
+        this.username = profile.displayName;
+      });
+    }
   },
   methods: {
     profileUpdate() {
