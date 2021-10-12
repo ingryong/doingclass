@@ -1,14 +1,20 @@
 <template>
-  <div class="profile-container">
-    <h1>{{ useremail }}내 정보</h1>
+  <div class="profile-container" v-if="profile.user !== null">
+    <h1>{{ profile.displayName }}님의 Profile</h1>
     <div class="profile_group f-column m-auto">
+      <div class="profile-img">
+        <img
+          v-if="$store.state.user.phothURL"
+          :src="$store.state.user.phothURL"
+        />
+        <a><i v-if="!$store.state.user.phothURL" class="fas fa-user"/></a>
+      </div>
       <input
         id="profile_email"
         type="text"
         class="form-control"
-        :placeholder="useremail"
         ref="useremail"
-        v-model="useremail"
+        v-model="profile.email"
         disabled
       />
       <input
@@ -17,8 +23,8 @@
         class="form-control"
         placeholder="이름"
         ref="username"
-        v-model="username"
-        value="d"
+        v-model="profile.displayName"
+        value=""
       />
       <button class="btn-l btn-red" @click="signOut">logout</button>
     </div>
@@ -26,51 +32,19 @@
 </template>
 
 <script>
-import { getAuth, updateProfile, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 const auth = getAuth();
-const user = auth.currentUser;
 
 export default {
   data() {
     // 현재 컴포넌트에서 사용할 데이터셋
     return {
-      useremail: "umail",
-      username: "uname",
+      profile: this.$store.state.user,
+      username: "",
       userpw: ""
     };
   },
-  async created() {
-    const user = await auth.currentUser;
-    if (user) {
-      user.providerData.forEach(profile => {
-        this.useremail = profile.email;
-        this.username = profile.displayName;
-      });
-    }
-  },
-  async computed() {
-    if (user) {
-      await user.providerData.forEach(profile => {
-        this.useremail = profile.email;
-        this.username = profile.displayName;
-      });
-    }
-  },
   methods: {
-    profileUpdate() {
-      updateProfile(auth.currentUser, {
-        displayName: "",
-        photoURL: "https://example.com/jane-q-user/profile.jpg"
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
-        })
-        .catch(error => {
-          // An error occurred
-          console.log(error);
-        });
-    },
     signOut() {
       signOut(auth)
         .then(() => {
@@ -107,7 +81,31 @@ export default {
       border-radius: 0px;
       font-size: 1rem;
     }
+
+    .profile-img {
+      margin: auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-color: $gray-4;
+      img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        object-position: center;
+        border: 0px;
+      }
+      a {
+        svg {
+          margin-top: 20px;
+          font-size: 10rem;
+          color: white;
+          text-align: center;
+        }
+      }
+    }
   }
+
   button {
     margin-top: 20px;
   }

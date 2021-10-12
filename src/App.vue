@@ -12,7 +12,7 @@ import Header from "@/components/Header.vue";
 import Drawer from "@/components/Drawer.vue";
 import Footer from "@/components/Footer.vue";
 import store from "./store";
-import "@/firebase";
+import "@/plugins/firebase";
 
 export default {
   name: "App",

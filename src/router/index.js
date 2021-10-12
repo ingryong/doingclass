@@ -7,6 +7,7 @@ import Home from "@/views/Home.vue";
 import Profile from "@/views/Auth/Profile.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
+import CreateClass from "@/views/OnlineClass/CreateClass";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     path: "/ocdetail/:id",
     name: "ocdetail",
     component: OnlineClassDetail
+  },
+  {
+    path: "/createclass",
+    name: "createclass",
+    component: CreateClass
   }
 ];
 

@@ -5,7 +5,7 @@
     </h1>
     <ul>
       <li v-for="list in OnlineClass" :key="list.id">
-        <a :href="`/ocdetail/${list.id}`">
+        <router-link :to="`/ocdetail/${list.id}`">
           <img :src="list.listimg" />
           <div
             class="list_profile"
@@ -34,7 +34,7 @@
               list.tag3
             }}</span>
           </p>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>

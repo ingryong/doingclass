@@ -1,12 +1,12 @@
 import Vue from "vue";
-import store from "./store";
+import store from "../store";
 // firebase import
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
 
-import KEY from "../secret.json";
+import KEY from "../../secret.json";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

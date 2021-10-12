@@ -144,8 +144,21 @@ a {
   margin: auto;
 }
 
+.btn {
+  padding: 4px 8px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid #999;
+  background-color: #eee;
+}
+
 .btn-s {
   padding: 4px 8px;
+  font-weight: bold;
+}
+.btn-m {
+  padding: 8px 10px;
+  width: 20%;
   font-weight: bold;
 }
 .btn-l {
@@ -156,6 +169,11 @@ a {
 }
 
 .btn-red {
-  border: 2px solid #ff6f6f;
+  border: 1px solid #ff6f6f;
   background-color: #ffb4b4;
+}
+
+.btn-blue {
+  border: 1px solid #00b7ff;
+  background-color: #d6f4ff;
 }

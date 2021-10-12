@@ -3,9 +3,9 @@
     <div id="nav">
       <div class="nav_top">
         <div class="nav_top1">
-          <a href="/"
+          <router-link to="/"
             ><img class="nav_logo" src="@/assets/imgs/logo_color.png"
-          /></a>
+          /></router-link>
         </div>
 
         <!-- 서치바 -->
