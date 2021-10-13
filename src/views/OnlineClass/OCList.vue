@@ -1,7 +1,9 @@
 <template>
   <div class="about">
     <h1>This is an OCList page</h1>
-    <router-link class="btn" :to="'/createclass'">클래스 생성하기</router-link>
+    <router-link class="btn" :to="'/creators/createclass'"
+      >클래스 생성하기</router-link
+    >
   </div>
 </template>
 

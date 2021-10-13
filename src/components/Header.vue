@@ -21,6 +21,7 @@
           <router-link to="/join"> 회원가입 </router-link>
         </div>
         <div class="nav_top3" v-if="$store.state.user !== null">
+          <router-link to="/creators/myclass">크리에이터 센터</router-link>
           <div>
             <img
               v-if="$store.state.user.phothURL"

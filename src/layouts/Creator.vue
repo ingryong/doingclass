@@ -24,7 +24,7 @@
       </ul>
       <h5>클래스 관리</h5>
       <ul>
-        <li>내 클래스</li>
+        <li><router-link to="/creators/myclass">내 클래스</router-link></li>
       </ul>
     </div>
     <router-view />

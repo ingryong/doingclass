@@ -86,6 +86,9 @@
       placeholder="price"
     />
     <input class="form-control m-1" type="file" id="image" />
+    <router-link tag="button" class="btn-m btn-gray m-1" to="/creators/myclass">
+      돌아가기
+    </router-link>
     <button class="btn-m btn-blue m-1" id="send" @click="upload()">
       클래스 생성하기
     </button>
@@ -97,7 +100,8 @@ export default {
   data() {
     return {
       db: this.$firebase.firestore(),
-      storage: this.$firebase.storage()
+      storage: this.$firebase.storage(),
+      user: this.$store.state.user
     };
   },
   methods: {
@@ -105,6 +109,10 @@ export default {
       await this.db
         .collection("onlineclass")
         .add({
+          creator_uid: this.user.uid,
+          creator_name: this.user.displayName,
+          creator_email: this.user.email,
+          last_update: new Date(),
           title: document.getElementById("title").value,
           category: {
             cagerory1: document.getElementById("classcategory1").value,
@@ -160,7 +168,7 @@ export default {
   }
 
   .m-1 {
-    margin: 10px 0px 20px 0px;
+    margin: 10px 10px 20px 0px;
   }
 }
 </style>

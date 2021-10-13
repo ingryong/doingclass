@@ -8,6 +8,7 @@ import Profile from "@/views/Auth/Profile.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 import CreateClass from "@/views/Creators/CreateClass";
+import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
 
@@ -59,6 +60,11 @@ const routes = [
         path: "/creators/createclass",
         name: "createclass",
         component: CreateClass
+      },
+      {
+        path: "/creators/myclass",
+        name: "myclass",
+        component: MyClass
       }
     ]
   }
