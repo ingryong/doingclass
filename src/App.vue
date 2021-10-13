@@ -1,16 +1,8 @@
 <template>
-  <div id="app">
-    <Drawer />
-    <Header />
-    <router-view />
-    <Footer />
-  </div>
+  <router-view />
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Drawer from "@/components/Drawer.vue";
-import Footer from "@/components/Footer.vue";
 import store from "./store";
 import "@/plugins/firebase";
 
@@ -21,11 +13,7 @@ export default {
       store
     };
   },
-  components: {
-    Header,
-    Drawer,
-    Footer
-  }
+  components: {}
 };
 </script>
 

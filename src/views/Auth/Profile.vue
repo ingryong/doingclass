@@ -67,6 +67,7 @@ export default {
 
   h1 {
     font-size: 3rem;
+    text-align: center;
   }
 
   .profile_group {
@@ -98,6 +99,7 @@ export default {
       a {
         svg {
           margin-top: 20px;
+          margin-left: 20px;
           font-size: 10rem;
           color: white;
           text-align: center;

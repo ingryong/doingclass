@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <h3>나의 클래스 만들기</h3>
+    <p>
+      클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를 알려주세요.<br />
+      [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
+    </p>
     <div class="input-group">
       <h4>클래스명</h4>
       <input
@@ -17,6 +21,32 @@
         <option value="onlineclass">온라인클래스(VOD)</option>
       </select>
     </div>
+
+    <div class="input-group">
+      <h4>클래스 카테고리</h4>
+      <p>1차 카테고리</p>
+      <select
+        id="classcategory1"
+        name="classcategory1"
+        class="form-control m-1"
+      >
+        <option value="" disabled selected hidden
+          >1차 카테고리를 선택해주세요</option
+        >
+        <option value="money">머니 클래스</option>
+        <option value="career">커리어 클래스</option>
+        <option value="healty">건강 클래스</option>
+        <option value="hobby">취미 클래스</option>
+      </select>
+      <p>2차 카테고리</p>
+      <input
+        type="text"
+        class="form-control m-1"
+        id="classcategory2"
+        placeholder="짧은 낱말로 2차 카테고리를 입력해주세요 (예)DIY, 책읽기, 다이어트"
+      />
+    </div>
+
     <div class="input-group onoff-group" id="onoff-group">
       <h4>온라인 / 오프라인</h4>
       <select id="onoff" name="onoff" class="form-control m-1">
@@ -57,7 +87,7 @@
     />
     <input class="form-control m-1" type="file" id="image" />
     <button class="btn-m btn-blue m-1" id="send" @click="upload()">
-      올리기
+      클래스 생성하기
     </button>
   </div>
 </template>
@@ -71,12 +101,15 @@ export default {
     };
   },
   methods: {
-    upload() {
-      this.db
+    async upload() {
+      await this.db
         .collection("onlineclass")
         .add({
           title: document.getElementById("title").value,
-
+          category: {
+            cagerory1: document.getElementById("classcategory1").value,
+            category2: document.getElementById("classcategory2").value
+          },
           type: document.getElementById("classtype").value,
           onoff: document.getElementById("onoff").value,
           level: document.getElementById("level").value
@@ -102,30 +135,32 @@ export default {
 
 <style lang="scss">
 .container {
-  max-width: 900px;
+  max-width: 700px;
   padding: 10px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 60px;
 
   h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: auto;
     text-align: left;
-    margin-left: 4%;
     padding-left: 10px;
+    font-weight: normal;
     border-left: 4px solid $cur-title-text;
   }
 
   .form-control {
     display: block;
-    width: 90%;
+    width: 80%;
     min-height: 2rem;
-    margin: auto;
     padding: 4px;
+  }
+  select {
+    height: 44px;
   }
 
   .m-1 {
-    margin: 10px auto 20px auto;
+    margin: 10px 0px 20px 0px;
   }
 }
 </style>

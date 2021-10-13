@@ -127,6 +127,7 @@ export default {
 
   h1 {
     font-size: 3rem;
+    text-align: center;
   }
 
   .login_group {
@@ -149,6 +150,7 @@ export default {
         background-color: #222;
         color: #fff;
         border: 1px solid #222;
+        cursor: pointer;
       }
       button:hover {
         background-color: #000;
