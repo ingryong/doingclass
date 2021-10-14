@@ -123,7 +123,7 @@ export default {
           level: document.getElementById("level").value
         })
         .then(() => {
-          document.getElementById("title").value = "";
+          this.$router.push("/creators/myclass");
         });
     },
     mixinAutoResize(event) {
