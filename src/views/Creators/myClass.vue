@@ -4,10 +4,22 @@
       <h4>개설한 클래스</h4>
       <router-link to="/creators/createclass">+ 새로운 클래스</router-link>
       <hr />
-      <div>
-        <ul>
-          <li>dd</li>
-        </ul>
+      <div id="class-view">
+        <div class="class-list" v-for="list in classinfo" :key="list.id">
+          <div class="class_thumbnail">
+            <img src="@/assets/imgs/PhotoPotrait.svg" />
+          </div>
+          <div class="class_info">
+            <ul>
+              <li class="title">{{ list.title }}</li>
+              <li>{{ list.type }}</li>
+              <li>오픈상태</li>
+            </ul>
+            <router-link class="btn-l btn-gray" to="/class_update"
+              >클래스 수정하기</router-link
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -18,14 +30,32 @@ export default {
   data() {
     return {
       user: this.$store.state.user,
-      db: this.$firebase.firestore()
+      db: this.$firebase.firestore(),
+      classinfo: ""
     };
+  },
+  async mounted() {
+    await this.db
+      .collection("onlineclass")
+      .where("creator_uid", "==", this.user.uid)
+      .get()
+      .then(result => {
+        result.forEach(doc => {
+          console.log(doc.data().title);
+          this.classinfo = doc.data();
+        });
+      });
   }
 };
 </script>
 
 <style lang="scss">
 .container {
+  max-width: 700px;
+  padding: 10px;
+  margin-left: 240px;
+  margin-top: 60px;
+
   .class-group {
     width: 100%;
     border: 1px solid #eee;
@@ -51,6 +81,28 @@ export default {
       font-weight: bold;
       color: $gray-2;
       text-align: right;
+    }
+
+    .class-list {
+      display: flex;
+      flex-direction: row;
+
+      .class_thumbnail {
+        margin: 10px;
+        width: 240px;
+        img {
+          width: 240px;
+          height: 150px;
+          object-fit: none;
+        }
+      }
+      .class_info {
+        margin: 10px auto;
+        width: 400px;
+        .title {
+          font-weight: bold;
+        }
+      }
     }
   }
 }

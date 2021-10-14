@@ -101,6 +101,9 @@ a {
   text-decoration: none;
   color: $black;
 }
+a:hover {
+  cursor: pointer;
+}
 
 .blank {
   width: 100%;
@@ -156,16 +159,25 @@ a {
   padding: 4px 8px;
   font-weight: bold;
 }
+.btn-s:hover {
+  cursor: pointer;
+}
 .btn-m {
   padding: 8px 10px;
   width: 20%;
   font-weight: bold;
+}
+.btn-m:hover {
+  cursor: pointer;
 }
 .btn-l {
   width: 100%;
   padding: 10px 0px;
   font-weight: bold;
   font-size: 1.2rem;
+}
+.btn-l:hover {
+  cursor: pointer;
 }
 
 .btn-red {

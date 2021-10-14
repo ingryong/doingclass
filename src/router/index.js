@@ -11,6 +11,7 @@ import CreateClass from "@/views/Creators/CreateClass";
 import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
+import CreatClassLayout from "@/layouts/CreateClassLayout";
 
 Vue.use(VueRouter);
 
@@ -57,14 +58,21 @@ const routes = [
     component: CreatorLayout,
     children: [
       {
-        path: "/creators/createclass",
-        name: "createclass",
-        component: CreateClass
-      },
-      {
         path: "/creators/myclass",
         name: "myclass",
         component: MyClass
+      }
+    ]
+  },
+  {
+    path: "/creators/createclass",
+    name: "createclass",
+    component: CreatClassLayout,
+    children: [
+      {
+        path: "/creators/createclass",
+        name: "createclass",
+        component: CreateClass
       }
     ]
   }

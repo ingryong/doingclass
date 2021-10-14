@@ -1,10 +1,14 @@
 <template>
   <div class="container">
-    <h3>나의 클래스 만들기</h3>
-    <p>
-      클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를 알려주세요.<br />
-      [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
-    </p>
+    <div class="notice-card">
+      <h3>나의 클래스 만들기</h3>
+      <p>
+        클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를
+        알려주세요.<br />
+        [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
+      </p>
+    </div>
+    <h3>1단계</h3>
     <div class="input-group">
       <h4>클래스명</h4>
       <input
@@ -145,8 +149,15 @@ export default {
 .container {
   max-width: 700px;
   padding: 10px;
-  margin: auto;
+  margin-left: 240px;
   margin-top: 60px;
+
+  .notice-card {
+    width: 80%;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    padding: 15px;
+  }
 
   h4 {
     font-size: 1.25rem;
@@ -161,7 +172,11 @@ export default {
     display: block;
     width: 80%;
     min-height: 2rem;
-    padding: 4px;
+    padding: 12px 6px;
+    box-sizing: border-box;
+  }
+  a:hover {
+    cursor: pointer;
   }
   select {
     height: 44px;

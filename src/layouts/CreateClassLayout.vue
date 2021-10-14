@@ -19,14 +19,16 @@
       </div>
     </div>
     <div id="creators-left-side">
+      <h5>클래스 생성</h5>
       <ul>
-        <li>크리에이터 정보</li>
-      </ul>
-      <h5>클래스 관리</h5>
-      <ul>
-        <li>
-          <router-link to="/creators/myclass">내 클래스</router-link>
+        <li class="step">
+          <router-link to="/creators/createclass"
+            ><span>1</span> 클래스 기본정보</router-link
+          >
         </li>
+        <li class="step disable"><span>2</span> 클래스 소개</li>
+        <li class="step disable"><span>3</span> 커리큘럼</li>
+        <li class="step disable"><span>4</span> 크리에이터 소개</li>
       </ul>
     </div>
     <router-view />
@@ -111,6 +113,27 @@ export default {
   background-color: #fcfcfc;
   ul {
     padding: 10px;
+
+    .step {
+      height: 40px;
+      align-items: center;
+      align-content: center;
+      line-height: 2rem;
+
+      span {
+        display: inline-block;
+        width: 24px;
+        height: 26px;
+        border-radius: 4px;
+        text-align: center;
+        background: linear-gradient(145deg, #e6e6e6, #ffffff);
+        box-shadow: 1px 1px 2px #e6e6e6, -1px -1px 2px #ffffff;
+      }
+    }
+    .disable {
+      color: $gray-3;
+      cursor: default;
+    }
   }
 }
 </style>
