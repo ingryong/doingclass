@@ -59,7 +59,7 @@
     </div>
 
     <div class="input-group">
-      <h4>강의의 난이도는 얼마나 높은가요?</h4>
+      <h4>클래스 난이도</h4>
       <select id="level" name="level" class="form-control m-1">
         <option value="none"
           >상관없음 (해당 강의와 관련된 지식이 전혀 없어도 수강 가능)</option
@@ -83,18 +83,35 @@
       placeholder="내용을 입력하세요"
       @input="mixinAutoResize"
     ></textarea>
-    <input
-      type="text"
-      class="form-control m-1"
-      id="price"
-      placeholder="price"
-    />
-    <input class="form-control m-1" type="file" id="image" />
+
+    <div class="input-group">
+      <h4>썸네일 이미지 업로드</h4>
+      <p>
+        썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
+        <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
+      </p>
+      <div class="class_thumbnail">
+        <img
+          src="@/assets/imgs/PhotoPotrait.svg"
+          v-if="thumbnail === ''"
+          style="border:1px solid #eee;"
+        />
+        <img :src="thumbnail" v-if="thumbnail" />
+      </div>
+      <input
+        class="form-control m-1"
+        type="file"
+        accept="image/*"
+        @change="imgUpload"
+        id="image"
+      />
+    </div>
+
     <router-link tag="button" class="btn-m btn-gray m-1" to="/creators/myclass">
       돌아가기
     </router-link>
     <button class="btn-m btn-blue m-1" id="send" @click="upload()">
-      클래스 생성하기
+      클래스 기본정보 저장
     </button>
   </div>
 </template>
@@ -105,10 +122,36 @@ export default {
     return {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
-      user: this.$store.state.user
+      user: this.$store.state.user,
+      thumbnail: ""
     };
   },
   methods: {
+    imgUpload() {
+      let fileInfo = document.querySelector("#image").files[0];
+      let storageRef = this.storage.ref();
+      let updateUrl = storageRef.child("images/thumbnail/" + fileInfo.name);
+      let uploadImg = updateUrl.put(fileInfo);
+
+      uploadImg.on(
+        "state_change",
+        // 변화시 동작하는 함수
+        null,
+        //에러시 동작하는 함수
+        error => {
+          console.log("실패 이유는", error);
+        },
+        // 성공시 동작하는 함수
+        () => {
+          uploadImg.snapshot.ref.getDownloadURL().then(url => {
+            this.thumbnail = url;
+          });
+        }
+      );
+
+      console.log(fileInfo);
+      this.thumbnail = fileInfo;
+    },
     async upload() {
       await this.db
         .collection("onlineclass")
@@ -119,12 +162,15 @@ export default {
           last_update: new Date(),
           title: document.getElementById("title").value,
           category: {
-            cagerory1: document.getElementById("classcategory1").value,
-            category2: document.getElementById("classcategory2").value
+            c1: document.getElementById("classcategory1").value,
+            c2: document.getElementById("classcategory2").value
           },
           type: document.getElementById("classtype").value,
           onoff: document.getElementById("onoff").value,
-          level: document.getElementById("level").value
+          level: document.getElementById("level").value,
+          thumbnail: this.thumbnail,
+          classopen: false,
+          price: 0
         })
         .then(() => {
           this.$router.push("/creators/myclass");
@@ -184,6 +230,17 @@ export default {
 
   .m-1 {
     margin: 10px 10px 20px 0px;
+  }
+  .imgs {
+    width: 100px;
+    height: auto;
+  }
+  .class_thumbnail {
+    margin: 10px;
+    img {
+      width: 240px;
+      height: 180px;
+    }
   }
 }
 </style>

@@ -8,10 +8,12 @@ import Profile from "@/views/Auth/Profile.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 import CreateClass from "@/views/Creators/CreateClass";
+import EditClass1 from "@/views/Creators/EditClass1";
 import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
 import CreatClassLayout from "@/layouts/CreateClassLayout";
+import EditClassLayout from "@/layouts/EditClassLayout";
 
 Vue.use(VueRouter);
 
@@ -66,13 +68,25 @@ const routes = [
   },
   {
     path: "/creators/createclass",
-    name: "createclass",
+    name: "create",
     component: CreatClassLayout,
     children: [
       {
         path: "/creators/createclass",
         name: "createclass",
         component: CreateClass
+      }
+    ]
+  },
+  {
+    path: "/creators/editclass:id",
+    name: "edit",
+    component: EditClassLayout,
+    children: [
+      {
+        path: "/creators/editclass1:id",
+        name: "editclass1",
+        component: EditClass1
       }
     ]
   }

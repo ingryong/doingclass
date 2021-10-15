@@ -7,16 +7,30 @@
       <div id="class-view">
         <div class="class-list" v-for="list in classinfo" :key="list.id">
           <div class="class_thumbnail">
-            <img src="@/assets/imgs/PhotoPotrait.svg" />
+            <img
+              src="@/assets/imgs/PhotoPotrait.svg"
+              v-if="list.thumbnail === null"
+            />
+            <img :src="list.thumbnail" v-if="list.thumbnail" />
           </div>
           <div class="class_info">
             <ul>
-              <li class="title">{{ list.title }}</li>
               <li>{{ list.type }}</li>
-              <li>오픈상태</li>
+              <li class="title">{{ list.title }}</li>
+              <li>
+                <span>{{ list.category.c1 }}</span>
+                <span>{{ list.category.c2 }}</span>
+              </li>
+              <li v-if="!list.classopen">
+                아직 클래스가 오픈되지 않았습니다.<br />추가 클래스 정보를
+                입력하고 클래스를 오픈하세요!
+              </li>
             </ul>
-            <router-link class="btn-l btn-gray" to="/class_update"
-              >클래스 수정하기</router-link
+            <router-link
+              class="btn-l btn-gray"
+              :to="`/creators/editclass1.html?id=${doc.id}`"
+              style="text-align:center; color:#000;"
+              >클래스 관리</router-link
             >
           </div>
         </div>
@@ -31,7 +45,8 @@ export default {
     return {
       user: this.$store.state.user,
       db: this.$firebase.firestore(),
-      classinfo: ""
+      classinfo: "",
+      doc: ""
     };
   },
   async mounted() {
@@ -40,9 +55,11 @@ export default {
       .where("creator_uid", "==", this.user.uid)
       .get()
       .then(result => {
+        let allDatas = [];
         result.forEach(doc => {
-          console.log(doc.data().title);
-          this.classinfo = doc.data();
+          allDatas.push(doc.data());
+          this.classinfo = allDatas;
+          this.doc = doc;
         });
       });
   }
@@ -92,8 +109,7 @@ export default {
         width: 240px;
         img {
           width: 240px;
-          height: 150px;
-          object-fit: none;
+          height: 181px;
         }
       }
       .class_info {
