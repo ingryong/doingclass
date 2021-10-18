@@ -9,6 +9,7 @@ import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 import CreateClass from "@/views/Creators/CreateClass";
 import EditClass1 from "@/views/Creators/EditClass1";
+import EditClass2 from "@/views/Creators/EditClass2";
 import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
@@ -87,6 +88,11 @@ const routes = [
         path: "/creators/editclass1/:id",
         name: "editclass1",
         component: EditClass1
+      },
+      {
+        path: "/creators/editclass2/:id",
+        name: "editclass2",
+        component: EditClass2
       }
     ]
   }
