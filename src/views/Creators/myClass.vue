@@ -9,7 +9,7 @@
           <div class="class_thumbnail">
             <img
               src="@/assets/imgs/PhotoPotrait.svg"
-              v-if="list.thumbnail === null"
+              v-if="list.thumbnail === ''"
             />
             <img :src="list.thumbnail" v-if="list.thumbnail" />
           </div>
@@ -28,7 +28,7 @@
             </ul>
             <router-link
               class="btn-l btn-gray"
-              :to="`/creators/editclass1.html?id=${doc.id}`"
+              :to="`/creators/editclass1/${list.id}`"
               style="text-align:center; color:#000;"
               >클래스 관리</router-link
             >

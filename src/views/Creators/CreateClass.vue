@@ -172,8 +172,15 @@ export default {
           classopen: false,
           price: 0
         })
-        .then(() => {
+        .then(async docRef => {
+          await this.db
+            .collection("onlineclass")
+            .doc(docRef.id)
+            .update({ id: docRef.id });
           this.$router.push("/creators/myclass");
+        })
+        .catch(error => {
+          console.log("error updateing document:", error);
         });
     },
     mixinAutoResize(event) {

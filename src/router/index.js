@@ -79,12 +79,12 @@ const routes = [
     ]
   },
   {
-    path: "/creators/editclass:id",
+    path: "/creators/editclass",
     name: "edit",
     component: EditClassLayout,
     children: [
       {
-        path: "/creators/editclass1:id",
+        path: "/creators/editclass1/:id",
         name: "editclass1",
         component: EditClass1
       }
