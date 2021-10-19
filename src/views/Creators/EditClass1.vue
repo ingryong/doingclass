@@ -2,9 +2,9 @@
   <div>
     <!-- 왼쪽 사이드바 -->
     <div id="creators-left-side">
-      <router-link class="backpage" :to="`/creators/myclass`"
-        ><i class="fas fa-arrow-left"></i> 이전으로 돌아가기</router-link
-      >
+      <router-link class="backpage" :to="`/creators/myclass`">
+        <i class="fas fa-arrow-left"></i> 이전으로 돌아가기
+      </router-link>
       <h5>클래스 생성</h5>
       <ul>
         <li class="step">
@@ -25,14 +25,14 @@
     <!-- 메인 컨텐츠 -->
     <div class="container">
       <div class="notice-card">
-        <h3>나의 클래스 만들기</h3>
+        <h3>1. 나의 클래스 만들기</h3>
         <p>
           클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를
           알려주세요.<br />
           [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
         </p>
       </div>
-      <h3>1단계</h3>
+
       <div class="input-group">
         <h4>클래스명</h4>
         <input
@@ -41,6 +41,29 @@
           id="title"
           placeholder="두잉클래스와 함께하는 영어 기초 다지기"
           :value="doc.title"
+        />
+      </div>
+
+      <div class="input-group">
+        <h4>썸네일 이미지 업로드</h4>
+        <p>
+          썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
+          <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
+        </p>
+        <div class="class_thumbnail">
+          <img
+            src="@/assets/imgs/PhotoPotrait.svg"
+            v-if="doc.thumbnail === ''"
+            style="border:1px solid #eee;"
+          />
+          <img :src="thumbnail" v-if="doc.thumbnail" />
+        </div>
+        <input
+          class="form-control m-1"
+          type="file"
+          accept="image/*"
+          @change="imgUpload"
+          id="image"
         />
       </div>
 
@@ -65,9 +88,9 @@
           class="form-control m-1"
           :value="doc.category.c1"
         >
-          <option value="" disabled selected hidden
-            >1차 카테고리를 선택해주세요</option
-          >
+          <option value="" disabled selected hidden>
+            1차 카테고리를 선택해주세요
+          </option>
           <option value="money">머니 클래스</option>
           <option value="career">커리어 클래스</option>
           <option value="healty">건강 클래스</option>
@@ -103,44 +126,22 @@
           class="form-control m-1"
           :value="doc.level"
         >
-          <option value="none"
-            >상관없음 (해당 강의와 관련된 지식이 전혀 없어도 수강 가능)</option
-          >
-          <option value="basic"
-            >초급 (해당 강의와 관련된 기초적인 지식이 있어야 수강 가능)</option
-          >
-          <option value="middle"
-            >중급 (해당 강의와 관련된 실무에 활용할 정도의 지식이 있어야 수강
-            가능)</option
-          >
-          <option value="basic"
-            >고급 (해당 강의와 관련된 상당한 지식이 있어야 수강 가능)</option
-          >
+          <option value="none">
+            상관없음 (해당 강의와 관련된 지식이 전혀 없어도 수강 가능)
+          </option>
+          <option value="basic">
+            초급 (해당 강의와 관련된 기초적인 지식이 있어야 수강 가능)
+          </option>
+          <option value="middle">
+            중급 (해당 강의와 관련된 실무에 활용할 정도의 지식이 있어야 수강
+            가능)
+          </option>
+          <option value="basic">
+            고급 (해당 강의와 관련된 상당한 지식이 있어야 수강 가능)
+          </option>
         </select>
       </div>
 
-      <div class="input-group">
-        <h4>썸네일 이미지 업로드</h4>
-        <p>
-          썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
-          <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
-        </p>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="doc.thumbnail === ''"
-            style="border:1px solid #eee;"
-          />
-          <img :src="thumbnail" v-if="doc.thumbnail" />
-        </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="image"
-        />
-      </div>
       <router-link
         tag="button"
         class="btn-m btn-gray m-1"
@@ -180,10 +181,10 @@ export default {
   },
   methods: {
     imgUpload() {
-      let fileInfo = document.querySelector("#image").files[0];
-      let storageRef = this.storage.ref();
-      let updateUrl = storageRef.child("images/thumbnail/" + fileInfo.name);
-      let uploadImg = updateUrl.put(fileInfo);
+      const fileInfo = document.querySelector("#image").files[0];
+      const storageRef = this.storage.ref();
+      const updateUrl = storageRef.child("images/thumbnail/" + fileInfo.name);
+      const uploadImg = updateUrl.put(fileInfo);
 
       uploadImg.on(
         "state_change",
@@ -223,7 +224,7 @@ export default {
           price: 0
         })
         .then(() => {
-          this.$router.push("/creators/myclass");
+          this.$router.push(`/creators/editclass2/${this.url}`);
         })
         .catch(error => {
           console.log("error updateing document:", error);

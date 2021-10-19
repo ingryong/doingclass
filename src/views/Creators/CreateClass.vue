@@ -8,6 +8,7 @@
         [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
       </p>
     </div>
+
     <h3>1단계</h3>
     <div class="input-group">
       <h4>클래스명</h4>
@@ -16,6 +17,29 @@
         class="form-control m-1"
         id="title"
         placeholder="두잉클래스와 함께하는 영어 기초 다지기"
+      />
+    </div>
+
+    <div class="input-group">
+      <h4>썸네일 이미지 업로드</h4>
+      <p>
+        썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
+        <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
+      </p>
+      <div class="class_thumbnail">
+        <img
+          src="@/assets/imgs/PhotoPotrait.svg"
+          v-if="thumbnail === ''"
+          style="border:1px solid #eee;"
+        />
+        <img :src="thumbnail" v-if="thumbnail" />
+      </div>
+      <input
+        class="form-control m-1"
+        type="file"
+        accept="image/*"
+        @change="imgUpload"
+        id="image"
       />
     </div>
 
@@ -77,36 +101,6 @@
       </select>
     </div>
 
-    <textarea
-      class="form-control m-1"
-      id="content"
-      placeholder="내용을 입력하세요"
-      @input="mixinAutoResize"
-    ></textarea>
-
-    <div class="input-group">
-      <h4>썸네일 이미지 업로드</h4>
-      <p>
-        썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
-        <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
-      </p>
-      <div class="class_thumbnail">
-        <img
-          src="@/assets/imgs/PhotoPotrait.svg"
-          v-if="thumbnail === ''"
-          style="border:1px solid #eee;"
-        />
-        <img :src="thumbnail" v-if="thumbnail" />
-      </div>
-      <input
-        class="form-control m-1"
-        type="file"
-        accept="image/*"
-        @change="imgUpload"
-        id="image"
-      />
-    </div>
-
     <router-link tag="button" class="btn-m btn-gray m-1" to="/creators/myclass">
       돌아가기
     </router-link>
@@ -128,10 +122,10 @@ export default {
   },
   methods: {
     imgUpload() {
-      let fileInfo = document.querySelector("#image").files[0];
-      let storageRef = this.storage.ref();
-      let updateUrl = storageRef.child("images/thumbnail/" + fileInfo.name);
-      let uploadImg = updateUrl.put(fileInfo);
+      const fileInfo = document.querySelector("#image").files[0];
+      const storageRef = this.storage.ref();
+      const updateUrl = storageRef.child("images/thumbnail/" + fileInfo.name);
+      const uploadImg = updateUrl.put(fileInfo);
 
       uploadImg.on(
         "state_change",
@@ -182,18 +176,7 @@ export default {
         .catch(error => {
           console.log("error updateing document:", error);
         });
-    },
-    mixinAutoResize(event) {
-      // textarea 자동 높이 조절
-      event.target.style.height = "auto";
-      event.target.style.height = `${event.target.scrollHeight}px`;
     }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      // textarea 자동 높이 조절
-      this.$el.setAttribute("style", "height", `${this.$el.scrollHeight}px`);
-    });
   }
 };
 </script>
@@ -223,7 +206,7 @@ export default {
 
   .form-control {
     display: block;
-    width: 80%;
+    width: 100%;
     min-height: 2rem;
     padding: 12px 6px;
     box-sizing: border-box;
@@ -247,6 +230,7 @@ export default {
     img {
       width: 240px;
       height: 180px;
+      object-fit: cover;
     }
   }
 }
