@@ -10,6 +10,8 @@ import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 import CreateClass from "@/views/Creators/CreateClass";
 import EditClass1 from "@/views/Creators/EditClass1";
 import EditClass2 from "@/views/Creators/EditClass2";
+import EditClass3 from "@/views/Creators/EditClass3";
+import EditClass4 from "@/views/Creators/EditClass4";
 import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
@@ -93,6 +95,16 @@ const routes = [
         path: "/creators/editclass2/:id",
         name: "editclass2",
         component: EditClass2
+      },
+      {
+        path: "/creators/editclass3/:id",
+        name: "editclass3",
+        component: EditClass3
+      },
+      {
+        path: "/creators/editclass4/:id",
+        name: "editclass4",
+        component: EditClass4
       }
     ]
   }

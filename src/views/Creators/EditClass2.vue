@@ -1,27 +1,5 @@
 <template>
   <div>
-    <!-- 왼쪽 사이드바 -->
-    <div id="creators-left-side">
-      <router-link class="backpage" :to="`/creators/myclass`"
-        ><i class="fas fa-arrow-left"></i> 이전으로 돌아가기</router-link
-      >
-      <h5>클래스 생성</h5>
-      <ul>
-        <li class="step">
-          <router-link :to="`/creators/editclass1/${url}`">
-            <span>1</span> 클래스 기본정보
-          </router-link>
-        </li>
-        <li class="step">
-          <router-link :to="`/creators/editclass2/${url}`">
-            <span>2</span> 클래스 소개
-          </router-link>
-        </li>
-        <li class="step"><span>3</span> 커리큘럼</li>
-        <li class="step"><span>4</span> 크리에이터 소개</li>
-      </ul>
-    </div>
-
     <!-- 메인 컨텐츠 -->
     <div class="container">
       <div class="notice-card">
@@ -45,11 +23,13 @@
           />
         </h4>
         <textarea
+          name="dec"
           class="form-control m-1 width-100"
           id="dec1_dec"
           placeholder="내용을 입력해주세요"
           :value="dec1.dec"
           @input="mixinAutoResize"
+          rows="10"
         ></textarea>
 
         <p>소개 이미지 업로드</p>
@@ -83,11 +63,13 @@
           />
         </h4>
         <textarea
+          name="dec"
           class="form-control m-1 width-100"
           id="dec2_dec"
           placeholder="내용을 입력해주세요"
           :value="dec2.dec"
           @input="mixinAutoResize"
+          rows="10"
         ></textarea>
 
         <p>소개 이미지 업로드</p>
@@ -121,11 +103,13 @@
           />
         </h4>
         <textarea
+          name="dec"
           class="form-control m-1 width-100"
           id="dec3_dec"
           placeholder="내용을 입력해주세요"
           :value="dec3.dec"
           @input="mixinAutoResize"
+          rows="10"
         ></textarea>
 
         <p>소개 이미지 업로드</p>
@@ -191,11 +175,6 @@ export default {
         this.dec3 = result.data().class_dec.dec3;
         this.dec3_img = result.data().class_dec.dec3.img;
       });
-
-    this.$nextTick(() => {
-      // textarea 자동 높이 조절
-      this.$el.setAttribute("style", "height", `${this.$el.scrollHeight}px`);
-    });
   },
   methods: {
     imgUpload(event) {
@@ -257,7 +236,7 @@ export default {
           }
         })
         .then(() => {
-          this.$router.push("/creators/myclass");
+          this.$router.push(`/creators/editclass3/${this.url}`);
         })
         .catch(error => {
           console.log("error updateing document:", error);

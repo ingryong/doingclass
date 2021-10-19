@@ -1,27 +1,5 @@
 <template>
   <div>
-    <!-- 왼쪽 사이드바 -->
-    <div id="creators-left-side">
-      <router-link class="backpage" :to="`/creators/myclass`">
-        <i class="fas fa-arrow-left"></i> 이전으로 돌아가기
-      </router-link>
-      <h5>클래스 생성</h5>
-      <ul>
-        <li class="step">
-          <router-link :to="`/creators/editclass1/${url}`">
-            <span>1</span> 클래스 기본정보
-          </router-link>
-        </li>
-        <li class="step">
-          <router-link :to="`/creators/editclass2/${url}`">
-            <span>2</span> 클래스 소개
-          </router-link>
-        </li>
-        <li class="step"><span>3</span> 커리큘럼</li>
-        <li class="step"><span>4</span> 크리에이터 소개</li>
-      </ul>
-    </div>
-
     <!-- 메인 컨텐츠 -->
     <div class="container">
       <div class="notice-card">
