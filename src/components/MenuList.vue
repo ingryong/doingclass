@@ -1,21 +1,23 @@
 <template>
   <ul id="nav_menu">
-      <li v-for="(menu, index) in menulist" :key="index">
-          <router-link id="nav_home" :to="menu.url">{{ menu.menuname }}</router-link>
-      </li>
+    <li v-for="(menu, index) in menulist" :key="index">
+      <router-link id="nav_home" :to="menu.url">{{
+        menu.menuname
+      }}</router-link>
+    </li>
   </ul>
 </template>
 
 <script>
-import menulist from '@/assets/data/menulist.js'
+import menulist from "@/assets/data/menulist.js";
 
 export default {
-  data () {
+  data() {
     return {
       menulist: menulist
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -23,29 +25,29 @@ export default {
   display: flex;
   margin-left: 40px;
 
-  li{
+  li {
     list-style: none;
-    padding:14px 16px;
+    padding: 14px 16px;
   }
 
-  li.on{
-    border-bottom:4px solid #000;
+  li.on {
+    border-bottom: 4px solid #000;
   }
 }
 
-#nav{
-  .nav_logo{
-  height:32px;
+#nav {
+  .nav_logo {
+    height: 32px;
   }
-  .nav_btm2{
+  .nav_btm2 {
     a {
-    color: #2c3e50;
-    font-size: 1rem;
-    font-weight: 400;
-    text-decoration: none;
+      color: #2c3e50;
+      font-size: 1rem;
+      font-weight: 400;
+      text-decoration: none;
     }
-    a:hover{
-      color:#000;
+    a:hover {
+      color: #000;
     }
   }
 
