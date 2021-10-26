@@ -1,6 +1,8 @@
 <template>
   <div>
-    <!-- 챕터생성 모달 -->
+    <!-- 
+    ---------- 챕터 생성 모달창 ----------
+    -->
     <div>
       <div id="chap_modal" class="black-bg" v-if="chap_modal === true">
         <div class="white-bg">
@@ -19,26 +21,9 @@
       </div>
     </div>
 
-    <!-- 세부강의 생성 모달 -->
-    <div>
-      <div id="chap_modal" class="black-bg" v-if="episode_modal === true">
-        <div class="white-bg">
-          <span @click="episode_modal = false">닫기</span>
-          <h4>세부강의명 입력</h4>
-          <input
-            id="create_episode_name"
-            type="text"
-            style="display:inline; width:90%;"
-            placeholder="세부강의명을 입력해주세요"
-          />
-          <button class="btn-m btn-blue" @click="episode_upload()">
-            생성하기
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 메인 컨텐츠 -->
+    <!-- 
+    ---------- 메인 컨텐츠 ----------
+    -->
     <div class="container">
       <div class="notice-card">
         <h3>3. 커리큘럼</h3>
@@ -57,36 +42,27 @@
         </p>
       </div>
 
-      <!-- 소개 -->
-      <div id="cur_area">
-        <div
-          class="input-group"
-          v-for="(cur, cur_num) in curriculum"
-          :key="cur_num"
-        >
+      <!-- 
+      ---------- 소개부분 ----------
+      -->
+      <div id="cur_area" v-for="(cur, cur_num) in curriculum" :key="cur_num">
+        <div class="input-group" v-if="cur.type === 'chapter'">
+          <h4>{{ cur.chapter_name }}</h4>
           <div class="cur_container">
-            <h4>
-              #{{ cur_num + 1 }} {{ cur.chapter_name }}
-              <input
-                id="docname"
-                type="text"
-                style="display:none;"
-                :value="cur.cur_id"
-                disabled
-              />
-            </h4>
             <div class="cur_left">
               <img src="@/assets/imgs/PhotoPotrait.svg" />
             </div>
             <div class="cur_right">
-              <ul>
-                <li v-for="epi in episode" :key="epi">
+              <ul v-for="(epi, epi_num) in episode" :key="epi_num">
+                <li v-if="epi.curriculum_id === cur.curriculum_id">
                   {{ epi.episode_name }}
                 </li>
               </ul>
-              <button class="btn-m btn-blue" @click="episode_modal = true">
-                세부강의 추가
-              </button>
+              <router-link
+                :to="`/creators/editclass3/${url}/${cur.curriculum_id}`"
+              >
+                + 세부강의 추가
+              </router-link>
             </div>
           </div>
         </div>
@@ -102,93 +78,57 @@ export default {
       storage: this.$firebase.storage(),
       user: this.$store.state.user,
       url: this.$route.params.id,
-      cur_id: "",
       curriculum: "",
+      cur_id: "",
       img: "../../assets/imgs/PhotoPotrait.svg",
       episode: "",
-      episode_id: "",
       chap_modal: false,
       episode_modal: false
     };
   },
   async mounted() {
-    // 커리큘럼 챕터 불러오기
+    /*
+    ---------- 챕터 불러오기 ---------
+    */
     await this.db
+      .collection("onlineclass")
+      .doc(this.url)
       .collection("curriculum")
       .orderBy("create_date")
-      .where("class_doc_id", "==", this.url)
-      .get()
-      .then(querySnapshot => {
+      .onSnapshot(querySnapshot => {
         const doc_data = [];
         querySnapshot.forEach(result => {
           // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
           doc_data.push(result.data());
           this.curriculum = doc_data;
+          this.episode = doc_data;
           this.cur_id = result.id;
-        });
-      });
-    // 세부강의 불러오기
-    this.db
-      .collection("curriculum")
-      .where("class_doc_id", "==", this.url)
-      .collection("episodes")
-      .get()
-      .then(querySnapshot => {
-        const episode_data = [];
-        querySnapshot.forEach(result => {
-          // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
-          episode_data.push(result.data());
-          this.episode = episode_data;
-          this.episode_id = result.id;
-          console.log(result.data());
         });
       });
   },
   methods: {
-    // 커리큘럽 챕터 추가하기
+    /*
+    ---------- 챕터 추가하기 ---------
+    */
     async chap_upload() {
       await this.db
+        .collection("onlineclass")
+        .doc(this.url)
         .collection("curriculum")
         .add({
           create_date: new Date(),
           chapter_name: document.getElementById("creat_chapter_name").value,
-          class_doc_id: this.url
+          class_id: this.url,
+          type: "chapter"
         })
         .then(async docRef => {
           await this.db
+            .collection("onlineclass")
+            .doc(this.url)
             .collection("curriculum")
             .doc(docRef.id)
-            .update({ cur_id: docRef.id });
-          this.cur_id = docRef.id;
+            .update({ curriculum_id: docRef.id });
           this.chap_modal = false;
-          location.reload();
-        })
-        .catch(error => {
-          console.log("error updateing document:", error);
-        });
-    },
-
-    // 세부강의 추가하기
-    async episode_upload() {
-      await this.db
-        .collection("curriculum")
-        .doc(document.getElementById("docname").value)
-        .collection("episodes")
-        .add({
-          create_date: new Date(),
-          episode_name: document.getElementById("create_episode_name").value,
-          class_doc_id: document.getElementById("docname").value
-        })
-        .then(async docRef => {
-          await this.db
-            .collection("curriculum")
-            .doc(document.getElementById("docname").value)
-            .collection("episodes")
-            .doc(docRef.id)
-            .update({ episode_id: docRef.id });
-          this.episode_id = docRef.id;
-          this.episode_modal = false;
-          location.reload();
         })
         .catch(error => {
           console.log("error updateing document:", error);
@@ -226,5 +166,9 @@ export default {
       padding: 10px;
     }
   }
+}
+
+.cur_container {
+  display: flex;
 }
 </style>

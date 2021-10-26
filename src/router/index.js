@@ -12,6 +12,7 @@ import EditClass1 from "@/views/Creators/EditClass1";
 import EditClass2 from "@/views/Creators/EditClass2";
 import EditClass3 from "@/views/Creators/EditClass3";
 import EditClass4 from "@/views/Creators/EditClass4";
+import EditEpisode from "@/views/Creators/EditEpisode";
 import MyClass from "@/views/Creators/MyClass";
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
@@ -105,6 +106,11 @@ const routes = [
         path: "/creators/editclass4/:id",
         name: "editclass4",
         component: EditClass4
+      },
+      {
+        path: "/creators/editclass3/:id/:doc_id",
+        name: "editepisode",
+        component: EditEpisode
       }
     ]
   }
