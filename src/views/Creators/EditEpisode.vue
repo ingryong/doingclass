@@ -23,6 +23,13 @@
           @input="mixinAutoResize"
           rows="10"
         ></textarea>
+        <!--
+        ---------- 에디터 설정 ---------
+        -->
+        <div class="editor">
+          <EditorMenuBar :editor="editor"> </EditorMenuBar>
+          <editor-content :editor="editor" />
+        </div>
       </div>
       <router-link
         tag="button"
@@ -38,7 +45,14 @@
   </div>
 </template>
 <script>
+import { Editor, EditorContent, EditorMenuBar } from "tiptap";
+import { Heading, Bold, Italic, Link, HardBreak } from "tiptap-extensions";
+
 export default {
+  components: {
+    EditorMenuBar,
+    EditorContent
+  },
   data() {
     return {
       db: this.$firebase.firestore(),
@@ -52,7 +66,8 @@ export default {
       episode_description: "",
       img: "../../assets/imgs/PhotoPotrait.svg",
       chap_modal: false,
-      episode_modal: false
+      episode_modal: false,
+      editor: null
     };
   },
   async mounted() {
@@ -68,6 +83,20 @@ export default {
       .then(result => {
         this.curriculum = result.data();
       });
+
+    this.editor = new Editor({
+      content: "<p>This is just a boring paragraph</p>",
+      extensions: [
+        new Heading(),
+        new Bold(),
+        new Italic(),
+        new Link(),
+        new HardBreak()
+      ]
+    });
+  },
+  beforeDestroy() {
+    this.editor.destroy();
   },
   methods: {
     /*
