@@ -26,10 +26,7 @@
         <!--
         ---------- 에디터 설정 ---------
         -->
-        <div class="editor">
-          <EditorMenuBar :editor="editor"> </EditorMenuBar>
-          <editor-content :editor="editor" />
-        </div>
+        <Tiptap> </Tiptap>
       </div>
       <router-link
         tag="button"
@@ -45,13 +42,11 @@
   </div>
 </template>
 <script>
-import { Editor, EditorContent, EditorMenuBar } from "tiptap";
-import { Heading, Bold, Italic, Link, HardBreak } from "tiptap-extensions";
+import Tiptap from "@/components/Tiptap.vue";
 
 export default {
   components: {
-    EditorMenuBar,
-    EditorContent
+    Tiptap
   },
   data() {
     return {
@@ -67,7 +62,8 @@ export default {
       img: "../../assets/imgs/PhotoPotrait.svg",
       chap_modal: false,
       episode_modal: false,
-      editor: null
+      content:
+        "<p>A Vue.js wrapper component for tiptap to use <code>v-model</code>.</p>"
     };
   },
   async mounted() {
@@ -83,20 +79,6 @@ export default {
       .then(result => {
         this.curriculum = result.data();
       });
-
-    this.editor = new Editor({
-      content: "<p>This is just a boring paragraph</p>",
-      extensions: [
-        new Heading(),
-        new Bold(),
-        new Italic(),
-        new Link(),
-        new HardBreak()
-      ]
-    });
-  },
-  beforeDestroy() {
-    this.editor.destroy();
   },
   methods: {
     /*
