@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import Tiptap from "@/components/Tiptap.vue";
+import Tiptap from "@/components/Tiptap/Tiptap.vue";
 
 export default {
   components: {

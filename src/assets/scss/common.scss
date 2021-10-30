@@ -5,6 +5,7 @@ $main-txt: #222;
 $cur-title-text: #665bd3;
 
 $black: #000;
+$white: #fff;
 
 $gray-0: #f1f1f1;
 $gray-1: #eaeaea;
@@ -195,4 +196,20 @@ a:hover {
 .btn-gray {
   border: 1px solid #999;
   background-color: #eee;
+}
+
+// svg sprite
+body > svg,
+.icon use > svg,
+symbol {
+  path,
+  rect,
+  circle,
+  g {
+    fill: currentColor;
+    stroke: none;
+  }
+  *[d="M0 0h24v24H0z"] {
+    display: none;
+  }
 }
