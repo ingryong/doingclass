@@ -1,5 +1,30 @@
 <template>
   <div>
+    <!-- 
+    ---------- 챕터 모달창 ----------
+    -->
+    <div>
+      <div id="chap_modal" class="black-bg" v-if="video_modal === true">
+        <div class="white-bg">
+          <span @click="video_modal = false">닫기</span>
+          <h4>강의영상 URL 입력</h4>
+          <input
+            id="video_url"
+            type="text"
+            style="display:inline; width:90%;"
+            placeholder="강의영상의 url을 입력해주세요"
+            :value="video_url"
+          />
+          <button class="btn-m btn-blue" @click="video_upload()">
+            영상 추가
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+    ---------- 강의 내용 입력 ----------
+    -->
     <div class="container">
       <div class="notice-card">
         <h3>{{ curriculum.chapter_name }}</h3>
@@ -14,6 +39,22 @@
             :value="episode_name"
           />
         </h4>
+
+        <div class="video area">
+          <div @click="video_modal = true">
+            영상 URL 올리기
+          </div>
+          <iframe
+            v-if="video_url"
+            width="100%"
+            height="282"
+            :src="video_url"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
         <textarea
           name="dec"
           class="form-control m-1 width-100"
@@ -23,11 +64,11 @@
           @input="mixinAutoResize"
           rows="10"
         ></textarea>
-        <!--
-        ---------- 에디터 설정 ---------
-        -->
-        <Tiptap> </Tiptap>
       </div>
+
+      <!-- 
+    ---------- 돌아가기/저장하기 버튼 ----------
+    -->
       <router-link
         tag="button"
         class="btn-m btn-gray m-1"
@@ -42,12 +83,7 @@
   </div>
 </template>
 <script>
-import Tiptap from "@/components/Tiptap/Tiptap.vue";
-
 export default {
-  components: {
-    Tiptap
-  },
   data() {
     return {
       db: this.$firebase.firestore(),
@@ -59,11 +95,9 @@ export default {
       episode: "",
       episode_name: "",
       episode_description: "",
+      video_url: "",
       img: "../../assets/imgs/PhotoPotrait.svg",
-      chap_modal: false,
-      episode_modal: false,
-      content:
-        "<p>A Vue.js wrapper component for tiptap to use <code>v-model</code>.</p>"
+      video_modal: false
     };
   },
   async mounted() {
@@ -87,6 +121,29 @@ export default {
     mixinAutoResize(event) {
       event.target.style.height = "auto";
       event.target.style.height = `${event.target.scrollHeight}px`;
+    },
+
+    /*
+    ---------- youtube / vimeo의 영상을 embed와 일반 url 구분하여 제대로 넣어줌 ---------
+    */
+    video_upload() {
+      let input_url = document.getElementById("video_url").value;
+
+      if (input_url.includes("youtube.com/embed")) {
+        this.video_url = document.getElementById("video_url").value;
+      } else if (input_url.includes("youtu.be")) {
+        this.video_url = input_url.replace("youtu.be", "www.youtube.com/embed");
+      } else if (input_url.includes("vimeo.com")) {
+        this.video_url = input_url.replace(
+          "vimeo.com",
+          "player.vimeo.com/video"
+        );
+      } else if (input_url.includes("player.vimeo.com/video")) {
+        this.video_url = document.getElementById("video_url").value;
+      } else {
+        this.video_url = "";
+      }
+      this.video_modal = false;
     },
 
     /*
@@ -114,6 +171,7 @@ export default {
             .collection("curriculum")
             .doc(docRef.id)
             .update({ episode_id: docRef.id });
+
           this.$router.push(`/creators/editclass3/${this.url}`);
         })
         .catch(error => {

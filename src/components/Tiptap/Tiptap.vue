@@ -198,28 +198,7 @@ export default {
     return {
       editor: new Editor({
         extensions: [StarterKit, Underline],
-        content: `
-          <h2>
-            Hi there,
-          </h2>
-          <p>
-            this is a very <em>basic</em> example of tiptap.
-          </p>
-          <pre><code>body { display: none; }</code></pre>
-          <ul>
-            <li>
-              A regular list
-            </li>
-            <li>
-              With regular items
-            </li>
-          </ul>
-          <blockquote>
-            It's amazing 👏
-            <br />
-            – mom
-          </blockquote>
-        `
+        content: `asdf`
       })
     };
   },
@@ -232,6 +211,9 @@ export default {
       if (src !== null) {
         command({ src });
       }
+    },
+    onEmit() {
+      this.$emit("setContent", this.content);
     }
   }
 };
