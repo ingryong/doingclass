@@ -3,20 +3,22 @@
     <!-- 
     ---------- 챕터 모달창 ----------
     -->
-    <div id="viedo_modal" class="black-bg" v-show="video_modal">
-      <div class="white-bg">
-        <span @click="video_modal = false">닫기</span>
-        <h4>강의영상 URL 입력</h4>
-        <input
-          id="video_url"
-          type="text"
-          style="display:inline; width:90%;"
-          placeholder="강의영상의 url을 입력해주세요"
-          :value="episode.video_url"
-        />
-        <button class="btn-m btn-blue" @click="video_upload()">
-          영상 추가
-        </button>
+    <div>
+      <div id="viedo_modal" class="black-bg" v-show="video_modal">
+        <div class="white-bg">
+          <span @click="video_modal = false">닫기</span>
+          <h4>강의영상 URL 입력</h4>
+          <input
+            id="video_url"
+            type="text"
+            style="display:inline; width:90%;"
+            placeholder="강의영상의 url을 입력해주세요"
+            :value="video_url"
+          />
+          <button class="btn-m btn-blue" @click="video_upload()">
+            영상 추가
+          </button>
+        </div>
       </div>
     </div>
 
@@ -34,7 +36,6 @@
             class="form-control m-1 width-100"
             id="create_episode_name"
             placeholder="세부강의의 제목을 입력해주세요"
-            :value="episode.episode_name"
           />
         </h4>
 
@@ -43,7 +44,7 @@
             영상 URL 올리기
           </div>
           <iframe
-            v-if="episode.video_url"
+            v-if="video_url"
             width="100%"
             height="282"
             :src="video_url"
@@ -58,7 +59,6 @@
           class="form-control m-1 width-100"
           id="create_episode_description"
           placeholder="강의 내용을 입력해주세요"
-          :value="episode.episode_description"
           @input="mixinAutoResize"
           rows="10"
         ></textarea>
@@ -88,12 +88,13 @@ export default {
       storage: this.$firebase.storage(),
       user: this.$store.state.user,
       url: this.$route.params.id,
-      cur_id: this.$route.params.cur_id,
-      epi_id: this.$route.params.epi_id,
+      curriculum_id: this.$route.params.doc_id,
       curriculum: "",
       episode: "",
-      img: "../../assets/imgs/PhotoPotrait.svg",
+      episode_name: "",
+      episode_description: "",
       video_url: "",
+      img: "../../assets/imgs/PhotoPotrait.svg",
       video_modal: false
     };
   },
@@ -105,21 +106,10 @@ export default {
       .collection("onlineclass")
       .doc(this.url)
       .collection("curriculum")
-      .doc(this.cur_id)
+      .doc(this.curriculum_id)
       .get()
       .then(result => {
         this.curriculum = result.data();
-      });
-
-    await this.db
-      .collection("onlineclass")
-      .doc(this.url)
-      .collection("curriculum")
-      .doc(this.epi_id)
-      .get()
-      .then(result => {
-        this.episode = result.data();
-        this.video_url = result.data().video_url;
       });
   },
   methods: {
@@ -159,23 +149,32 @@ export default {
     },
 
     /*
-    ---------- 세부강의 업데이트 하기 ---------
+    ---------- 세부강의 추가하기 ---------
     */
     async episode_upload() {
       await this.db
         .collection("onlineclass")
         .doc(this.url)
         .collection("curriculum")
-        .doc(this.epi_id)
-        .update({
-          update_date: new Date(),
+        .add({
+          create_date: new Date(),
           episode_name: document.getElementById("create_episode_name").value,
           video_url: this.video_url,
           episode_description: document.getElementById(
             "create_episode_description"
-          ).value
+          ).value,
+          class_id: this.url,
+          curriculum_id: this.curriculum_id,
+          type: "episode"
         })
-        .then(() => {
+        .then(async docRef => {
+          await this.db
+            .collection("onlineclass")
+            .doc(this.url)
+            .collection("curriculum")
+            .doc(docRef.id)
+            .update({ episode_id: docRef.id });
+
           this.$router.push(`/creators/editclass3/${this.url}`);
         })
         .catch(error => {

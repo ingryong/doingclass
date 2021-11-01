@@ -46,16 +46,23 @@
       ---------- 소개부분 ----------
       -->
       <div id="cur_area" v-for="(cur, cur_num) in curriculum" :key="cur_num">
-        <div class="input-group" v-if="cur.type === 'chapter'">
+        <div class="input-group">
           <h4>{{ cur.chapter_name }}</h4>
           <div class="cur_container">
             <div class="cur_left">
               <img src="@/assets/imgs/PhotoPotrait.svg" />
             </div>
             <div class="cur_right">
-              <ul v-for="(epi, epi_num) in episode" :key="epi_num">
-                <li v-if="epi.curriculum_id === cur.curriculum_id">
-                  {{ epi.episode_name }}
+              <ul>
+                <li v-for="(epi, epi_num) in episode" :key="epi_num">
+                  <router-link
+                    v-if="epi.curriculum_id === cur.curriculum_id"
+                    :to="
+                      `/creators/editclass3/${url}/${epi.curriculum_id}/${epi.episode_id}`
+                    "
+                  >
+                    {{ epi.episode_name }} <i class="far fa-edit"></i>
+                  </router-link>
                 </li>
               </ul>
               <router-link
@@ -96,12 +103,17 @@ export default {
       .collection("curriculum")
       .orderBy("create_date")
       .onSnapshot(querySnapshot => {
-        const doc_data = [];
+        const chap_data = [];
+        const epi_data = [];
         querySnapshot.forEach(result => {
           // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
-          doc_data.push(result.data());
-          this.curriculum = doc_data;
-          this.episode = doc_data;
+          if (result.data().type === "chapter") {
+            chap_data.push(result.data());
+          } else if (result.data().type === "episode") {
+            epi_data.push(result.data());
+          }
+          this.curriculum = chap_data;
+          this.episode = epi_data;
           this.cur_id = result.id;
         });
       });
@@ -170,5 +182,14 @@ export default {
 
 .cur_container {
   display: flex;
+  .cur_right {
+    ul {
+      li {
+        a {
+          line-height: 1.5rem;
+        }
+      }
+    }
+  }
 }
 </style>
