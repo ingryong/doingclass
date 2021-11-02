@@ -50,7 +50,25 @@
           <h4>{{ cur.chapter_name }}</h4>
           <div class="cur_container">
             <div class="cur_left">
-              <img src="@/assets/imgs/PhotoPotrait.svg" />
+              <label for="input-file">
+                <p class="chap_img" v-if="!cur.chapter_img">
+                  챕터 이미지<br />등록
+                </p>
+                <img
+                  class="chap_img"
+                  :src="cur.chapter_img"
+                  v-if="cur.chapter_img"
+                />
+              </label>
+              <input
+                class="img_upload"
+                type="file"
+                id="input-file"
+                accept="image/*"
+                v-show="false"
+                :name="cur.curriculum_id"
+                @change="imgUpload($event, cur.curriculum_id)"
+              />
             </div>
             <div class="cur_right">
               <ul>
@@ -88,9 +106,11 @@ export default {
       curriculum: "",
       cur_id: "",
       img: "../../assets/imgs/PhotoPotrait.svg",
+      chapter_img: "",
       episode: "",
       chap_modal: false,
-      episode_modal: false
+      episode_modal: false,
+      chapid: ""
     };
   },
   async mounted() {
@@ -114,7 +134,6 @@ export default {
           }
           this.curriculum = chap_data;
           this.episode = epi_data;
-          this.cur_id = result.id;
         });
       });
   },
@@ -145,6 +164,44 @@ export default {
         .catch(error => {
           console.log("error updateing document:", error);
         });
+    },
+    /*
+    ---------- 이미지 추가하기 ---------
+    */
+    async imgUpload(event, cur_id) {
+      console.log(cur_id);
+      const fileInfo = document.querySelector(".img_upload").files[0];
+      const storageRef = this.storage.ref();
+      const updateUrl = storageRef.child("images/class/" + fileInfo.name);
+      const uploadImg = updateUrl.put(fileInfo);
+      await uploadImg.on(
+        "state_change",
+        // 변화시 동작하는 함수
+        null,
+        //에러시 동작하는 함수
+        error => {
+          console.log("실패 이유는", error);
+        },
+        // 성공시 동작하는 함수
+        () => {
+          uploadImg.snapshot.ref.getDownloadURL().then(url => {
+            this.chapter_img = url;
+
+            this.db
+              .collection("onlineclass")
+              .doc(this.url)
+              .collection("curriculum")
+              .doc(cur_id)
+              .update({
+                chapter_img: url
+              })
+              .then(() => {})
+              .catch(error => {
+                console.log("error updateing document:", error);
+              });
+          });
+        }
+      );
     }
   }
 };
@@ -182,6 +239,32 @@ export default {
 
 .cur_container {
   display: flex;
+  .cur_left {
+    margin-right: 10px;
+    label {
+      p {
+        padding: 10px;
+        padding-top: 40px;
+        width: 120px;
+        height: 120px;
+        text-align: center;
+        margin: 10px 4px;
+        box-sizing: border-box;
+        background-image: url(~@/assets/imgs/PhotoPotrait.svg);
+        background-size: contain;
+        background-color: #eee;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      img {
+        margin: 10px 4px;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    }
+  }
   .cur_right {
     ul {
       li {
