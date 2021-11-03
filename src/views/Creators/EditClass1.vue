@@ -152,7 +152,6 @@ export default {
       .doc(this.url)
       .get()
       .then(result => {
-        console.log(result.data());
         this.doc = result.data();
         this.thumbnail = result.data().thumbnail;
       });
