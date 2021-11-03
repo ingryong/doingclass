@@ -47,28 +47,24 @@
       -->
       <div id="cur_area" v-for="(cur, cur_num) in curriculum" :key="cur_num">
         <div class="input-group">
-          <h4>{{ cur.chapter_name }}</h4>
+          <div class="cur_header">
+            <h4>{{ cur.chapter_name }}</h4>
+            <router-link :to="`/creators/editchap/${url}/${cur.curriculum_id}`"
+              ><i class="fas fa-cog"></i
+            ></router-link>
+          </div>
           <div class="cur_container">
             <div class="cur_left">
-              <label for="input-file">
+              <div class="check_img">
                 <p class="chap_img" v-if="!cur.chapter_img">
-                  챕터 이미지<br />등록
+                  챕터 이미지를<br />등록 해주세요.
                 </p>
                 <img
                   class="chap_img"
                   :src="cur.chapter_img"
                   v-if="cur.chapter_img"
                 />
-              </label>
-              <input
-                class="img_upload"
-                type="file"
-                id="input-file"
-                accept="image/*"
-                v-show="false"
-                :name="cur.curriculum_id"
-                @change="imgUpload($event, cur.curriculum_id)"
-              />
+              </div>
             </div>
             <div class="cur_right">
               <ul>
@@ -76,7 +72,7 @@
                   <router-link
                     v-if="epi.curriculum_id === cur.curriculum_id"
                     :to="
-                      `/creators/editclass3/${url}/${epi.curriculum_id}/${epi.episode_id}`
+                      `/creators/editepi/${url}/${epi.curriculum_id}/${epi.episode_id}`
                     "
                   >
                     {{ epi.episode_name }} <i class="far fa-edit"></i>
@@ -84,7 +80,7 @@
                 </li>
               </ul>
               <router-link
-                :to="`/creators/editclass3/${url}/${cur.curriculum_id}`"
+                :to="`/creators/createepi/${url}/${cur.curriculum_id}`"
               >
                 + 세부강의 추가
               </router-link>
@@ -237,39 +233,48 @@ export default {
   }
 }
 
-.cur_container {
-  display: flex;
-  .cur_left {
-    margin-right: 10px;
-    label {
-      p {
-        padding: 10px;
-        padding-top: 40px;
-        width: 120px;
-        height: 120px;
-        text-align: center;
-        margin: 10px 4px;
-        box-sizing: border-box;
-        background-image: url(~@/assets/imgs/PhotoPotrait.svg);
-        background-size: contain;
-        background-color: #eee;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      img {
-        margin: 10px 4px;
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 4px;
-      }
+.input-group {
+  .cur_header {
+    display: flex;
+    justify-content: space-between;
+    h4 {
+      margin-left: 4px;
     }
   }
-  .cur_right {
-    ul {
-      li {
-        a {
-          line-height: 1.5rem;
+  .cur_container {
+    display: flex;
+    .cur_left {
+      margin-right: 10px;
+      .check_img {
+        p {
+          padding: 10px;
+          padding-top: 40px;
+          width: 120px;
+          height: 120px;
+          text-align: center;
+          margin: 10px 4px;
+          box-sizing: border-box;
+          background-image: url(~@/assets/imgs/PhotoPotrait.svg);
+          background-size: contain;
+          background-color: #eee;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        img {
+          margin: 10px 4px;
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+      }
+    }
+    .cur_right {
+      ul {
+        li {
+          a {
+            line-height: 1.5rem;
+          }
         }
       }
     }
