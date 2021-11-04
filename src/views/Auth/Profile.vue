@@ -1,14 +1,25 @@
 <template>
-  <div class="profile-container" v-if="profile.user !== null">
+  <div class="profile-container">
     <h1>{{ profile.displayName }}님의 Profile</h1>
     <div class="profile_group f-column m-auto">
-      <div class="profile-img">
+      <label for="profile-img" class="profile-img">
         <img
-          v-if="$store.state.user.phothURL"
-          :src="$store.state.user.phothURL"
+          v-show="$store.state.user.photoURL"
+          :src="$store.state.user.photoURL"
         />
-        <a><i v-if="!$store.state.user.phothURL" class="fas fa-user"/></a>
-      </div>
+        <i v-show="!$store.state.user.photoURL" class="fas fa-user" />
+      </label>
+      <input
+        class="img_upload"
+        type="file"
+        id="profile-img"
+        accept="image/*"
+        v-show="false"
+        @change="imgUpload"
+      />
+      <a v-show="$store.state.user.photoURL" @click="imgDelete"
+        >기본 이미지로</a
+      >
       <input
         id="profile_email"
         type="text"
@@ -25,7 +36,11 @@
         ref="username"
         v-model="profile.displayName"
         value=""
+        maxlength="8"
       />
+      <button class="btn-l btn-blue" @click="saveProfile">
+        내 정보 수정하기
+      </button>
       <button class="btn-l btn-red" @click="signOut">logout</button>
     </div>
   </div>
@@ -39,10 +54,15 @@ export default {
   data() {
     // 현재 컴포넌트에서 사용할 데이터셋
     return {
-      profile: this.$store.state.user,
+      storage: this.$firebase.storage(),
+      profile: "",
       username: "",
-      userpw: ""
+      userpw: "",
+      userphonenumber: ""
     };
+  },
+  async mounted() {
+    this.profile = await this.$store.state.user;
   },
   methods: {
     signOut() {
@@ -54,6 +74,65 @@ export default {
         .catch(error => {
           // an error happened
           console.log(error);
+        });
+    },
+    /*
+    ---------- 이미지 추가하기 ---------
+    */
+    async imgUpload() {
+      const fileInfo = document.querySelector(".img_upload").files[0];
+      const storageRef = this.storage.ref();
+      const updateUrl = storageRef.child("images/photoURL/" + fileInfo.name);
+      const uploadImg = updateUrl.put(fileInfo);
+      await uploadImg.on(
+        "state_change",
+        // 변화시 동작하는 함수
+        null,
+        //에러시 동작하는 함수
+        error => {
+          console.log("실패 이유는", error);
+        },
+        // 성공시 동작하는 함수
+        () => {
+          uploadImg.snapshot.ref.getDownloadURL().then(url => {
+            this.profile
+              .updateProfile({
+                photoURL: url
+              })
+              .then(() => {
+                this.$router.push(`/profile`);
+              })
+              .catch(error => {
+                console.log("error updateing document:", error);
+              });
+          });
+        }
+      );
+    },
+    /*
+    ---------- 이미지 삭제하기 ---------
+    */
+    imgDelete() {
+      this.profile
+        .updateProfile({
+          photoURL: ""
+        })
+        .then(() => {})
+        .catch(error => {
+          console.log("error updateing document:", error);
+        });
+    },
+    /*
+    ---------- 프로필 수정하기 ---------
+    */
+    saveProfile() {
+      this.profile
+        .updateProfile({
+          displayName: document.getElementById("profile_name").value
+        })
+        .then(() => {})
+        .catch(error => {
+          console.log("error updateing document:", error);
         });
     }
   }
@@ -89,21 +168,22 @@ export default {
       height: 180px;
       border-radius: 50%;
       background-color: $gray-4;
+      cursor: pointer;
       img {
-        width: 60px;
-        height: 60px;
+        width: 180px;
+        height: 180px;
         object-fit: cover;
         object-position: center;
         border: 0px;
+        border-radius: 50%;
+        background-color: white;
       }
-      a {
-        svg {
-          margin-top: 20px;
-          margin-left: 20px;
-          font-size: 10rem;
-          color: white;
-          text-align: center;
-        }
+      svg {
+        margin-top: 20px;
+        margin-left: 20px;
+        font-size: 10rem;
+        color: white;
+        text-align: center;
       }
     }
   }

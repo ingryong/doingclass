@@ -8,10 +8,10 @@
       <div class="profile">
         <div>
           <img
-            v-if="$store.state.user.phothURL"
-            :src="$store.state.user.phothURL"
+            v-if="$store.state.user.photoURL"
+            :src="$store.state.user.photoURL"
           />
-          <a><i v-if="!$store.state.user.phothURL" class="fas fa-user"/></a>
+          <a><i v-if="!$store.state.user.photoURL" class="fas fa-user"/></a>
         </div>
         <router-link to="/profile">
           {{ $store.state.user.displayName }}
@@ -116,6 +116,7 @@ export default {
         object-fit: cover;
         object-position: center;
         border: 0px;
+        background-color: white;
       }
       a {
         svg {

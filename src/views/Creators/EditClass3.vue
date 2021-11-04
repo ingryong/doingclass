@@ -160,44 +160,6 @@ export default {
         .catch(error => {
           console.log("error updateing document:", error);
         });
-    },
-    /*
-    ---------- 이미지 추가하기 ---------
-    */
-    async imgUpload(event, cur_id) {
-      console.log(cur_id);
-      const fileInfo = document.querySelector(".img_upload").files[0];
-      const storageRef = this.storage.ref();
-      const updateUrl = storageRef.child("images/class/" + fileInfo.name);
-      const uploadImg = updateUrl.put(fileInfo);
-      await uploadImg.on(
-        "state_change",
-        // 변화시 동작하는 함수
-        null,
-        //에러시 동작하는 함수
-        error => {
-          console.log("실패 이유는", error);
-        },
-        // 성공시 동작하는 함수
-        () => {
-          uploadImg.snapshot.ref.getDownloadURL().then(url => {
-            this.chapter_img = url;
-
-            this.db
-              .collection("onlineclass")
-              .doc(this.url)
-              .collection("curriculum")
-              .doc(cur_id)
-              .update({
-                chapter_img: url
-              })
-              .then(() => {})
-              .catch(error => {
-                console.log("error updateing document:", error);
-              });
-          });
-        }
-      );
     }
   }
 };
@@ -258,7 +220,6 @@ export default {
           background-size: contain;
           background-color: #eee;
           border-radius: 4px;
-          cursor: pointer;
         }
         img {
           margin: 10px 4px;

@@ -7,7 +7,8 @@
         <p>
           클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를
           알려주세요.<br />
-          [저장하기]버튼을 누르면 모든 수정 사항은 즉시 반영되어 보여집니다.
+          썸네일 이미지를 제외한 다른 입력은 [저장하고 다음으로] 버튼을 클릭해야
+          반영 됩니다.
         </p>
       </div>
 
@@ -24,25 +25,28 @@
 
       <div class="input-group">
         <h4>썸네일 이미지 업로드</h4>
-        <p>
-          썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
-          <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
+        <p style="font-size:0.9rem; text-align:center;">
+          썸네일 이미지는 4:3 비율에 최적화되어 있습니다.<br />
+          비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.<br /><br />
+          썸네일 이미지는 이미지가 변경되면 저장버튼을 누르지 않아도 즉시
+          적용됩니다.
         </p>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="doc.thumbnail === ''"
-            style="border:1px solid #eee;"
+        <div class="thumb_img_upload">
+          <label for="image">
+            <p class="thumb_img" v-if="!doc.thumbnail">
+              썸네일 이미지를<br />등록 해주세요.
+            </p>
+            <img class="thumb_img" :src="doc.thumbnail" v-if="doc.thumbnail" />
+          </label>
+          <input
+            class="thumb_upload"
+            type="file"
+            id="image"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
           />
-          <img :src="thumbnail" v-if="doc.thumbnail" />
         </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="image"
-        />
       </div>
 
       <div class="input-group">
@@ -142,8 +146,7 @@ export default {
       storage: this.$firebase.storage(),
       user: this.$store.state.user,
       doc: "",
-      url: this.$route.params.id,
-      thumbnail: ""
+      url: this.$route.params.id
     };
   },
   mounted() {
@@ -153,7 +156,6 @@ export default {
       .get()
       .then(result => {
         this.doc = result.data();
-        this.thumbnail = result.data().thumbnail;
       });
   },
   methods: {
@@ -175,6 +177,17 @@ export default {
         () => {
           uploadImg.snapshot.ref.getDownloadURL().then(url => {
             this.thumbnail = url;
+
+            this.db
+              .collection("onlineclass")
+              .doc(this.url)
+              .update({
+                thumbnail: url
+              })
+              .then(() => {})
+              .catch(error => {
+                console.log("error updateing document:", error);
+              });
           });
         }
       );
@@ -196,7 +209,6 @@ export default {
           type: document.getElementById("classtype").value,
           onoff: document.getElementById("onoff").value,
           level: document.getElementById("level").value,
-          thumbnail: this.thumbnail,
           classopen: false,
           price: 0
         })
@@ -252,6 +264,35 @@ export default {
     .disable {
       color: $gray-3;
       cursor: default;
+    }
+  }
+}
+.thumb_img_upload {
+  width: 100%;
+  label {
+    margin: auto;
+    cursor: pointer;
+    p {
+      padding: 10px;
+      padding-top: 95px;
+      width: 320px;
+      height: 240px;
+      text-align: center;
+      margin: auto;
+      box-sizing: border-box;
+      background-image: url(~@/assets/imgs/PhotoPotrait.svg);
+      background-size: contain;
+      background-color: #eee;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      margin: auto;
+      width: 320px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 4px;
     }
   }
 }
