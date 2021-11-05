@@ -38,21 +38,22 @@
         <h4>
           프로필 이미지 업로드
         </h4>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="profile_img === ''"
-            style="border:1px solid #eee;"
+        <div class="profile-img-upload">
+          <label for="input-file">
+            <p class="chap_img" v-if="!profile_img">
+              프로필 사진을<br />등록 해주세요.
+            </p>
+            <img class="chap_img" :src="profile_img" v-if="profile_img" />
+          </label>
+          <input
+            class="img_upload"
+            type="file"
+            id="input-file"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
           />
-          <img :src="profile_img" v-if="profile_img" />
         </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="profile_img"
-        />
       </div>
       <router-link
         tag="button"
@@ -67,7 +68,10 @@
     </div>
   </div>
 </template>
+
 <script>
+import { v4 as uuidv4 } from "uuid";
+
 export default {
   data() {
     return {
@@ -90,13 +94,18 @@ export default {
       });
   },
   methods: {
+    /*
+    ---------- 프로필 추가하기 ---------
+    */
     imgUpload(event) {
       const {
         target: { files }
       } = event;
       const fileInfo = files[0];
       const storageRef = this.storage.ref();
-      const updateUrl = storageRef.child("images/class/" + fileInfo.name);
+      const updateUrl = storageRef.child(
+        "images/class/" + this.url + "/" + uuidv4()
+      );
       const uploadImg = updateUrl.put(fileInfo);
 
       uploadImg.on(
@@ -144,3 +153,33 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.profile-img-upload {
+  width: 100%;
+  label {
+    margin: auto;
+    p {
+      padding: 10px;
+      padding-top: 95px;
+      width: 280px;
+      height: 280px;
+      text-align: center;
+      margin: auto;
+      box-sizing: border-box;
+      background-image: url(~@/assets/imgs/PhotoPotrait.svg);
+      background-size: contain;
+      background-color: #eee;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      margin: auto;
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+}
+</style>

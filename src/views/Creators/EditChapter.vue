@@ -55,7 +55,9 @@
     </div>
   </div>
 </template>
+
 <script>
+import { v4 as uuidv4 } from "uuid";
 export default {
   data() {
     return {
@@ -108,7 +110,9 @@ export default {
     async imgUpload() {
       const fileInfo = document.querySelector(".img_upload").files[0];
       const storageRef = this.storage.ref();
-      const updateUrl = storageRef.child("images/class/" + fileInfo.name);
+      const updateUrl = storageRef.child(
+        "images/class/" + this.url + "/" + uuidv4()
+      );
       const uploadImg = updateUrl.put(fileInfo);
       await uploadImg.on(
         "state_change",

@@ -32,22 +32,22 @@
           rows="10"
         ></textarea>
 
-        <p>소개 이미지 업로드</p>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="dec1_img === ''"
-            style="border:1px solid #eee;"
+        <div class="introduce-img-upload">
+          <label for="dec1">
+            <p class="chap_img" v-if="!dec1_img">
+              해당 소개와 관련 이미지를<br />등록 해주세요.
+            </p>
+            <img class="chap_img" :src="dec1_img" v-if="dec1_img" />
+          </label>
+          <input
+            class="img_upload"
+            type="file"
+            id="dec1"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
           />
-          <img :src="dec1_img" v-if="dec1_img" />
         </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="dec1"
-        />
       </div>
 
       <!-- 소개2 -->
@@ -72,22 +72,22 @@
           rows="10"
         ></textarea>
 
-        <p>소개 이미지 업로드</p>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="dec2_img === ''"
-            style="border:1px solid #eee;"
+        <div class="introduce-img-upload">
+          <label for="dec2">
+            <p class="chap_img" v-if="!dec2_img">
+              해당 소개와 관련 이미지를<br />등록 해주세요.
+            </p>
+            <img class="chap_img" :src="dec2_img" v-if="dec2_img" />
+          </label>
+          <input
+            class="img_upload"
+            type="file"
+            id="dec2"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
           />
-          <img :src="dec2_img" v-if="dec2_img" />
         </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="dec2"
-        />
       </div>
 
       <!-- 소개3 -->
@@ -112,22 +112,22 @@
           rows="10"
         ></textarea>
 
-        <p>소개 이미지 업로드</p>
-        <div class="class_thumbnail">
-          <img
-            src="@/assets/imgs/PhotoPotrait.svg"
-            v-if="dec3_img === ''"
-            style="border:1px solid #eee;"
+        <div class="introduce-img-upload">
+          <label for="dec3">
+            <p class="chap_img" v-if="!dec3_img">
+              해당 소개와 관련 이미지를<br />등록 해주세요.
+            </p>
+            <img class="chap_img" :src="dec3_img" v-if="dec3_img" />
+          </label>
+          <input
+            class="img_upload"
+            type="file"
+            id="dec3"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
           />
-          <img :src="dec3_img" v-if="dec3_img" />
         </div>
-        <input
-          class="form-control m-1"
-          type="file"
-          accept="image/*"
-          @change="imgUpload"
-          id="dec3"
-        />
       </div>
 
       <router-link
@@ -145,6 +145,8 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from "uuid";
+
 export default {
   data() {
     return {
@@ -183,7 +185,9 @@ export default {
       } = event;
       const fileInfo = files[0];
       const storageRef = this.storage.ref();
-      const updateUrl = storageRef.child("images/class/" + fileInfo.name);
+      const updateUrl = storageRef.child(
+        "images/class/" + this.url + "/" + uuidv4()
+      );
       const uploadImg = updateUrl.put(fileInfo);
 
       uploadImg.on(
@@ -252,49 +256,6 @@ export default {
 </script>
 
 <style lang="scss">
-#creators-left-side {
-  position: fixed;
-  top: 50px;
-  left: 0px;
-  z-index: 98;
-  width: 220px;
-  height: 100%;
-  border-right: 1px solid $gray-1;
-  box-sizing: border-box;
-  padding: 10px;
-  background-color: #fcfcfc;
-
-  .backpage {
-    display: block;
-    padding-top: 10px;
-    font-size: 0.875rem;
-    font-weight: bold;
-  }
-  ul {
-    padding: 10px;
-
-    .step {
-      height: 40px;
-      align-items: center;
-      align-content: center;
-      line-height: 2rem;
-
-      span {
-        display: inline-block;
-        width: 24px;
-        height: 26px;
-        border-radius: 4px;
-        text-align: center;
-        background: linear-gradient(145deg, #e6e6e6, #ffffff);
-        box-shadow: 1px 1px 2px #e6e6e6, -1px -1px 2px #ffffff;
-      }
-    }
-    .disable {
-      color: $gray-3;
-      cursor: default;
-    }
-  }
-}
 .container {
   .input-group {
     width: 80%;
@@ -308,5 +269,30 @@ export default {
 textarea {
   resize: none;
   height: auto;
+}
+.introduce-img-upload {
+  width: 100%;
+  label {
+    margin: auto;
+    p {
+      padding: 10px;
+      padding-top: 120px;
+      width: 100%;
+      height: 280px;
+      text-align: center;
+      margin: auto;
+      box-sizing: border-box;
+      background-color: #eee;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      margin: auto;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
 }
 </style>
