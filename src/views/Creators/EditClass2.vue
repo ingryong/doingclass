@@ -10,6 +10,106 @@
         </p>
       </div>
 
+      <div class="input-group">
+        <h4>헤더 이미지 업로드</h4>
+        <p>
+          소개페이지 헤더 부분에 보일 4개의 이미지입니다. <br />
+          하단의 저장버튼을 누르셔야 정상적으로 저장됩니다.
+        </p>
+
+        <div class="header-img-upload">
+          <div class="banner_left">
+            <label for="header_img1">
+              <p class="chap_img" v-if="!header_img1">
+                헤더 이미지를<br />등록 해주세요.
+              </p>
+              <img class="chap_img" :src="header_img1" v-if="header_img1" />
+            </label>
+            <input
+              class="img_upload"
+              type="file"
+              id="header_img1"
+              accept="image/*"
+              v-show="false"
+              @change="imgUpload"
+            />
+          </div>
+          <div class="banner_right_top">
+            <label for="header_img2">
+              <p class="chap_img" v-if="!header_img2">
+                헤더 이미지를<br />등록 해주세요.
+              </p>
+              <img class="chap_img" :src="header_img2" v-if="header_img2" />
+            </label>
+            <input
+              class="img_upload"
+              type="file"
+              id="header_img2"
+              accept="image/*"
+              v-show="false"
+              @change="imgUpload"
+            />
+          </div>
+          <div class="banner_right_bottom1">
+            <label for="header_img3">
+              <p class="chap_img" v-if="!header_img3">
+                헤더 이미지를<br />등록 해주세요.
+              </p>
+              <img class="chap_img" :src="header_img3" v-if="header_img3" />
+            </label>
+            <input
+              class="img_upload"
+              type="file"
+              id="header_img3"
+              accept="image/*"
+              v-show="false"
+              @change="imgUpload"
+            />
+          </div>
+          <div class="banner_right_bottom2">
+            <label for="header_img4">
+              <p class="chap_img" v-if="!header_img4">
+                헤더 이미지를<br />등록 해주세요.
+              </p>
+              <img class="chap_img" :src="header_img4" v-if="header_img4" />
+            </label>
+            <input
+              class="img_upload"
+              type="file"
+              id="header_img4"
+              accept="image/*"
+              v-show="false"
+              @change="imgUpload"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <h4>포스터 이미지 업로드</h4>
+        <p>
+          소개페이지 진입 후 가장 처음 보여질 클래스 소개 포스터
+          이미지입니다.<br />
+          하단의 저장버튼을 누르셔야 정상적으로 저장됩니다.
+        </p>
+        <div class="introduce-img-upload">
+          <label for="poster_img">
+            <p class="chap_img" v-if="!poster_img">
+              해당 소개와 관련 이미지를<br />등록 해주세요.
+            </p>
+            <img class="chap_img" :src="poster_img" v-if="poster_img" />
+          </label>
+          <input
+            class="img_upload"
+            type="file"
+            id="poster_img"
+            accept="image/*"
+            v-show="false"
+            @change="imgUpload"
+          />
+        </div>
+      </div>
+
       <!-- 소개1 -->
       <div class="input-group">
         <h4>
@@ -24,7 +124,7 @@
         </h4>
         <textarea
           name="dec"
-          class="form-control m-1 width-100"
+          class="form-control-text-area m-1 width-100"
           id="dec1_dec"
           placeholder="내용을 입력해주세요"
           :value="dec1.dec"
@@ -64,7 +164,7 @@
         </h4>
         <textarea
           name="dec"
-          class="form-control m-1 width-100"
+          class="form-control-text-area m-1 width-100"
           id="dec2_dec"
           placeholder="내용을 입력해주세요"
           :value="dec2.dec"
@@ -104,7 +204,7 @@
         </h4>
         <textarea
           name="dec"
-          class="form-control m-1 width-100"
+          class="form-control-text-area m-1 width-100"
           id="dec3_dec"
           placeholder="내용을 입력해주세요"
           :value="dec3.dec"
@@ -160,15 +260,22 @@ export default {
       dec2: "",
       dec2_img: "",
       dec3: "",
-      dec3_img: ""
+      dec3_img: "",
+      poster_img: "",
+      header_img1: "",
+      header_img2: "",
+      header_img3: "",
+      header_img4: ""
     };
   },
   mounted() {
+    /*
+    ---------- 커리큘럼 불러오기 ---------
+    */
     this.db
       .collection("onlineclass")
       .doc(this.url)
-      .get()
-      .then(result => {
+      .onSnapshot(result => {
         this.doc = result.data();
         this.dec1 = result.data().class_dec.dec1;
         this.dec1_img = result.data().class_dec.dec1.img;
@@ -176,10 +283,18 @@ export default {
         this.dec2_img = result.data().class_dec.dec2.img;
         this.dec3 = result.data().class_dec.dec3;
         this.dec3_img = result.data().class_dec.dec3.img;
+        this.poster_img = result.data().poster_img;
+        this.header_img1 = result.data().header_img.header_img1;
+        this.header_img2 = result.data().header_img.header_img2;
+        this.header_img3 = result.data().header_img.header_img3;
+        this.header_img4 = result.data().header_img.header_img4;
       });
   },
   methods: {
-    imgUpload(event) {
+    /*
+    ---------- 이미지 업로드 ---------
+    */
+    async imgUpload(event) {
       const {
         target: { files }
       } = event;
@@ -190,7 +305,7 @@ export default {
       );
       const uploadImg = updateUrl.put(fileInfo);
 
-      uploadImg.on(
+      await uploadImg.on(
         "state_change",
         // 변화시 동작하는 함수
         null,
@@ -202,16 +317,37 @@ export default {
         () => {
           uploadImg.snapshot.ref.getDownloadURL().then(url => {
             if (event.target.id === "dec1") {
+              // 소개이미지-1
               this.dec1_img = url;
             } else if (event.target.id === "dec2") {
+              // 소개이미지-2
               this.dec2_img = url;
             } else if (event.target.id === "dec3") {
+              // 소개이미지-3
               this.dec3_img = url;
+            } else if (event.target.id === "poster_img") {
+              // 포스터이미지
+              this.poster_img = url;
+            } else if (event.target.id === "header_img1") {
+              // 포스터이미지
+              this.header_img1 = url;
+            } else if (event.target.id === "header_img2") {
+              // 포스터이미지
+              this.header_img2 = url;
+            } else if (event.target.id === "header_img3") {
+              // 포스터이미지
+              this.header_img3 = url;
+            } else if (event.target.id === "header_img4") {
+              // 포스터이미지
+              this.header_img4 = url;
             }
           });
         }
       );
     },
+    /*
+    ---------- 커리큘럼 내용 업데이트 ---------
+    */
     async upload() {
       await this.db
         .collection("onlineclass")
@@ -221,6 +357,7 @@ export default {
           creator_name: this.user.displayName,
           creator_email: this.user.email,
           last_update: new Date(),
+          poster_img: this.poster_img,
           class_dec: {
             dec1: {
               title: document.getElementById("dec1_title").value,
@@ -237,6 +374,12 @@ export default {
               dec: document.getElementById("dec3_dec").value,
               img: this.dec3_img
             }
+          },
+          header_img: {
+            header_img1: this.header_img1,
+            header_img2: this.header_img2,
+            header_img3: this.header_img3,
+            header_img4: this.header_img4
           }
         })
         .then(() => {
@@ -258,7 +401,7 @@ export default {
 <style lang="scss">
 .container {
   .input-group {
-    width: 80%;
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
     margin: 30px 0;
@@ -274,6 +417,7 @@ textarea {
   width: 100%;
   label {
     margin: auto;
+    cursor: pointer;
     p {
       padding: 10px;
       padding-top: 120px;
@@ -293,6 +437,55 @@ textarea {
       object-fit: cover;
       border-radius: 4px;
     }
+  }
+}
+
+.header-img-upload {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  grid-template-areas:
+    "left right right"
+    "left right1 right2";
+  label {
+    width: 100%;
+    cursor: pointer;
+  }
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  p {
+    background-color: #eee;
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+    margin: 0;
+    text-align: center;
+    padding-top: 60px;
+    border: 1px dotted #ccc;
+  }
+
+  .banner_left {
+    grid-area: left;
+    img {
+      height: 300px;
+    }
+    p {
+      height: 300px;
+      padding-top: 120px;
+    }
+  }
+  .banner_right_top {
+    grid-area: right;
+  }
+  .banner_right_bottom1 {
+    grid-area: right1;
+  }
+  .banner_right_bottom2 {
+    grid-area: right2;
   }
 }
 </style>

@@ -164,7 +164,30 @@ export default {
           level: document.getElementById("level").value,
           thumbnail: this.thumbnail,
           classopen: false,
-          price: 0
+          price: 0,
+          class_dec: {
+            dec1: {
+              title: "",
+              dec: "",
+              img: ""
+            },
+            dec2: {
+              title: "",
+              dec: "",
+              img: ""
+            },
+            dec3: {
+              title: "",
+              dec: "",
+              img: ""
+            }
+          },
+          header_img: {
+            header_img1: "",
+            header_img2: "",
+            header_img3: "",
+            header_img4: ""
+          }
         })
         .then(async docRef => {
           await this.db
@@ -189,7 +212,7 @@ export default {
   margin-top: 60px;
 
   .notice-card {
-    width: 80%;
+    width: 100%;
     border: 1px solid #eee;
     box-sizing: border-box;
     padding: 15px;
@@ -210,6 +233,16 @@ export default {
     min-height: 2rem;
     padding: 12px 6px;
     box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    &-text-area {
+      display: block;
+      width: 100%;
+      min-height: 2rem;
+      padding: 12px 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+    }
   }
   a:hover {
     cursor: pointer;
