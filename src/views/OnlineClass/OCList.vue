@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="oc_oclist">
-      <h1 class="ListTitle">
-        머니 클래스
-        <p class="sub_title">들으면 돈이 되는 클래스</p>
-      </h1>
+      <p class="listTitle">
+        <span class="title">
+          <i class="fas fa-coins" style="color:#999;"></i> 머니 클래스
+        </span>
+        <span class="sub_title">들으면 돈이 되는 클래스</span>
+      </p>
       <ul>
         <li v-for="list in moneyClassList" :key="list.id">
           <router-link :to="`/ocdetail/${list.id}`">
-            <img :src="list.thumbnail" />
+            <img class="list_sumbnail" :src="list.thumbnail" />
             <div class="list_profile">
               <img :src="list.profile_img" />
               <span>{{ list.profile_name }}</span>
@@ -32,14 +34,16 @@
       </ul>
     </div>
     <div class="oc_oclist">
-      <h1 class="ListTitle">
-        커리어 클래스
-        <p class="sub_title">각 분야별 전문가의 커리어 클래스</p>
-      </h1>
+      <p class="listTitle">
+        <span class="title">
+          <i class="fas fa-briefcase" style="color:#999;"></i> 커리어 클래스
+        </span>
+        <span class="sub_title">각 분야별 전문가의 커리어 클래스</span>
+      </p>
       <ul>
         <li v-for="list in careerClassList" :key="list.id">
           <router-link :to="`/ocdetail/${list.id}`">
-            <img :src="list.thumbnail" />
+            <img class="list_sumbnail" :src="list.thumbnail" />
             <div class="list_profile">
               <img :src="list.profile_img" />
               <span>{{ list.profile_name }}</span>
@@ -107,6 +111,16 @@ export default {
   @include content-area;
   padding: 50px 10px;
   margin-bottom: 30px;
+
+  .listTitle {
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .sub_title {
+      font-size: 0.9rem;
+    }
+  }
   ul {
     @include content-area;
     padding-left: 0px;
@@ -152,8 +166,8 @@ export default {
       }
 
       img {
-        width: 288px;
-        height: 217px;
+        width: 100%;
+        height: 72%;
         border-radius: 6px;
         object-fit: cover;
       }
