@@ -4,96 +4,112 @@
     <header class="title_container">
       <div class="detail_title_banner">
         <div class="banner_left">
-          <img :src="class_detail.detail_banner_img[0]" />
+          <img :src="classDetails.header_img.header_img1" />
         </div>
         <div class="banner_right_top">
-          <img :src="class_detail.detail_banner_img[1]" />
+          <img :src="classDetails.header_img.header_img2" />
         </div>
         <div class="banner_right_bottom1">
-          <img :src="class_detail.detail_banner_img[2]" />
+          <img :src="classDetails.header_img.header_img3" />
         </div>
         <div class="banner_right_bottom2">
-          <img :src="class_detail.detail_banner_img[3]" />
+          <img :src="classDetails.header_img.header_img4" />
         </div>
       </div>
     </header>
+
     <article class="detail_container" style="padding:0px 8px;">
       <!-- 메인 컨텐츠 컨테이너 -->
       <div class="left_container">
         <p class="class_info">
           <strong>클래스 정보</strong><br />
-          <span
-            >수강가능 <span class="values">{{ class_detail.tag1 }}</span></span
-          >
+          <span>
+            클래스 유형 <span class="values">{{ classDetails.type }}</span>
+          </span>
         </p>
         <hr />
-        <img class="detail_poster_img" :src="class_detail.posterimg" />
+        <img class="detail_poster_img" :src="classDetails.poster_img" />
         <hr />
-        <!-- description 영역 -->
-        <div
-          v-for="(des, des_num) in class_detail.detail_description"
-          :key="des_num"
-        >
-          <div
-            class="description_container"
-            v-if="class_detail.detail_description1 !== ''"
-          >
-            <h4>| {{ des.title }}</h4>
-            <p
-              class="point"
-              v-html="des.description"
-              v-if="des.class === 'point'"
-            ></p>
+
+        <!-- description1 영역 -->
+        <div>
+          <div class="description_container">
+            <h4>| {{ classDetails.class_dec.dec1.title }}</h4>
             <p
               class="detail_description"
-              v-html="des.description"
-              v-if="des.class === ''"
+              v-html="classDetails.class_dec.dec1.dec"
             ></p>
+            <img :src="classDetails.class_dec.dec1.img" />
             <hr />
           </div>
         </div>
+
+        <!-- description2 영역 -->
+        <div>
+          <div class="description_container">
+            <h4>| {{ classDetails.class_dec.dec2.title }}</h4>
+            <p
+              class="detail_description"
+              v-html="classDetails.class_dec.dec2.dec"
+            ></p>
+            <img :src="classDetails.class_dec.dec2.img" />
+            <hr />
+          </div>
+        </div>
+
+        <!-- description3 영역 -->
+        <div>
+          <div class="description_container">
+            <h4>| {{ classDetails.class_dec.dec3.title }}</h4>
+            <p
+              class="detail_description"
+              v-html="classDetails.class_dec.dec3.dec"
+            ></p>
+            <img :src="classDetails.class_dec.dec3.img" />
+            <hr />
+          </div>
+        </div>
+
         <!-- 강의 커리큘럼 -->
         <div class="description_container">
           <h4>| 강의 커리큘럼</h4>
           <div
             class="cur_container"
-            v-for="(cur, chapnum) in class_detail.detail_curriculum"
-            :key="chapnum"
+            v-for="(cur, cur_num) in curriculum"
+            :key="cur_num"
           >
-            <p class="cur_title">#{{ cur.cur_id }} {{ cur.title }}</p>
+            <p class="cur_title">#{{ cur.cur_id }} {{ cur.chapter_name }}</p>
             <ul style="display:flex;">
               <li>
-                <img class="cur_img" :src="cur.cur_img" />
+                <img class="cur_img" :src="cur.chapter_img" />
               </li>
               <ul class="cur_study_container">
-                <li
-                  class="cur_study"
-                  v-for="(cur_study, nums) in cur.study"
-                  :key="nums"
-                  v-html="nums + 1 + '. ' + cur_study"
-                ></li>
+                <li v-for="(epi, epi_num) in episode" :key="epi_num">
+                  <span
+                    class="cur_study"
+                    v-if="epi.curriculum_id === cur.curriculum_id"
+                    >{{ epi.episode_name }}</span
+                  >
+                </li>
               </ul>
             </ul>
           </div>
           <hr />
         </div>
         <!-- 크리에이터 소개 -->
-        <div
-          class="description_container"
-          v-for="(profiles, pnum) in class_detail.creator_profile"
-          :key="pnum"
-        >
+        <div class="description_container">
           <h4>| 크리에이터 소개</h4>
           <div class="creator_container" style="flex;">
-            <img :src="profiles.img" />
+            <img :src="classDetails.profile_img" />
             <div>
-              <h3>{{ profiles.cname }}</h3>
-              <p v-html="profiles.cdescription"></p>
+              <h3>{{ classDetails.profile_name }}</h3>
+              <p v-html="classDetails.profile_description"></p>
             </div>
           </div>
           <hr />
         </div>
-        <!-- 크리에이터의 한 마디 -->
+
+        <!-- 크리에이터의 한 마디
         <div
           class="description_container"
           v-if="class_detail.detail_lastmessage !== undefined"
@@ -105,51 +121,40 @@
             style="text-align:center; line-height:1.5;"
           ></p>
           <div style="height:50px;"></div>
-        </div>
+        </div> -->
       </div>
+
       <!-- 우측 플로팅 컨테이너 -->
       <aside class="right_container">
         <div id="side_content" class="float_window">
           <p class="window_category">
             <span
-              >{{ class_detail.category1 }} | {{ class_detail.category2 }}</span
+              >{{ classDetails.category.c1 }} |
+              {{ classDetails.category.c2 }}</span
             >
           </p>
           <p class="window_title">
-            {{ class_detail.title }}<br />
-            <span v-if="class_detail.tag1 === '수강가능'" class="tag-open">{{
-              class_detail.tag1
-            }}</span>
-            <span
-              v-else-if="class_detail.tag1 === '준비중'"
-              class="tag-ready"
-              >{{ class_detail.tag1 }}</span
+            {{ classDetails.title }}<br />
+            <span v-if="classDetails.classopen" class="tag-open"
+              >수강 가능</span
             >
-            <span
-              v-else-if="class_detail.tag1 === '모집종료'"
-              class="tag-close"
-              >{{ class_detail.tag1 }}</span
+            <span v-else-if="!classDetails.classopen" class="tag-ready"
+              >준비중</span
             >
-            <span v-if="class_detail.tag2 === '1:1코칭'" class="tag-coaching">{{
-              class_detail.tag2
-            }}</span>
-            <span v-if="class_detail.tag3 === '준비물'" class="tag-goods">{{
-              class_detail.tag3
-            }}</span>
           </p>
           <p class="detail_price">
             <span
-              ><s>{{ (class_detail.price * 1.3) | comma }}원</s> →
-              {{ class_detail.price | comma }}원</span
+              ><s>{{ (classDetails.price * 1.3) | comma }}원</s> →
+              {{ classDetails.price | comma }}원</span
             ><br />
             <span
-              ><strong>월 {{ (class_detail.price / 3) | comma }}원</strong>
+              ><strong>월 {{ (classDetails.price / 3) | comma }}원</strong>
               (3개월 할부)</span
             >
           </p>
           <p class="detail_learningdays">
             <span>수강기간</span>
-            <span>구매 후 {{ class_detail.learningdays }}일간 무제한 수강</span>
+            <span>구매 후 {{ classDetails.learningdays }}일간 무제한 수강</span>
           </p>
           <a class="btn_lg btn_black" href="/">클래스 신청하기</a>
         </div>
@@ -159,25 +164,54 @@
 </template>
 
 <script>
-import OnlineClass from "@/assets/data/onlineclass.js";
-
 export default {
   data() {
     return {
-      OnlineClass: OnlineClass,
+      db: this.$firebase.firestore(),
+      storage: this.$firebase.storage(),
+      url: this.$route.params.id,
+      classDetails: "",
+      curriculum: "",
+      episode: "",
       scrollPosition: null
     };
+  },
+  async mounted() {
+    await this.db
+      .collection("onlineclass")
+      .doc(this.url)
+      .onSnapshot(result => {
+        this.classDetails = result.data();
+      });
+
+    await this.db
+      .collection("onlineclass")
+      .doc(this.url)
+      .collection("curriculum")
+      .orderBy("create_date")
+      .onSnapshot(querySnapshot => {
+        const chap_data = [];
+        const epi_data = [];
+        querySnapshot.forEach(result => {
+          // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
+          if (result.data().type === "chapter") {
+            chap_data.push(result.data());
+          } else if (result.data().type === "episode") {
+            epi_data.push(result.data());
+          }
+          this.curriculum = chap_data;
+          this.episode = epi_data;
+        });
+      });
+
+    // mounted -> 라이프사이클 상 DOM에 모든 컴포넌트를 불러온 후에 할 일
+    // 스크롤이 발생할 때마다 methods의 updateScroll 이벤트를 불러온다.
+    window.addEventListener("scroll", this.updateScroll);
   },
   filters: {
     comma: function(val) {
       var num = Number(val);
       return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,");
-    }
-  },
-  computed: {
-    // 들어온 클래스의 id값을 찾는 OnlineClass[$route.params.id - 1] 대신 class_detail을 사용
-    class_detail() {
-      return OnlineClass[this.$route.params.id - 1];
     }
   },
   methods: {
@@ -191,11 +225,6 @@ export default {
         document.getElementById("side_content").style = "position : ";
       }
     }
-  },
-  mounted() {
-    // mounted -> 라이프사이클 상 DOM에 모든 컴포넌트를 불러온 후에 할 일
-    // 스크롤이 발생할 때마다 methods의 updateScroll 이벤트를 불러온다.
-    window.addEventListener("scroll", this.updateScroll);
   }
 };
 </script>
@@ -329,6 +358,7 @@ export default {
           width: 100%;
 
           .cur_study {
+            display: block;
             border: 1px solid $gray-2;
             padding: 6px 10px;
             margin: 0px 0px 5px 5px;
