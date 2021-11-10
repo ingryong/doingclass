@@ -118,7 +118,7 @@
             중급 (해당 강의와 관련된 실무에 활용할 정도의 지식이 있어야 수강
             가능)
           </option>
-          <option value="basic">
+          <option value="high">
             고급 (해당 강의와 관련된 상당한 지식이 있어야 수강 가능)
           </option>
         </select>

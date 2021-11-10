@@ -24,55 +24,57 @@
         <p class="class_info">
           <strong>클래스 정보</strong><br />
           <span>
-            클래스 유형 <span class="values">{{ classDetails.type }}</span>
+            <span class="values">클래스 분량</span>
+            {{ this.chapNum }}개 챕터, {{ this.epiNum }}개 세부강의
+          </span>
+          <span>
+            ·
+            <span class="values">난이도 </span>
+            <span v-if="classDetails.level === 'none'">상관없음</span>
+            <span v-if="classDetails.level === 'basic'">초급</span>
+            <span v-if="classDetails.level === 'middle'">중급</span>
+            <span v-if="classDetails.level === 'high'">고급</span>
           </span>
         </p>
         <hr />
         <img class="detail_poster_img" :src="classDetails.poster_img" />
-        <hr />
 
         <!-- description1 영역 -->
-        <div>
-          <div class="description_container">
-            <h4>| {{ classDetails.class_dec.dec1.title }}</h4>
-            <p
-              class="detail_description"
-              v-html="classDetails.class_dec.dec1.dec"
-            ></p>
-            <img :src="classDetails.class_dec.dec1.img" />
-            <hr />
-          </div>
+        <div class="description_container">
+          <h4>1. {{ classDetails.class_dec.dec1.title }}</h4>
+          <img :src="classDetails.class_dec.dec1.img" />
+          <p
+            class="detail_description"
+            v-html="classDetails.class_dec.dec1.dec"
+          ></p>
         </div>
 
         <!-- description2 영역 -->
-        <div>
-          <div class="description_container">
-            <h4>| {{ classDetails.class_dec.dec2.title }}</h4>
-            <p
-              class="detail_description"
-              v-html="classDetails.class_dec.dec2.dec"
-            ></p>
-            <img :src="classDetails.class_dec.dec2.img" />
-            <hr />
-          </div>
+        <div class="description_container">
+          <h4>2. {{ classDetails.class_dec.dec2.title }}</h4>
+          <img :src="classDetails.class_dec.dec2.img" />
+          <p
+            class="detail_description"
+            v-html="classDetails.class_dec.dec2.dec"
+          ></p>
         </div>
 
         <!-- description3 영역 -->
-        <div>
-          <div class="description_container">
-            <h4>| {{ classDetails.class_dec.dec3.title }}</h4>
-            <p
-              class="detail_description"
-              v-html="classDetails.class_dec.dec3.dec"
-            ></p>
-            <img :src="classDetails.class_dec.dec3.img" />
-            <hr />
-          </div>
+        <div class="description_container">
+          <h4>3. {{ classDetails.class_dec.dec3.title }}</h4>
+          <img :src="classDetails.class_dec.dec3.img" />
+          <p
+            class="detail_description"
+            v-html="classDetails.class_dec.dec3.dec"
+          ></p>
         </div>
 
         <!-- 강의 커리큘럼 -->
         <div class="description_container">
-          <h4>| 강의 커리큘럼</h4>
+          <h4>4. 강의 커리큘럼</h4>
+          <p style="margin-top:-20px;">
+            강의를 수강하게 되면 배울 수 있는 커리큘럼 입니다.
+          </p>
           <div
             class="cur_container"
             v-for="(cur, cur_num) in curriculum"
@@ -94,11 +96,10 @@
               </ul>
             </ul>
           </div>
-          <hr />
         </div>
         <!-- 크리에이터 소개 -->
         <div class="description_container">
-          <h4>| 크리에이터 소개</h4>
+          <h4>크리에이터 소개</h4>
           <div class="creator_container" style="flex;">
             <img :src="classDetails.profile_img" />
             <div>
@@ -106,7 +107,6 @@
               <p v-html="classDetails.profile_description"></p>
             </div>
           </div>
-          <hr />
         </div>
 
         <!-- 크리에이터의 한 마디
@@ -122,6 +122,29 @@
           ></p>
           <div style="height:50px;"></div>
         </div> -->
+
+        <h3>클래스 질의응답</h3>
+        <div class="class_faq_board">
+          <div class="class_faq_write">
+            <textarea placeholder="클래스 문의 내용을 입력해주세요"></textarea>
+            <i class="far fa-paper-plane"></i>
+          </div>
+          <div>
+            <div class="class_faq_top">
+              <img />
+              <div><span>닉네임</span><span>작성일자</span></div>
+            </div>
+            <div class="class_faq_bottom">작성내용</div>
+            <div class="class_faq_reply_container">
+              <img /><span>닉네임</span><span>작성일자</span>
+              <span>작성내용</span>
+            </div>
+            <div class="class_faq_write_reply">
+              <input type="text" placeholder="댓글을 입력해주세요" />
+              <i class="fas fa-paper-plane"></i>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 우측 플로팅 컨테이너 -->
@@ -129,12 +152,14 @@
         <div id="side_content" class="float_window">
           <p class="window_category">
             <span
-              >{{ classDetails.category.c1 }} |
+              >{{ classDetails.category.c1 }} ·
               {{ classDetails.category.c2 }}</span
             >
           </p>
           <p class="window_title">
-            {{ classDetails.title }}<br />
+            {{ classDetails.title }}
+          </p>
+          <p class="window_state">
             <span v-if="classDetails.classopen" class="tag-open"
               >수강 가능</span
             >
@@ -156,7 +181,9 @@
             <span>수강기간</span>
             <span>구매 후 {{ classDetails.learningdays }}일간 무제한 수강</span>
           </p>
-          <a class="btn_lg btn_black" href="/">클래스 신청하기</a>
+          <a class="btn-l btn-mint" style="border-radius:4px;" href="/"
+            >클래스 신청하기</a
+          >
         </div>
       </aside>
     </article>
@@ -173,6 +200,8 @@ export default {
       classDetails: "",
       curriculum: "",
       episode: "",
+      chapNum: 0,
+      epiNum: 0,
       scrollPosition: null
     };
   },
@@ -196,8 +225,10 @@ export default {
           // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
           if (result.data().type === "chapter") {
             chap_data.push(result.data());
+            this.chapNum += 1;
           } else if (result.data().type === "episode") {
             epi_data.push(result.data());
+            this.epiNum += 1;
           }
           this.curriculum = chap_data;
           this.episode = epi_data;
@@ -230,39 +261,13 @@ export default {
 </script>
 
 <style lang="scss">
-.btn_lg {
-  display: block;
-  padding: 14px 10px;
-  text-align: center;
-  align-items: center;
-  border: 1px solid black;
-}
-.btn_black {
-  background-color: black;
-  border-color: black;
-  color: white;
-}
-.btn_black:hover {
-  background-color: white;
-  color: black;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-
 .title_container {
   width: 100%;
   background: #222;
 
   .detail_title_banner {
     width: 100%;
-    min-width: 1200px;
+    min-width: 1000px;
     max-width: 1920px;
     margin: auto;
     display: grid;
@@ -318,7 +323,9 @@ export default {
     }
 
     .class_info {
+      margin: 20px 0px;
       font-size: 0.9rem;
+      line-height: 1.4rem;
       strong {
         font-size: 1rem;
       }
@@ -326,20 +333,9 @@ export default {
         color: $gray-3;
       }
     }
-    .cur_title {
-      font-size: 1.1rem;
-      font-weight: bolder;
-      color: $cur-title-text;
-      margin-bottom: 0px;
-    }
-    .cur_img {
-      object-fit: cover;
-      width: 200px;
-      height: 110px;
-      border-radius: 4px;
-    }
 
     .description_container {
+      margin-bottom: 100px;
       hr {
         margin-top: 50px;
       }
@@ -351,8 +347,25 @@ export default {
         font-size: 1.4rem;
         color: $dct-title;
       }
+      img {
+        width: 100%;
+      }
+
       .cur_container {
         padding-bottom: 10px;
+
+        .cur_title {
+          font-size: 1.1rem;
+          font-weight: bolder;
+          color: $cur-title-text;
+          margin-bottom: 0px;
+        }
+        .cur_img {
+          object-fit: cover;
+          width: 200px;
+          height: 150px;
+          border-radius: 4px;
+        }
 
         .cur_study_container {
           width: 100%;
@@ -360,13 +373,14 @@ export default {
           .cur_study {
             display: block;
             border: 1px solid $gray-2;
-            padding: 6px 10px;
+            padding: 10px 10px;
             margin: 0px 0px 5px 5px;
             border-radius: 4px;
             font-size: 0.9rem;
           }
         }
       }
+
       .creator_container {
         display: flex;
         padding-bottom: 30px;
@@ -382,6 +396,7 @@ export default {
           }
         }
       }
+
       .detail_description {
         padding: 0px 10px;
       }
@@ -407,9 +422,10 @@ export default {
       .window_category {
         font-size: 0.8rem;
         margin: 0;
+        margin-bottom: 4px;
       }
       .window_title {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         font-weight: bold;
         margin: 0;
 
@@ -417,6 +433,9 @@ export default {
           margin-left: 0;
           margin-right: 5px;
         }
+      }
+      .window_state {
+        margin-top: 6px;
       }
       .detail_price {
         text-align-last: right;

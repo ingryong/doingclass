@@ -15,6 +15,7 @@ $gray-4: #666;
 
 $dct-title: #13b896;
 $primary: #00b8ff;
+$mint: #13b896;
 
 $blue: #00b8ff;
 $purple: #665bd3;
@@ -25,7 +26,7 @@ $purple: #665bd3;
 .tag-open {
   margin-left: 5px;
   margin-top: 5px;
-  padding: 3px 6px;
+  padding: 5px 6px;
   background-color: #00b8ff;
   color: #fff;
   font-size: 10px;
@@ -34,7 +35,7 @@ $purple: #665bd3;
 .tag-ready {
   margin-left: 5px;
   margin-top: 5px;
-  padding: 3px 6px;
+  padding: 5px 6px;
   background-color: #ffae00;
   color: #fff;
   font-size: 10px;
@@ -43,7 +44,7 @@ $purple: #665bd3;
 .tag-close {
   margin-left: 5px;
   margin-top: 5px;
-  padding: 3px 6px;
+  padding: 5px 6px;
   background-color: #999;
   color: #fff;
   font-size: 10px;
@@ -52,7 +53,7 @@ $purple: #665bd3;
 .tag-coaching {
   margin-left: 5px;
   margin-top: 5px;
-  padding: 3px 6px;
+  padding: 5px 6px;
   background-color: black;
   color: #fff;
   font-size: 10px;
@@ -61,7 +62,7 @@ $purple: #665bd3;
 .tag-goods {
   margin-left: 5px;
   margin-top: 5px;
-  padding: 3px 6px;
+  padding: 5px 6px;
   background-color: palevioletred;
   color: #fff;
   font-size: 10px;
@@ -175,10 +176,11 @@ a:hover {
   cursor: pointer;
 }
 .btn-l {
+  display: block;
   width: 100%;
-  padding: 10px 0px;
-  font-weight: bold;
-  font-size: 1.2rem;
+  padding: 14px 0px;
+  text-align: center;
+  align-items: center;
 }
 .btn-l:hover {
   cursor: pointer;
@@ -186,16 +188,40 @@ a:hover {
 
 .btn-red {
   border: 1px solid #ff6f6f;
-  background-color: #ffb4b4;
+  background-color: #fff0f0;
+  color: #ff6f6f;
+
+  &:hover {
+    background-color: #ffe9e9;
+  }
 }
 
 .btn-blue {
   border: 1px solid #00b7ff;
-  background-color: #d6f4ff;
+  background-color: #e7f9ff;
+  color: #00b7ff;
+  &:hover {
+    background-color: #dbf6ff;
+  }
+}
+.btn-mint {
+  border: 1px solid #13b896;
+  background-color: #fff;
+  color: #13b896;
+  &:hover {
+    background-color: #13b896;
+    color: #fff;
+    animation-duration: 1s;
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+  }
 }
 .btn-gray {
   border: 1px solid #999;
   background-color: #eee;
+  &:hover {
+    background-color: #e0e0e0;
+  }
 }
 
 // svg sprite
@@ -211,5 +237,35 @@ symbol {
   }
   *[d="M0 0h24v24H0z"] {
     display: none;
+  }
+}
+
+/* 
+--- animation ---
+*/
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.01);
   }
 }

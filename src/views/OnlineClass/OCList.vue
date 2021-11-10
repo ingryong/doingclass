@@ -190,7 +190,9 @@ export default {
       }
     }
     li:hover {
-      transform: scale(1.01);
+      animation-name: scaleUp;
+      animation-duration: 0.5s;
+      animation-fill-mode: both;
     }
   }
 }
