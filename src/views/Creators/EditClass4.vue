@@ -23,19 +23,6 @@
           :value="doc.profile_name"
         />
         <h4>
-          프로필 내용
-        </h4>
-        <textarea
-          name="dec"
-          class="form-control m-1 width-100"
-          id="profile_description"
-          placeholder="프로필 내용을 입력해주세요"
-          :value="doc.profile_description"
-          @input="mixinAutoResize"
-          rows="10"
-        ></textarea>
-
-        <h4>
           프로필 이미지 업로드
         </h4>
         <div class="profile-img-upload">
@@ -54,6 +41,18 @@
             @change="imgUpload"
           />
         </div>
+        <h4>
+          프로필 내용
+        </h4>
+        <textarea
+          name="dec"
+          class="form-control m-1 width-100"
+          id="profile_description"
+          placeholder="프로필 내용을 입력해주세요"
+          :value="doc.profile_description"
+          @input="mixinAutoResize"
+          rows="10"
+        ></textarea>
       </div>
       <router-link
         tag="button"
@@ -63,7 +62,7 @@
         돌아가기
       </router-link>
       <button class="btn-m btn-blue m-1" id="send" @click="upload()">
-        저장하고 다음으로
+        저장하기
       </button>
     </div>
   </div>
@@ -139,7 +138,7 @@ export default {
           profile_img: this.profile_img
         })
         .then(() => {
-          this.$router.push(`/creators/myclass`);
+          alert("저장되었습니다.");
         })
         .catch(error => {
           console.log("error updateing document:", error);
@@ -160,7 +159,7 @@ export default {
     margin: auto;
     p {
       padding: 10px;
-      padding-top: 95px;
+      padding-top: 110px;
       width: 280px;
       height: 280px;
       text-align: center;

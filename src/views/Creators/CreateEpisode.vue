@@ -30,6 +30,7 @@
         <h3>{{ curriculum.chapter_name }}</h3>
       </div>
       <div class="input-group">
+        <p>세부 강의 제목 입력</p>
         <h4>
           <input
             type="text"
@@ -40,8 +41,11 @@
         </h4>
 
         <div class="video area">
-          <div @click="video_modal = true">
-            영상 URL 올리기
+          <div
+            @click="video_modal = true"
+            style="border:1px solid #ccc; text-align:center; border-radius:4px; padding:20px; cursor:pointer; margin-bottom:10px;"
+          >
+            강의 영상 URL 올리기
           </div>
           <iframe
             v-if="video_url"

@@ -8,6 +8,7 @@
         <h3>챕터 수정</h3>
       </div>
       <div class="input-group">
+        <p>챕터 제목</p>
         <h4>
           <input
             type="text"
@@ -18,6 +19,11 @@
           />
         </h4>
         <div class="chap_img_upload">
+          <p>챕터 이미지</p>
+          <p style="text-align:center;">
+            챕터 이미지는 16:9 비율에 최적화되어 있습니다.<br />360x180의
+            사이즈가 가장 적합합니다.
+          </p>
           <label for="input-file">
             <p class="chap_img" v-if="!chapter.chapter_img">
               챕터 이미지를<br />등록 해주세요.
@@ -154,14 +160,12 @@ export default {
     margin: auto;
     p {
       padding: 10px;
-      padding-top: 95px;
-      width: 240px;
-      height: 240px;
+      padding-top: 75px;
+      width: 320px;
+      height: 180px;
       text-align: center;
       margin: auto;
       box-sizing: border-box;
-      background-image: url(~@/assets/imgs/PhotoPotrait.svg);
-      background-size: contain;
       background-color: #eee;
       border-radius: 4px;
       cursor: pointer;
@@ -169,8 +173,8 @@ export default {
     img {
       display: block;
       margin: auto;
-      width: 240px;
-      height: 240px;
+      width: 320px;
+      height: 180px;
       object-fit: cover;
       border-radius: 4px;
     }

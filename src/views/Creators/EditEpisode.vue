@@ -39,7 +39,10 @@
         </h4>
 
         <div class="video area">
-          <div @click="video_modal = true">
+          <div
+            @click="video_modal = true"
+            style="border:1px solid #ccc; text-align:center; border-radius:4px; padding:20px; cursor:pointer; margin-bottom:10px;"
+          >
             영상 URL 올리기
           </div>
           <iframe

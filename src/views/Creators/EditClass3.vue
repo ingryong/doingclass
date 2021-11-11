@@ -38,7 +38,7 @@
           style="margin:auto; color:#06f; cursor:pointer;"
           @click="chap_modal = true"
         >
-          커리큘럼 챕터 추가하기
+          +커리큘럼 챕터 추가하기
         </p>
       </div>
 
@@ -210,21 +210,20 @@ export default {
       .check_img {
         p {
           padding: 10px;
-          padding-top: 40px;
-          width: 120px;
-          height: 120px;
+          padding-top: 25px;
+          width: 160px;
+          height: 90px;
+          font-size: 0.95rem;
           text-align: center;
           margin: 10px 4px;
           box-sizing: border-box;
-          background-image: url(~@/assets/imgs/PhotoPotrait.svg);
-          background-size: contain;
           background-color: #eee;
           border-radius: 4px;
         }
         img {
           margin: 10px 4px;
-          width: 120px;
-          height: 120px;
+          width: 160px;
+          height: 90px;
           object-fit: cover;
           border-radius: 4px;
         }

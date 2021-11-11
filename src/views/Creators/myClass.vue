@@ -15,21 +15,26 @@
           </div>
           <div class="class_info">
             <ul>
-              <li>{{ list.type }}</li>
-              <li class="title">{{ list.title }}</li>
               <li>
-                <span>{{ list.category.c1 }}</span>
+                <span>{{ list.type }}</span> ·
+                <span>{{ list.category.c1 }}</span> ·
                 <span>{{ list.category.c2 }}</span>
               </li>
+              <li class="title">{{ list.title }}</li>
+              <li v-if="list.classopen">
+                <span class="tag-open" style="margin:0;">클래스 오픈</span
+                ><br /><br />클래스가 오픈중입니다.
+              </li>
               <li v-if="!list.classopen">
-                아직 클래스가 오픈되지 않았습니다.<br />추가 클래스 정보를
-                입력하고 클래스를 오픈하세요!
+                <span class="tag-ready" style="margin:0;">오픈 준비중</span
+                ><br /><br />아직 클래스가 오픈되지 않았습니다.<br />추가 클래스
+                정보를 입력하고 클래스를 오픈하세요!
               </li>
             </ul>
             <router-link
               class="btn-l btn-gray"
               :to="`/creators/editclass1/${list.id}`"
-              style="text-align:center; color:#000;"
+              style="text-align:center; color:#000; border-radius:4px;"
               >클래스 관리</router-link
             >
           </div>
@@ -90,13 +95,14 @@ export default {
       background-color: #eee;
       height: 1px;
       border: none;
+      margin-top: 0;
     }
 
     a {
       display: inline-block;
       font-size: 0.9rem;
       font-weight: bold;
-      color: $gray-2;
+      color: $gray-3;
       text-align: right;
     }
 
@@ -110,13 +116,15 @@ export default {
         img {
           width: 240px;
           height: 181px;
+          border-radius: 4px;
         }
       }
       .class_info {
-        margin: 10px auto;
+        margin: 0px 10px 10px auto;
         width: 400px;
         .title {
           font-weight: bold;
+          font-size: 1.15rem;
         }
       }
     }

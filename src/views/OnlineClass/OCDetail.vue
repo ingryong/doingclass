@@ -45,7 +45,7 @@
           <img :src="classDetails.class_dec.dec1.img" />
           <p
             class="detail_description"
-            v-html="classDetails.class_dec.dec1.dec"
+            v-html="handleNewLine(classDetails.class_dec.dec1.dec)"
           ></p>
         </div>
 
@@ -55,7 +55,7 @@
           <img :src="classDetails.class_dec.dec2.img" />
           <p
             class="detail_description"
-            v-html="classDetails.class_dec.dec2.dec"
+            v-html="handleNewLine(classDetails.class_dec.dec2.dec)"
           ></p>
         </div>
 
@@ -65,7 +65,7 @@
           <img :src="classDetails.class_dec.dec3.img" />
           <p
             class="detail_description"
-            v-html="classDetails.class_dec.dec3.dec"
+            v-html="handleNewLine(classDetails.class_dec.dec3.dec)"
           ></p>
         </div>
 
@@ -104,7 +104,7 @@
             <img :src="classDetails.profile_img" />
             <div>
               <h3>{{ classDetails.profile_name }}</h3>
-              <p v-html="classDetails.profile_description"></p>
+              <p v-html="handleNewLine(classDetails.profile_description)"></p>
             </div>
           </div>
         </div>
@@ -255,6 +255,12 @@ export default {
       } else {
         document.getElementById("side_content").style = "position : ";
       }
+    },
+    /* 
+      textarea 자동 줄바꿈
+    */
+    handleNewLine(str) {
+      return String(str).replace(/(?:\r\n|\r|\n)/g, "</br>");
     }
   }
 };
@@ -362,8 +368,8 @@ export default {
         }
         .cur_img {
           object-fit: cover;
-          width: 200px;
-          height: 150px;
+          width: 220px;
+          height: 123.75px;
           border-radius: 4px;
         }
 

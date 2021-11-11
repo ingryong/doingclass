@@ -122,16 +122,6 @@
             disabled
           />
         </h4>
-        <textarea
-          name="dec"
-          class="form-control-text-area m-1 width-100"
-          id="dec1_dec"
-          placeholder="내용을 입력해주세요"
-          :value="dec1.dec"
-          @input="mixinAutoResize"
-          rows="10"
-        ></textarea>
-
         <div class="introduce-img-upload">
           <label for="dec1">
             <p class="chap_img" v-if="!dec1_img">
@@ -148,6 +138,16 @@
             @change="imgUpload"
           />
         </div>
+
+        <textarea
+          name="dec"
+          class="form-control-text-area m-1 width-100"
+          id="dec1_dec"
+          placeholder="내용을 입력해주세요"
+          :value="doc.class_dec.dec1.dec"
+          @input="mixinAutoResize"
+          rows="10"
+        ></textarea>
       </div>
 
       <!-- 소개2 -->
@@ -162,16 +162,6 @@
             disabled
           />
         </h4>
-        <textarea
-          name="dec"
-          class="form-control-text-area m-1 width-100"
-          id="dec2_dec"
-          placeholder="내용을 입력해주세요"
-          :value="dec2.dec"
-          @input="mixinAutoResize"
-          rows="10"
-        ></textarea>
-
         <div class="introduce-img-upload">
           <label for="dec2">
             <p class="chap_img" v-if="!dec2_img">
@@ -188,6 +178,16 @@
             @change="imgUpload"
           />
         </div>
+
+        <textarea
+          name="dec"
+          class="form-control-text-area m-1 width-100"
+          id="dec2_dec"
+          placeholder="내용을 입력해주세요"
+          :value="doc.class_dec.dec2.dec"
+          @input="mixinAutoResize"
+          rows="10"
+        ></textarea>
       </div>
 
       <!-- 소개3 -->
@@ -202,16 +202,6 @@
             disabled
           />
         </h4>
-        <textarea
-          name="dec"
-          class="form-control-text-area m-1 width-100"
-          id="dec3_dec"
-          placeholder="내용을 입력해주세요"
-          :value="dec3.dec"
-          @input="mixinAutoResize"
-          rows="10"
-        ></textarea>
-
         <div class="introduce-img-upload">
           <label for="dec3">
             <p class="chap_img" v-if="!dec3_img">
@@ -228,6 +218,16 @@
             @change="imgUpload"
           />
         </div>
+
+        <textarea
+          name="dec"
+          class="form-control-text-area m-1 width-100"
+          id="dec3_dec"
+          placeholder="내용을 입력해주세요"
+          :value="doc.class_dec.dec3.dec"
+          @input="mixinAutoResize"
+          rows="10"
+        ></textarea>
       </div>
 
       <router-link
@@ -255,11 +255,8 @@ export default {
       user: this.$store.state.user,
       url: this.$route.params.id,
       doc: "",
-      dec1: "",
       dec1_img: "",
-      dec2: "",
       dec2_img: "",
-      dec3: "",
       dec3_img: "",
       poster_img: "",
       header_img1: "",
@@ -277,11 +274,8 @@ export default {
       .doc(this.url)
       .onSnapshot(result => {
         this.doc = result.data();
-        this.dec1 = result.data().class_dec.dec1;
         this.dec1_img = result.data().class_dec.dec1.img;
-        this.dec2 = result.data().class_dec.dec2;
         this.dec2_img = result.data().class_dec.dec2.img;
-        this.dec3 = result.data().class_dec.dec3;
         this.dec3_img = result.data().class_dec.dec3.img;
         this.poster_img = result.data().poster_img;
         this.header_img1 = result.data().header_img.header_img1;
@@ -294,7 +288,7 @@ export default {
     /*
     ---------- 이미지 업로드 ---------
     */
-    async imgUpload(event) {
+    imgUpload(event) {
       const {
         target: { files }
       } = event;
@@ -305,7 +299,7 @@ export default {
       );
       const uploadImg = updateUrl.put(fileInfo);
 
-      await uploadImg.on(
+      uploadImg.on(
         "state_change",
         // 변화시 동작하는 함수
         null,
