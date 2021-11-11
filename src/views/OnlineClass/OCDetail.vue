@@ -103,7 +103,10 @@
           <div class="creator_container" style="flex;">
             <img :src="classDetails.profile_img" />
             <div>
-              <h3>{{ classDetails.profile_name }}</h3>
+              <h3>
+                안녕하세요,<br />크리에이터 "{{ classDetails.profile_name }}"
+                입니다.
+              </h3>
               <p v-html="handleNewLine(classDetails.profile_description)"></p>
             </div>
           </div>
@@ -125,23 +128,34 @@
 
         <h3>클래스 질의응답</h3>
         <div class="class_faq_board">
+          <p>클래스 문의 작성</p>
           <div class="class_faq_write">
-            <textarea placeholder="클래스 문의 내용을 입력해주세요"></textarea>
-            <i class="far fa-paper-plane"></i>
+            <textarea
+              placeholder="클래스 문의 내용을 입력해주세요"
+              @input="mixinAutoResize"
+            ></textarea>
+            <i class="fas fa-paper-plane"></i>
           </div>
-          <div>
+          <div class="class_faq_container">
             <div class="class_faq_top">
               <img />
               <div><span>닉네임</span><span>작성일자</span></div>
             </div>
-            <div class="class_faq_bottom">작성내용</div>
+            <div class="class_faq_bottom" v-html="handleNewLine()"></div>
             <div class="class_faq_reply_container">
-              <img /><span>닉네임</span><span>작성일자</span>
-              <span>작성내용</span>
-            </div>
-            <div class="class_faq_write_reply">
-              <input type="text" placeholder="댓글을 입력해주세요" />
-              <i class="fas fa-paper-plane"></i>
+              <div class="class_faq_top">
+                <img />
+                <div><span>닉네임</span><span>작성일자</span></div>
+              </div>
+              <div class="class_faq_bottom" v-html="handleNewLine()"></div>
+              <div class="class_faq_write_reply">
+                <textarea
+                  type="text"
+                  placeholder="댓글을 입력해주세요"
+                  @input="mixinAutoResize"
+                />
+                <i class="fas fa-paper-plane"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -261,6 +275,12 @@ export default {
     */
     handleNewLine(str) {
       return String(str).replace(/(?:\r\n|\r|\n)/g, "</br>");
+    },
+
+    // textarea 자동 높이 조절
+    mixinAutoResize(event) {
+      event.target.style.height = "auto";
+      event.target.style.height = `${event.target.scrollHeight}px`;
     }
   }
 };
@@ -391,7 +411,9 @@ export default {
         display: flex;
         padding-bottom: 30px;
         img {
-          width: 38%;
+          width: 250px;
+          height: 250px;
+          border-radius: 50%;
           margin-top: 0px;
         }
         div {
@@ -454,6 +476,81 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+      }
+    }
+  }
+  .class_faq_board {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    .class_faq_write {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      margin-bottom: 50px;
+      textarea {
+        width: 88%;
+        margin: 20px;
+        margin-bottom: 0px;
+        border: none;
+      }
+      svg {
+        position: absolute;
+        margin-top: 21px;
+        color: $blue;
+        font-size: 1.2rem;
+      }
+    }
+    .class_faq_container {
+      width: 100%;
+      padding: 30px 10px;
+      border-top: 1px solid #ccc;
+      .class_faq_top {
+        display: flex;
+        flex-direction: row;
+        img {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background-color: #ccc;
+          margin-right: 10px;
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          margin-top: 4px;
+          span {
+            margin-right: 10px;
+          }
+        }
+      }
+      .class_faq_bottom {
+        width: 100%;
+        margin: 20px;
+        margin-left: 0px;
+      }
+      .class_faq_reply_container {
+        width: 100%;
+        padding-left: 50px;
+
+        .class_faq_write_reply {
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 30px;
+          textarea {
+            width: 84%;
+            margin: 16px 30px;
+            margin-bottom: 0px;
+            border: none;
+          }
+          svg {
+            position: absolute;
+            margin-top: 16px;
+            color: $blue;
+            font-size: 1.2rem;
+          }
+        }
       }
     }
   }
