@@ -42,7 +42,10 @@
         <!-- description1 영역 -->
         <div class="description_container">
           <h4>1. {{ classDetails.class_dec.dec1.title }}</h4>
-          <img :src="classDetails.class_dec.dec1.img" />
+          <img
+            v-if="classDetails.class_dec.dec1.img"
+            :src="classDetails.class_dec.dec1.img"
+          />
           <p
             class="detail_description"
             v-html="handleNewLine(classDetails.class_dec.dec1.dec)"
@@ -52,7 +55,10 @@
         <!-- description2 영역 -->
         <div class="description_container">
           <h4>2. {{ classDetails.class_dec.dec2.title }}</h4>
-          <img :src="classDetails.class_dec.dec2.img" />
+          <img
+            v-if="classDetails.class_dec.dec2.img"
+            :src="classDetails.class_dec.dec2.img"
+          />
           <p
             class="detail_description"
             v-html="handleNewLine(classDetails.class_dec.dec2.dec)"
@@ -62,7 +68,10 @@
         <!-- description3 영역 -->
         <div class="description_container">
           <h4>3. {{ classDetails.class_dec.dec3.title }}</h4>
-          <img :src="classDetails.class_dec.dec3.img" />
+          <img
+            v-if="classDetails.class_dec.dec3.img"
+            :src="classDetails.class_dec.dec3.img"
+          />
           <p
             class="detail_description"
             v-html="handleNewLine(classDetails.class_dec.dec3.dec)"
@@ -131,17 +140,26 @@
           <p>클래스 문의 작성</p>
           <div class="class_faq_write">
             <textarea
+              id="create_qna_description"
               placeholder="클래스 문의 내용을 입력해주세요"
               @input="mixinAutoResize"
             ></textarea>
-            <i class="fas fa-paper-plane"></i>
+            <a @click="qna_upload()">
+              <i class="fas fa-paper-plane"></i>
+            </a>
           </div>
-          <div class="class_faq_container">
+          <div class="class_faq_container" v-for="qna in qna" :key="qna">
             <div class="class_faq_top">
-              <img />
-              <div><span>닉네임</span><span>작성일자</span></div>
+              <img :scr="qna.photoURL" />
+              <div>
+                <span>{{ qna.displayName }}</span
+                ><span>{{ qna.create_date }}</span>
+              </div>
             </div>
-            <div class="class_faq_bottom" v-html="handleNewLine()"></div>
+            <div
+              class="class_faq_bottom"
+              v-html="handleNewLine(qna.description)"
+            ></div>
             <div class="class_faq_reply_container">
               <div class="class_faq_top">
                 <img />
@@ -205,17 +223,24 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
+  component: {
+    dayjs
+  },
   data() {
     return {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
+      user: this.$store.state.user,
       url: this.$route.params.id,
       classDetails: "",
       curriculum: "",
       episode: "",
       chapNum: 0,
       epiNum: 0,
+      qna: "",
+      reply: "",
       scrollPosition: null
     };
   },
@@ -249,6 +274,26 @@ export default {
         });
       });
 
+    await this.db
+      .collection("onlineclass")
+      .doc(this.url)
+      .collection("qna")
+      .orderBy("create_date")
+      .onSnapshot(querySnapshot => {
+        const qna_data = [];
+        const reply_data = [];
+        querySnapshot.forEach(result => {
+          // forEach를 사용하여 분리된 result.data()값을 받아오므로 배열로 된 변수 'doc_data'에 push하여 배열로 다시 묶어서 사용할 수 있게 함
+          if (result.data().type === "qna") {
+            qna_data.push(result.data());
+          } else if (result.data().type === "reply") {
+            reply_data.push(result.data());
+          }
+          this.qna = qna_data;
+          this.reply = reply_data;
+        });
+      });
+
     // mounted -> 라이프사이클 상 DOM에 모든 컴포넌트를 불러온 후에 할 일
     // 스크롤이 발생할 때마다 methods의 updateScroll 이벤트를 불러온다.
     window.addEventListener("scroll", this.updateScroll);
@@ -260,6 +305,37 @@ export default {
     }
   },
   methods: {
+    /*
+    ---------- qna 추가하기 ---------
+    */
+    async qna_upload() {
+      await this.db
+        .collection("onlineclass")
+        .doc(this.url)
+        .collection("qna")
+        .add({
+          create_date: dayjs().format("YYYY.MM.DD HH:mm:ss"),
+          update_date: "",
+          description: document.getElementById("create_qna_description").value,
+          photoURL: this.user.photoURL,
+          displayName: this.user.displayName,
+          type: "qna"
+        })
+        .then(async docRef => {
+          await this.db
+            .collection("onlineclass")
+            .doc(this.url)
+            .collection("curriculum")
+            .doc(docRef.id)
+            .update({ qna_id: docRef.id });
+        })
+        .catch(error => {
+          console.log("error updateing document:", error);
+        });
+    },
+    /*
+    ---------- 스크롤에 맞춰 고정되는 플로팅 바 ---------
+    */
     updateScroll() {
       this.scrollPosition =
         window.scrollY || document.documentElement.scrollTop;
@@ -391,6 +467,7 @@ export default {
           width: 220px;
           height: 123.75px;
           border-radius: 4px;
+          background-color: #ccc;
         }
 
         .cur_study_container {
@@ -411,10 +488,11 @@ export default {
         display: flex;
         padding-bottom: 30px;
         img {
-          width: 250px;
-          height: 250px;
+          width: 230px;
+          height: 230px;
           border-radius: 50%;
           margin-top: 0px;
+          background-color: #ccc;
         }
         div {
           padding: 0px 14px;
@@ -497,7 +575,7 @@ export default {
       }
       svg {
         position: absolute;
-        margin-top: 21px;
+        margin-top: 20px;
         color: $blue;
         font-size: 1.2rem;
       }
