@@ -148,7 +148,11 @@
               <i class="fas fa-paper-plane"></i>
             </a>
           </div>
-          <div class="class_faq_container" v-for="qna in qna" :key="qna">
+          <div
+            class="class_faq_container"
+            v-for="(qna, qna_num) in qna"
+            :key="qna_num"
+          >
             <div class="class_faq_top">
               <img :scr="qna.photoURL" />
               <div>
@@ -325,9 +329,11 @@ export default {
           await this.db
             .collection("onlineclass")
             .doc(this.url)
-            .collection("curriculum")
+            .collection("qna")
             .doc(docRef.id)
             .update({ qna_id: docRef.id });
+
+          document.getElementById("create_qna_description").value = "";
         })
         .catch(error => {
           console.log("error updateing document:", error);
