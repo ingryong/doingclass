@@ -56,7 +56,7 @@ export default {
 #home-oclist {
   @include content-area;
   padding: 50px 10px;
-  margin-bottom: 30px;
+  background-color: #fff;
   ul {
     @include content-area;
     padding-left: 0px;

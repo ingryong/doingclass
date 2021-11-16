@@ -217,9 +217,12 @@
             <span>수강기간</span>
             <span>구매 후 {{ classDetails.learningdays }}일간 무제한 수강</span>
           </p>
-          <a class="btn-l btn-mint" style="border-radius:4px;" href="/"
-            >클래스 신청하기</a
-          >
+          <router-link
+            class="btn-l btn-mint"
+            style="border-radius:4px;"
+            :to="`/shopping/${classDetails.id}`"
+            >클래스 신청하기
+          </router-link>
         </div>
       </aside>
     </article>
@@ -369,6 +372,9 @@ export default {
 </script>
 
 <style lang="scss">
+section {
+  background-color: white;
+}
 .title_container {
   width: 100%;
   background: #222;
@@ -522,9 +528,9 @@ export default {
     }
 
     .float_window {
-      background-color: white;
+      background-color: #fff;
       z-index: 100;
-      border: 1px solid $gray-1;
+      border: 1px solid $gray-3;
       padding: 14px 14px;
       margin-top: 10px;
       font-size: 0.9rem;

@@ -17,6 +17,8 @@ import CreateEpisode from "@/views/Creators/CreateEpisode";
 import EditEpisode from "@/views/Creators/EditEpisode";
 import EditChapter from "@/views/Creators/EditChapter";
 import MyClass from "@/views/Creators/MyClass";
+import BuyClass from "@/views/Shop/BuyClass";
+
 import DefultLayout from "@/layouts/Default";
 import CreatorLayout from "@/layouts/Creator";
 import CreatClassLayout from "@/layouts/CreateClassLayout";
@@ -58,6 +60,11 @@ const routes = [
         path: "/ocdetail/:id",
         name: "ocdetail",
         component: OnlineClassDetail
+      },
+      {
+        path: "/shopping/:id",
+        name: "buyclass",
+        component: BuyClass
       }
     ]
   },
