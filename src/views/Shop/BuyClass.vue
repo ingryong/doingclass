@@ -3,15 +3,26 @@
     <div class="buy_container">
       <div class="buy_item">
         <h3>주문 정보</h3>
-        <p>클래스 이름</p>
-        <img />
+        <p>{{ classDetails.title }}</p>
+        <img :src="classDetails.thumbnail" style="width:250px;" />
         <hr />
       </div>
       <div class="buy_item">
         <h3>결제 금액</h3>
-        <p><span>상품 금액</span><span>000원</span></p>
-        <p><span>상품 할인 금액</span><span>000원</span></p>
-        <p><strong>최종가격</strong><span>000원</span></p>
+        <p class="buy_price">
+          <span>상품 금액</span
+          ><span>{{ classDetails.price + classDetails.price * 0.3 }}원</span>
+        </p>
+        <p class="buy_price">
+          <span>상품 할인 금액</span>
+          <span> {{ classDetails.price * 0.3 }}원 </span>
+        </p>
+        <p class="buy_price">
+          <strong>최종가격</strong>
+          <span>
+            <strong> {{ classDetails.price }}원 </strong>
+          </span>
+        </p>
         <hr />
       </div>
       <div class="buy_item">
@@ -24,15 +35,62 @@
           <div>toss</div>
           <div>paypal</div>
         </div>
-        <div>
-          <a>결제하기</a>
+        <div style="margin-top:30px;">
+          <a class="btn btn-l btn-blue" @click="buy_class()">결제하기</a>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import dayjs from "dayjs";
+export default {
+  component: {
+    dayjs
+  },
+  data() {
+    return {
+      db: this.$firebase.firestore(),
+      user: this.$store.state.user,
+      url: this.$route.params.id,
+      classDetails: ""
+    };
+  },
+  async mounted() {
+    await this.db
+      .collection("onlineclass")
+      .doc(this.url)
+      .onSnapshot(result => {
+        this.classDetails = result.data();
+      });
+  },
+  methods: {
+    /*
+    ---------- 결제하기 ---------
+    */
+    async buy_class() {
+      await this.db
+        .collection("users")
+        .doc(this.user.uid)
+        .collection("myclass")
+        .doc(this.url)
+        .set({
+          buy_day: dayjs().format("YYYY.MM.DD HH:mm:ss"),
+          class_name: this.classDetails.title,
+          class_thumbnail: this.classDetails.thumbnail,
+          class_id: this.url
+        })
+        .then(() => {
+          this.$router.push(`/`);
+        })
+        .catch(error => {
+          console.log("error updateing document:", error);
+        });
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 .gray_body {
@@ -55,11 +113,18 @@
         column-gap: 4px;
         row-gap: 4px;
         div {
+          cursor: pointer;
           height: 50px;
           line-height: 50px;
           text-align: center;
           background-color: #eee;
         }
+      }
+
+      .buy_price {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
     }
   }

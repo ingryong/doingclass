@@ -22,6 +22,9 @@
         </div>
         <div class="nav_top3" v-if="$store.state.user !== null">
           <router-link to="/creators/myclass">크리에이터 센터</router-link>
+          <router-link to="/myclass">
+            <i class="fas fa-book"></i> 내 클래스
+          </router-link>
           <div>
             <img
               v-if="$store.state.user.photoURL"
@@ -103,7 +106,7 @@ export default {
     }
 
     .nav_top3 {
-      max-width: 240px;
+      max-width: 270px;
       display: flex;
       align-items: center;
       a {
@@ -112,6 +115,9 @@ export default {
         color: $gray-4;
       }
       a:first-child {
+        margin-right: 10px;
+      }
+      a:nth-child(2) {
         margin-right: 10px;
       }
       div {

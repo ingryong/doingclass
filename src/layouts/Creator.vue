@@ -6,12 +6,17 @@
         <span>CREATOR CENTER</span>
       </div>
       <div class="profile">
+        <span class="creator_header_menu">
+          <router-link to="/profile"> 학습페이지로 </router-link>
+        </span>
         <div>
           <img
             v-if="$store.state.user.photoURL"
             :src="$store.state.user.photoURL"
           />
-          <a><i v-if="!$store.state.user.photoURL" class="fas fa-user"/></a>
+          <router-link to="/profile">
+            <i v-if="!$store.state.user.photoURL" class="fas fa-user" />
+          </router-link>
         </div>
         <router-link to="/profile">
           {{ $store.state.user.displayName }}
@@ -70,6 +75,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-weight: normal;
 
     div {
       width: 30px;

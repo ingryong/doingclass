@@ -3,8 +3,9 @@ import VueRouter from "vue-router";
 
 import Login from "@/views/Auth/Login.vue";
 import Join from "@/views/Auth/Join.vue";
-import Home from "@/views/Home.vue";
 import Profile from "@/views/Auth/Profile.vue";
+import MyClass from "@/views/Auth/MyClass.vue";
+import Home from "@/views/Home.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
 import CreateClass from "@/views/Creators/CreateClass";
@@ -16,7 +17,7 @@ import OtherSetting from "@/views/Creators/OtherSetting";
 import CreateEpisode from "@/views/Creators/CreateEpisode";
 import EditEpisode from "@/views/Creators/EditEpisode";
 import EditChapter from "@/views/Creators/EditChapter";
-import MyClass from "@/views/Creators/MyClass";
+import CreatorClass from "@/views/Creators/MyClass";
 import BuyClass from "@/views/Shop/BuyClass";
 
 import DefultLayout from "@/layouts/Default";
@@ -47,6 +48,11 @@ const routes = [
         component: Profile
       },
       {
+        path: "/myclass",
+        name: "MyClass",
+        component: MyClass
+      },
+      {
         path: "/join",
         name: "Join",
         component: Join
@@ -75,8 +81,8 @@ const routes = [
     children: [
       {
         path: "/creators/myclass",
-        name: "myclass",
-        component: MyClass
+        name: "creatorclass",
+        component: CreatorClass
       }
     ]
   },
