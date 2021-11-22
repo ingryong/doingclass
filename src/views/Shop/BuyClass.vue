@@ -79,7 +79,10 @@ export default {
           buy_day: dayjs().format("YYYY.MM.DD HH:mm:ss"),
           class_name: this.classDetails.title,
           class_thumbnail: this.classDetails.thumbnail,
-          class_id: this.url
+          class_id: this.url,
+          learning: true,
+          c1: this.classDetails.category.c1,
+          c2: this.classDetails.category.c2
         })
         .then(() => {
           this.$router.push(`/`);

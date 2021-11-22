@@ -169,6 +169,7 @@ export default {
       border-radius: 50%;
       background-color: $gray-4;
       cursor: pointer;
+      overflow: hidden;
       img {
         width: 180px;
         height: 180px;
