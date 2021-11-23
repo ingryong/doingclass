@@ -8,6 +8,7 @@ import MyClass from "@/views/Auth/MyClass.vue";
 import Home from "@/views/Home.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
+import LearningClass from "@/views/OnlineClass/LearningClass";
 import CreateClass from "@/views/Creators/CreateClass";
 import EditClass1 from "@/views/Creators/EditClass1";
 import EditClass2 from "@/views/Creators/EditClass2";
@@ -21,6 +22,7 @@ import CreatorClass from "@/views/Creators/MyClass";
 import BuyClass from "@/views/Shop/BuyClass";
 
 import DefultLayout from "@/layouts/Default";
+import LearningClassLayout from "@/layouts/LearningClassLayout";
 import CreatorLayout from "@/layouts/Creator";
 import CreatClassLayout from "@/layouts/CreateClassLayout";
 import EditClassLayout from "@/layouts/EditClassLayout";
@@ -71,6 +73,18 @@ const routes = [
         path: "/shopping/:id",
         name: "buyclass",
         component: BuyClass
+      }
+    ]
+  },
+  {
+    path: "/learningclass",
+    name: "learningclass",
+    component: LearningClassLayout,
+    children: [
+      {
+        path: "/learningclass/:id",
+        name: "learningclass",
+        component: LearningClass
       }
     ]
   },

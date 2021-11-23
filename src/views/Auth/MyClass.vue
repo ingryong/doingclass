@@ -20,7 +20,7 @@
       </p>
       <ul>
         <li v-for="list in MyClass" :key="list.id">
-          <router-link :to="`/class/learning/${list.class_id}`">
+          <router-link :to="`/learningclass/${list.class_id}`">
             <img class="list_sumbnail" :src="list.class_thumbnail" />
             <span class="ctg">{{ list.c1 }} | {{ list.c2 }} </span>
             <span class="tt">{{ list.class_name }}</span>
