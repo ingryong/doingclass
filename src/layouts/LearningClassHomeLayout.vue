@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div id="creators-nav">
+    <div id="learning-nav">
       <div class="logo">
-        <span>클래스 제목 입력 부분</span>
+        <span>Doing Class</span>
       </div>
       <div class="profile">
         <span class="creator_header_menu">
@@ -22,17 +22,6 @@
         </router-link>
       </div>
     </div>
-    <div id="creators-left-side">
-      <ul>
-        <li><router-link to="/">홈으로 돌아가기</router-link></li>
-      </ul>
-      <h5>챕터명 입력 부분</h5>
-      <ul>
-        <li>
-          <router-link to="/creators/myclass">강의 리스트 부분</router-link>
-        </li>
-      </ul>
-    </div>
     <router-view />
   </div>
 </template>
@@ -44,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss">
-#creators-nav {
+#learning-nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -53,14 +42,14 @@ export default {
   left: 0px;
   z-index: 99;
   width: 100%;
-  height: 50px;
+  height: 70px;
   background: #fff;
   font-weight: bold;
   border-bottom: 1px solid $gray-1;
 
   .logo {
     display: inline-block;
-    margin: 14px;
+    margin: auto 14px;
     span {
       padding: 6px 8px;
       background-color: $black;

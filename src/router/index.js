@@ -22,7 +22,7 @@ import CreatorClass from "@/views/Creators/MyClass";
 import BuyClass from "@/views/Shop/BuyClass";
 
 import DefultLayout from "@/layouts/Default";
-import LearningClassLayout from "@/layouts/LearningClassLayout";
+import LearningClassLayout from "@/layouts/LearningClassHomeLayout";
 import CreatorLayout from "@/layouts/Creator";
 import CreatClassLayout from "@/layouts/CreateClassLayout";
 import EditClassLayout from "@/layouts/EditClassLayout";
