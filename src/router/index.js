@@ -8,7 +8,7 @@ import MyClass from "@/views/Auth/MyClass.vue";
 import Home from "@/views/Home.vue";
 import OnlineClassList from "@/views/OnlineClass/OCList";
 import OnlineClassDetail from "@/views/OnlineClass/OCDetail";
-import LearningClass from "@/views/OnlineClass/LearningClass";
+import LearningClassMain from "@/views/OnlineClass/LearningClassMain";
 import CreateClass from "@/views/Creators/CreateClass";
 import EditClass1 from "@/views/Creators/EditClass1";
 import EditClass2 from "@/views/Creators/EditClass2";
@@ -84,7 +84,7 @@ const routes = [
       {
         path: "/learningclass/:id",
         name: "learningclass",
-        component: LearningClass
+        component: LearningClassMain
       }
     ]
   },
