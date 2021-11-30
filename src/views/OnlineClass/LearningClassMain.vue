@@ -26,13 +26,16 @@
               </li>
               <ul class="cur_study_container">
                 <li v-for="(epi, epi_num) in episode" :key="epi_num">
-                  <router-link :to="`/learning/${epi.episode_id}`">
+                  <router-link
+                    :to="`/learning/${epi.class_id}/${epi.episode_id}`"
+                  >
                     <span
                       class="cur_study"
                       v-if="epi.curriculum_id === cur.curriculum_id"
-                      >{{ epi.episode_name }}
-                      <i class="fas fa-play-circle" style="color:#13b896;"></i
-                    ></span>
+                    >
+                      {{ epi.episode_name }}
+                      <i class="fas fa-play-circle" style="color:#13b896;"></i>
+                    </span>
                   </router-link>
                 </li>
               </ul>
@@ -42,7 +45,9 @@
       </section>
       <section class="learning_main_right">
         <div class="learning_side_window">
-          <router-link :to="`/learningclass/`">계속 수강하기</router-link>
+          <a @click="continueClass">
+            계속 수강하기
+          </a>
           <span>평생 수강 가능</span>
         </div>
       </section>
@@ -60,6 +65,7 @@ export default {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
       user: this.$store.state.user,
+      userDB: "",
       url: this.$route.params.id,
       classDetails: "",
       curriculum: "",
@@ -70,6 +76,19 @@ export default {
     };
   },
   async mounted() {
+    // usersDB import
+    await this.db
+      .collection("users")
+      .doc(this.user.uid)
+      .collection("myclass")
+      .doc(this.url)
+      .onSnapshot(result => {
+        this.userDB = result.data();
+        console.log(this.userDB);
+        console.log(this.user.uid);
+      });
+
+    // classDB import
     await this.db
       .collection("onlineclass")
       .doc(this.url)
@@ -77,6 +96,7 @@ export default {
         this.classDetails = result.data();
       });
 
+    // curriculum & episode DB import
     await this.db
       .collection("onlineclass")
       .doc(this.url)
@@ -98,6 +118,19 @@ export default {
           this.episode = epi_data;
         });
       });
+  },
+  methods: {
+    continueClass() {
+      if (this.userDB.continue_study === "") {
+        this.$router.push(
+          `/learning/${this.url}/${this.classDetails.first_episode}`
+        );
+      } else {
+        this.$router.push(
+          `/learning/${this.url}/${this.userDB.continue_study}`
+        );
+      }
+    }
   }
 };
 </script>

@@ -7,7 +7,7 @@
       <div id="viedo_modal" class="black-bg" v-show="video_modal">
         <div class="white-bg">
           <span @click="video_modal = false">닫기</span>
-          <h4>강의영상 URL 입력</h4>
+          <h3>강의영상 URL 입력</h3>
           <input
             id="video_url"
             type="text"
@@ -27,7 +27,8 @@
     -->
     <div class="container">
       <div class="notice-card">
-        <h3>{{ curriculum.chapter_name }}</h3>
+        <h3>{{ class_info.title }}</h3>
+        <h4>{{ curriculum.chapter_name }}</h4>
       </div>
       <div class="input-group">
         <p>세부 강의 제목 입력</p>
@@ -93,6 +94,7 @@ export default {
       user: this.$store.state.user,
       url: this.$route.params.id,
       curriculum_id: this.$route.params.doc_id,
+      class_info: "",
       curriculum: "",
       episode: "",
       episode_name: "",
@@ -103,6 +105,16 @@ export default {
     };
   },
   async mounted() {
+    /*
+    ---------- 클래스정보 불러오기 ---------
+    */
+    await this.db
+      .collection("onlineclass")
+      .doc(this.url)
+      .get()
+      .then(result => {
+        this.class_info = result.data();
+      });
     /*
     ---------- 챕터(type:"chapter")/세부강의(type:"episode") 불러오기 ---------
     */
@@ -179,6 +191,14 @@ export default {
             .doc(docRef.id)
             .update({ episode_id: docRef.id });
 
+          if (this.class_info.first_episode === "") {
+            await this.db
+              .collection("onlineclass")
+              .doc(this.url)
+              .update({
+                first_episode: docRef.id
+              });
+          }
           this.$router.push(`/creators/editclass3/${this.url}`);
         })
         .catch(error => {

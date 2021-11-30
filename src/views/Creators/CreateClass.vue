@@ -164,6 +164,7 @@ export default {
           level: document.getElementById("level").value,
           thumbnail: this.thumbnail,
           classopen: false,
+          first_episode: "",
           price: 0,
           class_dec: {
             dec1: {
