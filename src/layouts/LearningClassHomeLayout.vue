@@ -5,9 +5,9 @@
         <span>Doing Class</span>
       </div>
       <div class="profile">
-        <span class="creator_header_menu">
-          <router-link to="/profile"> 학습페이지로 </router-link>
-        </span>
+        <router-link to="/myclass">
+          <span><i class="fas fa-book"></i> 내 클래스</span>
+        </router-link>
         <div>
           <img
             v-if="$store.state.user.photoURL"

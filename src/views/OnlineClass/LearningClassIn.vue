@@ -13,9 +13,7 @@
           <ul style="display:flex;">
             <ul class="cur_study_container">
               <li v-for="(epi, epi_num) in episode" :key="epi_num">
-                <router-link
-                  :to="`/learning/${epi.class_id}/${epi.episode_id}`"
-                >
+                <a :href="`/learning/${epi.class_id}/${epi.episode_id}`">
                   <span
                     class="cur_study"
                     v-if="epi.curriculum_id === cur.curriculum_id"
@@ -23,7 +21,7 @@
                     {{ epi.episode_name }}
                     <i class="fas fa-play-circle" style="color:#13b896;"></i>
                   </span>
-                </router-link>
+                </a>
               </li>
             </ul>
           </ul>

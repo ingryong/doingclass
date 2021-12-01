@@ -23,7 +23,7 @@
         <div class="nav_top3" v-if="$store.state.user !== null">
           <router-link to="/creators/myclass">크리에이터 센터</router-link>
           <router-link to="/myclass">
-            <i class="fas fa-book"></i> 내 클래스
+            <span><i class="fas fa-book"></i> 내 클래스</span>
           </router-link>
           <div>
             <img
