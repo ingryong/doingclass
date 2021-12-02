@@ -3,6 +3,7 @@
     <div class="blank-70"></div>
 
     <container class="learning_class_container">
+      <!-- 학습 리스트 섹션 -->
       <section class="learning_class_left">
         <div
           class="cur_container"
@@ -13,7 +14,9 @@
           <ul style="display:flex;">
             <ul class="cur_study_container">
               <li v-for="(epi, epi_num) in episode" :key="epi_num">
-                <a :href="`/learning/${epi.class_id}/${epi.episode_id}`">
+                <router-link
+                  :to="`/learning/${epi.class_id}/${epi.episode_id}`"
+                >
                   <span
                     class="cur_study"
                     v-if="epi.curriculum_id === cur.curriculum_id"
@@ -21,17 +24,20 @@
                     {{ epi.episode_name }}
                     <i class="fas fa-play-circle" style="color:#13b896;"></i>
                   </span>
-                </a>
+                </router-link>
               </li>
             </ul>
           </ul>
         </div>
       </section>
+
+      <!-- 학습 섹션 -->
       <section class="learning_class_right">
         <h4>{{ learningEpisode.episode_name }}</h4>
         <iframe
+          class="video_iframe"
           width="100%"
-          height="282"
+          height="56.25%"
           :src="learningEpisode.video_url"
           title="YouTube video player"
           frameborder="0"
@@ -125,6 +131,7 @@ export default {
   }
   .learning_class_right {
     margin-left: 330px;
+    max-width: 600px;
   }
 }
 </style>
