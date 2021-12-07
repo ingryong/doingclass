@@ -28,8 +28,14 @@
                     class="cur_study"
                     v-if="epi.curriculum_id === cur.curriculum_id"
                   >
+                    <span
+                      class="cur_point"
+                      v-if="
+                        epi.curriculum_id === cur.curriculum_id &&
+                          epi.episode_id === epi_url
+                      "
+                    ></span>
                     <span>{{ epi.episode_name }}</span>
-                    <i class="fas fa-circle" style="color:#a0a0a0;"></i>
                   </span>
                 </router-link>
               </li>
@@ -53,7 +59,10 @@
             allowfullscreen
           ></iframe>
         </div>
-        <p v-html="handleNewLine(learningEpisode.episode_description)"></p>
+        <p
+          v-html="handleNewLine(learningEpisode.episode_description)"
+          v-if="learningEpisode.episode_description"
+        ></p>
       </section>
     </container>
   </div>
@@ -174,14 +183,13 @@ export default {
       .cur_study {
         width: 100%;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
 
-        span {
+        .cur_point {
           margin-right: 10px;
-          font-size: 0.95rem;
-          color: #333;
+          width: 4px;
+          height: 30px;
+          background-color: $mint;
         }
 
         svg {
