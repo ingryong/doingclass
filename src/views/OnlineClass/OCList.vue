@@ -170,6 +170,7 @@ export default {
         height: 72%;
         border-radius: 6px;
         object-fit: cover;
+        background: $gray-2;
       }
       span {
         display: block;

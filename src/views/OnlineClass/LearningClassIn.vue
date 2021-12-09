@@ -2,13 +2,26 @@
   <div>
     <div class="blank-70"></div>
 
-    <div class="learning_sidse_arrow">
+    <div
+      ref="off_button"
+      class="learning_side_off_arrow"
+      @click="slide_off()"
+      style="cursor:pointer;"
+    >
       <i class="fas fa-caret-square-left"></i>
+    </div>
+    <div
+      ref="on_button"
+      class="learning_side_on_arrow"
+      @click="slide_on()"
+      style="cursor:pointer;"
+    >
+      <i class="fas fa-caret-square-right"></i>
     </div>
 
     <container class="learning_class_container">
       <!-- 학습 리스트 섹션 -->
-      <section class="learning_class_left">
+      <section class="learning_class_left" ref="left_container">
         <div class="left_container">
           {{ curriculum.title }}
         </div>
@@ -45,7 +58,7 @@
       </section>
 
       <!-- 학습 섹션 -->
-      <section class="learning_class_right">
+      <section class="learning_class_right" ref="right_container">
         <h4>{{ learningEpisode.episode_name }}</h4>
         <div class="iframe_box">
           <iframe
@@ -135,6 +148,19 @@ export default {
     */
     handleNewLine(str) {
       return String(str).replace(/(?:\r\n|\r|\n)/g, "</br>");
+    },
+
+    slide_off() {
+      this.$refs.left_container.style.left = "-390px";
+      this.$refs.right_container.style.marginLeft = "60px";
+      this.$refs.off_button.style.display = "none";
+      this.$refs.on_button.style.display = "block";
+    },
+    slide_on() {
+      this.$refs.left_container.style.left = "0px";
+      this.$refs.right_container.style.marginLeft = "380px";
+      this.$refs.on_button.style.display = "none";
+      this.$refs.off_button.style.display = "block";
     }
   }
 };
@@ -145,7 +171,18 @@ export default {
   margin-top: 70px;
 }
 
-.learning_sidse_arrow {
+.learning_side_on_arrow {
+  position: fixed;
+  display: none;
+  z-index: 99;
+  top: 80px;
+  left: 10px;
+  svg {
+    font-size: 3rem;
+    color: $gray-2;
+  }
+}
+.learning_side_off_arrow {
   position: fixed;
   z-index: 99;
   top: 80px;
@@ -201,7 +238,8 @@ export default {
 
   .learning_class_right {
     margin-left: 390px;
-    max-width: 600px;
+    max-width: 1100px;
+    margin-right: 50px;
 
     h4 {
       padding-top: 30px;
