@@ -164,6 +164,8 @@
               class="class_faq_bottom"
               v-html="handleNewLine(qna.description)"
             ></div>
+
+            <!-- 대댓글 부분
             <div class="class_faq_reply_container">
               <div class="class_faq_top">
                 <img />
@@ -179,6 +181,7 @@
                 <i class="fas fa-paper-plane"></i>
               </div>
             </div>
+            -->
           </div>
         </div>
       </div>

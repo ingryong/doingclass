@@ -11,7 +11,7 @@ export default [
   },
   {
     id: 3,
-    menuname: "더라콘쇼",
-    url: "/about"
+    menuname: "내 클래스",
+    url: "/myclass"
   }
 ];

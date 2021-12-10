@@ -9,7 +9,7 @@
       :nav="false"
       :rewind="true"
     >
-      <div class="tlcs_bg">
+      <div style="width:100%; height:500px; background-color:black;">
         <table class="noBorder">
           <tbody>
             <tr>
@@ -17,86 +17,29 @@
                 <h4>
                   <span><br /></span>
                 </h4>
-                <p style="user-select: auto; text-align: center;">
-                  <a href="doingtv"
-                    ><img
-                      src="https://cdn.imweb.me/upload/S202009184501f9980a350/deaae5f6f4d5f.png"
-                      style="width: 450px;"
-                      class="fr-dib"
-                  /></a>
-                </p>
                 <p>
-                  <span class="fs-18">8월 스페셜 게스트&nbsp;</span
-                  ><span class="fs-24"><strong>정진일</strong></span>
-                </p>
-                <p>
+                  <span class="fs-16">DOING CREATOR CENTER</span>
+                  <br /><br />
                   <span class="fs-24"
-                    ><strong>The Zoom Live Contents Show</strong></span
+                    ><strong>온라인 강의를 게시하고 관리하세요!</strong></span
                   >
+                  <br />
+                  <br />
+                  <br />
                 </p>
-                <p><span class="fs-18">2021.08.04 수요일 밤 8시</span></p>
-                <br style="user-select: auto;" />
                 <p>
                   <span class="fs-18"
-                    ><a class="btn-lg" href="/doingtv"
-                      >더라콘쇼 자세히 보기 &gt;</a
+                    ><router-link class="btn-lg" to="/creators/myclass"
+                      >크리에이터센터 이동하기 &gt;</router-link
                     ></span
                   >
                 </p>
                 <br style="user-select: auto;" />
               </td>
-              <td style="width: 60%; user-select: auto;">
+              <td style="width: 60%; user-select: auto; margin:auto;">
                 <a href="/"
                   ><img
-                    src="https://cdn.imweb.me/upload/S202009184501f9980a350/642cb6dba53fd.jpg"
-                    style="width: 600px;"
-                    class="fr-dib"
-                /></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="width:100%; height:500px; background-color:green;">
-        <table class="noBorder">
-          <tbody>
-            <tr>
-              <td class="banner_left">
-                <h4>
-                  <span><br /></span>
-                </h4>
-                <p style="user-select: auto; text-align: center;">
-                  <a href="doingtv"
-                    ><img
-                      src="https://cdn.imweb.me/upload/S202009184501f9980a350/deaae5f6f4d5f.png"
-                      style="width: 450px;"
-                      class="fr-dib"
-                  /></a>
-                </p>
-                <p>
-                  <span class="fs-18">8월 스페셜 게스트&nbsp;</span
-                  ><span class="fs-24"><strong>정진일</strong></span>
-                </p>
-                <p>
-                  <span class="fs-24"
-                    ><strong>The Zoom Live Contents Show</strong></span
-                  >
-                </p>
-                <p><span class="fs-18">2021.08.04 수요일 밤 8시</span></p>
-                <br style="user-select: auto;" />
-                <p>
-                  <span class="fs-18"
-                    ><a class="btn-lg" href="/doingtv"
-                      >더라콘쇼 자세히 보기 &gt;</a
-                    ></span
-                  >
-                </p>
-                <br style="user-select: auto;" />
-              </td>
-              <td style="width: 60%; user-select: auto;">
-                <a href="/"
-                  ><img
-                    src="https://cdn.imweb.me/upload/S202009184501f9980a350/642cb6dba53fd.jpg"
+                    src="~@/assets/imgs/home_banner01.jpg"
                     style="width: 600px;"
                     class="fr-dib"
                 /></a>
@@ -124,7 +67,7 @@ export default { components: { Carousel } };
     .btn-lg {
       padding: 10px 30px;
       border: 1px solid #fff;
-      border-radius: 10px;
+      border-radius: 4px;
       color: #fff;
       font-weight: bold;
     }
@@ -135,6 +78,7 @@ export default { components: { Carousel } };
 
     table {
       width: 100%;
+      height: 100%;
       user-select: auto;
 
       .banner_left {
@@ -160,13 +104,6 @@ export default { components: { Carousel } };
           }
         }
       }
-    }
-  }
-  .tlcs_bg {
-    background-image: url("~@/assets/imgs/tlcs_bg.png");
-    .btn-lg:hover {
-      background-color: #fff;
-      color: purple;
     }
   }
 }
