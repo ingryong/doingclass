@@ -2,17 +2,14 @@
   <div>
     <CreatorHeader></CreatorHeader>
     <div id="creators-left-side">
-      <ul>
-        <li>크리에이터 정보</li>
-      </ul>
       <h5>클래스 관리</h5>
       <ul>
         <li>
-          <router-link to="/creators/myclass">내 클래스</router-link>
+          <router-link to="/creators/myclass">개설한 클래스 관리</router-link>
         </li>
       </ul>
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 

@@ -14,7 +14,7 @@
         <li class="step disable"><span>4</span> 크리에이터 소개</li>
       </ul>
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 <style lang="scss">
 #creators-left-side {
   position: fixed;
-  top: 50px;
+  top: 70px;
   left: 0px;
   z-index: 98;
   width: 220px;
@@ -43,6 +43,10 @@ export default {
   background-color: #fcfcfc;
   ul {
     padding: 10px;
+
+    a {
+      cursor: pointer;
+    }
 
     .step {
       height: 40px;
