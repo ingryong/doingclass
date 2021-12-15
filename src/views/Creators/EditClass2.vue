@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 메인 컨텐츠 -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>2. 클래스 소개</h3>
         <p>
           클래스를 수강하려는 수강생들에게 클래스의 정보를 입력해주세요.<br />
@@ -10,7 +10,7 @@
         </p>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>헤더 이미지 업로드</h4>
         <p>
           소개페이지 헤더 부분에 보일 4개의 이미지입니다. <br />
@@ -85,7 +85,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>포스터 이미지 업로드</h4>
         <p>
           소개페이지 진입 후 가장 처음 보여질 클래스 소개 포스터
@@ -111,7 +111,7 @@
       </div>
 
       <!-- 소개1 -->
-      <div class="input-group">
+      <div class="input_group">
         <h4>
           <input
             type="text"
@@ -146,12 +146,13 @@
           placeholder="내용을 입력해주세요"
           :value="doc.class_dec.dec1.dec"
           @input="mixinAutoResize"
+          @change="autoSave()"
           rows="10"
         ></textarea>
       </div>
 
       <!-- 소개2 -->
-      <div class="input-group">
+      <div class="input_group">
         <h4>
           <input
             type="text"
@@ -191,7 +192,7 @@
       </div>
 
       <!-- 소개3 -->
-      <div class="input-group">
+      <div class="input_group">
         <h4>
           <input
             type="text"
@@ -340,6 +341,48 @@ export default {
       );
     },
     /*
+    ---------- 커리큘럼 내용 자동 업데이트 ---------
+    */
+    async autoSave() {
+      await this.db
+        .collection("onlineclass")
+        .doc(this.url)
+        .update({
+          creator_uid: this.user.uid,
+          creator_name: this.user.displayName,
+          creator_email: this.user.email,
+          last_update: new Date(),
+          poster_img: this.poster_img,
+          class_dec: {
+            dec1: {
+              title: document.getElementById("dec1_title").value,
+              dec: document.getElementById("dec1_dec").value,
+              img: this.dec1_img
+            },
+            dec2: {
+              title: document.getElementById("dec2_title").value,
+              dec: document.getElementById("dec2_dec").value,
+              img: this.dec2_img
+            },
+            dec3: {
+              title: document.getElementById("dec3_title").value,
+              dec: document.getElementById("dec3_dec").value,
+              img: this.dec3_img
+            }
+          },
+          header_img: {
+            header_img1: this.header_img1,
+            header_img2: this.header_img2,
+            header_img3: this.header_img3,
+            header_img4: this.header_img4
+          }
+        })
+        .then(() => {})
+        .catch(error => {
+          console.log("error updateing document:", error);
+        });
+    },
+    /*
     ---------- 커리큘럼 내용 업데이트 ---------
     */
     async upload() {
@@ -377,6 +420,7 @@ export default {
           }
         })
         .then(() => {
+          alert("저장이 완료되었습니다.");
           this.$router.push(`/creators/editclass3/${this.url}`);
         })
         .catch(error => {
@@ -393,16 +437,6 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
-  .input-group {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    margin: 30px 0;
-    border: 1px solid $gray-1;
-    border-radius: 5px;
-  }
-}
 textarea {
   resize: none;
   height: auto;

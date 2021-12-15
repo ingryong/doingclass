@@ -9,7 +9,9 @@
       :nav="false"
       :rewind="true"
     >
-      <div style="width:100%; height:500px; background-color:black;">
+      <div
+        style="width:100%; height:500px; margin:auto; background-color:black;"
+      >
         <table class="noBorder">
           <tbody>
             <tr>
@@ -36,12 +38,9 @@
                 </p>
                 <br style="user-select: auto;" />
               </td>
-              <td style="width: 60%; user-select: auto; margin:auto;">
+              <td class="banner_right">
                 <a href="/"
-                  ><img
-                    src="~@/assets/imgs/home_banner01.jpg"
-                    style="width: 600px;"
-                    class="fr-dib"
+                  ><img src="~@/assets/imgs/home_banner01.jpg" class="fr-dib"
                 /></a>
               </td>
             </tr>
@@ -76,9 +75,10 @@ export default { components: { Carousel } };
       color: orange;
     }
 
-    table {
-      width: 100%;
+    .noBorder {
+      min-width: 600px;
       height: 100%;
+      margin: auto;
       user-select: auto;
 
       .banner_left {
@@ -102,6 +102,16 @@ export default { components: { Carousel } };
           .fs-24 {
             font-size: 1.6rem;
           }
+        }
+      }
+      .banner_right {
+        width: 60%;
+        user-select: auto;
+        margin: auto;
+
+        a > img {
+          width: 90%;
+          margin: auto;
         }
       }
     }

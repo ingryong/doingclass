@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 머니클래스 -->
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
@@ -7,6 +8,11 @@
         </span>
         <span class="sub_title">들으면 돈이 되는 클래스</span>
       </p>
+      <!-- 해당 클래스에 등록된 클래스가 없을 경우 -->
+      <div class="none_class" v-if="!moneyClassList">
+        <h3>등록된 클래스가 없습니다.</h3>
+      </div>
+      <!-- 클래스 리스트 -->
       <ul>
         <li v-for="list in moneyClassList" :key="list.id">
           <router-link :to="`/ocdetail/${list.id}`">
@@ -33,6 +39,7 @@
         </li>
       </ul>
     </div>
+    <!-- 커리어클래스 -->
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
@@ -40,8 +47,91 @@
         </span>
         <span class="sub_title">각 분야별 전문가의 커리어 클래스</span>
       </p>
+      <!-- 해당 클래스에 등록된 클래스가 없을 경우 -->
+      <div class="none_class" v-if="!careerClassList">
+        <h3>등록된 클래스가 없습니다.</h3>
+      </div>
+      <!-- 클래스 리스트 -->
       <ul>
         <li v-for="list in careerClassList" :key="list.id">
+          <router-link :to="`/ocdetail/${list.id}`">
+            <img class="list_sumbnail" :src="list.thumbnail" />
+            <div class="list_profile">
+              <img :src="list.profile_img" />
+              <span>{{ list.profile_name }}</span>
+            </div>
+            <span class="ctg"
+              >{{ list.category.c1 }} | {{ list.category.c2 }}
+            </span>
+            <span class="tt">{{ list.title }}</span>
+            <p style="padding-block-start:0px;">
+              <span v-if="list.classopen" class="tag-open">수강 가능</span>
+              <span v-else-if="!list.classopen" class="tag-ready">준비중</span>
+              <span v-if="list.onoff === 'online'" class="tag-coaching"
+                >온라인 강의</span
+              >
+              <span v-if="list.onoff === 'offline'" class="tag-coaching"
+                >오프라인 강의</span
+              >
+            </p>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <!-- 취미클래스 -->
+    <div class="oc_oclist">
+      <p class="listTitle">
+        <span class="title">
+          <i class="fas fa-palette" style="color:#999;"></i> 취미 클래스
+        </span>
+        <span class="sub_title">삶의 질을 높이는 취미 클래스</span>
+      </p>
+      <!-- 해당 클래스에 등록된 클래스가 없을 경우 -->
+      <div class="none_class" v-if="!hobbyClassList">
+        <h3>등록된 클래스가 없습니다.</h3>
+      </div>
+      <!-- 클래스 리스트 -->
+      <ul>
+        <li v-for="list in hobbyClassList" :key="list.id">
+          <router-link :to="`/ocdetail/${list.id}`">
+            <img class="list_sumbnail" :src="list.thumbnail" />
+            <div class="list_profile">
+              <img :src="list.profile_img" />
+              <span>{{ list.profile_name }}</span>
+            </div>
+            <span class="ctg"
+              >{{ list.category.c1 }} | {{ list.category.c2 }}
+            </span>
+            <span class="tt">{{ list.title }}</span>
+            <p style="padding-block-start:0px;">
+              <span v-if="list.classopen" class="tag-open">수강 가능</span>
+              <span v-else-if="!list.classopen" class="tag-ready">준비중</span>
+              <span v-if="list.onoff === 'online'" class="tag-coaching"
+                >온라인 강의</span
+              >
+              <span v-if="list.onoff === 'offline'" class="tag-coaching"
+                >오프라인 강의</span
+              >
+            </p>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <!-- 건강클래스 -->
+    <div class="oc_oclist">
+      <p class="listTitle">
+        <span class="title">
+          <i class="fas fa-running" style="color:#999;"></i> 건강 클래스
+        </span>
+        <span class="sub_title">튼튼한 내 몸을 위한 건강 클래스</span>
+      </p>
+      <!-- 해당 클래스에 등록된 클래스가 없을 경우 -->
+      <div class="none_class" v-if="!healtyClassList">
+        <h3>등록된 클래스가 없습니다.</h3>
+      </div>
+      <!-- 클래스 리스트 -->
+      <ul>
+        <li v-for="list in healtyClassList" :key="list.id">
           <router-link :to="`/ocdetail/${list.id}`">
             <img class="list_sumbnail" :src="list.thumbnail" />
             <div class="list_profile">
@@ -77,7 +167,9 @@ export default {
       storage: this.$firebase.storage(),
       openClassList: "",
       moneyClassList: "",
-      careerClassList: ""
+      careerClassList: "",
+      hobbyClassList: "",
+      healtyClassList: ""
     };
   },
   async mounted() {
@@ -88,6 +180,8 @@ export default {
         let allDatas = [];
         let money_data = [];
         let career_data = [];
+        let hobby_data = [];
+        let healty_data = [];
 
         querySnapshot.forEach(doc => {
           allDatas.push(doc.data());
@@ -99,6 +193,12 @@ export default {
           } else if (doc.data().category.c1 === "career") {
             career_data.push(doc.data());
             this.careerClassList = career_data;
+          } else if (doc.data().category.c1 === "hobby") {
+            hobby_data.push(doc.data());
+            this.hobbyClassList = hobby_data;
+          } else if (doc.data().category.c1 === "healty") {
+            healty_data.push(doc.data());
+            this.healtyClassList = healty_data;
           }
         });
       });
@@ -109,7 +209,7 @@ export default {
 <style lang="scss">
 .oc_oclist {
   @include content-area;
-  padding: 50px 10px;
+  padding: 30px 10px;
   margin-bottom: 30px;
 
   .listTitle {
@@ -121,6 +221,14 @@ export default {
       font-size: 0.9rem;
     }
   }
+  .none_class {
+    margin: auto;
+    margin-top: 50px;
+    font-size: 2rem;
+    color: $gray-2;
+    text-align: center;
+  }
+
   ul {
     @include content-area;
     padding-left: 0px;

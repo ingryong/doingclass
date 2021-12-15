@@ -84,7 +84,7 @@ const routes = [
     children: [
       {
         path: "/learningclass/:id",
-        name: "learningclass",
+        name: "learningclassmain",
         component: LearningClassMain
       },
       {
@@ -170,7 +170,15 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // router-link로 페이지 전환 시 스크롤을 최상단에 위치하게 함
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
 
 export default router;

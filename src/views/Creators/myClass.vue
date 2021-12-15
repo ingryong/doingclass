@@ -1,11 +1,18 @@
 <template>
-  <div class="container">
-    <div class="class-group">
-      <h4>개설한 클래스</h4>
-      <router-link to="/creators/createclass">+ 새로운 클래스</router-link>
+  <div class="myclass_container">
+    <div class="class_group">
+      <h4>개설한 클래스 관리</h4>
+      <router-link class="create_class_button" to="/creators/createclass"
+        >+ 새로운 클래스</router-link
+      >
       <hr />
-      <div id="class-view">
-        <div class="class-list" v-for="list in classinfo" :key="list.id">
+      <!-- 개설된 클래스가 없을 경우 -->
+      <div class="none_class" v-if="!classinfo">
+        <h3>개설한 클래스가 없습니다.</h3>
+      </div>
+      <!-- 개설한 클래스 리스트 -->
+      <div id="class_view">
+        <div class="class_list" v-for="list in classinfo" :key="list.id">
           <div class="class_thumbnail">
             <img
               src="@/assets/imgs/PhotoPotrait.svg"
@@ -32,11 +39,10 @@
               </li>
             </ul>
             <router-link
-              class="btn-l btn-gray"
+              class="btn-l btn-gray class_setting_button"
               :to="`/creators/editclass1/${list.id}`"
-              style="text-align:center; color:#000; border-radius:4px;"
-              >클래스 관리</router-link
-            >
+              >클래스 관리 <i class="fas fa-cog"></i>
+            </router-link>
           </div>
         </div>
       </div>
@@ -72,21 +78,27 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.myclass_container {
   max-width: 700px;
   padding: 10px;
   margin-left: 240px;
-  margin-top: 60px;
+  margin-top: 70px;
 
-  .class-group {
+  .class_group {
     width: 100%;
     border: 1px solid #eee;
     border-radius: 10px;
     box-sizing: border-box;
 
+    .none_class {
+      margin: 40px;
+      text-align: center;
+      color: $gray-2;
+    }
+
     h4 {
       box-sizing: border-box;
-      padding: 20px;
+      padding: 0px 20px;
       border: none;
       display: inline-block;
     }
@@ -98,20 +110,26 @@ export default {
       margin-top: 0;
     }
 
-    a {
-      display: inline-block;
+    .create_class_button {
+      display: block;
+      float: right;
+      margin: 22px;
       font-size: 0.9rem;
       font-weight: bold;
       color: $gray-3;
       text-align: right;
     }
+    a:hover {
+      color: $black;
+    }
 
-    .class-list {
+    .class_list {
       display: flex;
       flex-direction: row;
+      margin-top: 5px;
 
       .class_thumbnail {
-        margin: 10px;
+        margin: auto;
         width: 240px;
         img {
           width: 240px;
@@ -125,6 +143,13 @@ export default {
         .title {
           font-weight: bold;
           font-size: 1.15rem;
+        }
+
+        .class_setting_button {
+          text-align: center;
+          color: #000;
+          border-color: #fff;
+          border-radius: 4px;
         }
       }
     }

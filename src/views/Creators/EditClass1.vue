@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 메인 컨텐츠 -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>1. 나의 클래스 만들기</h3>
         <p>
           클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를
@@ -12,24 +12,26 @@
         </p>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>클래스명</h4>
+        <p>클래스명은 <strong>최대 35자</strong>까지 작성 가능합니다.</p>
         <input
           type="text"
           class="form-control m-1"
           id="title"
           placeholder="두잉클래스와 함께하는 영어 기초 다지기"
           :value="doc.title"
+          maxlength="35"
         />
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>썸네일 이미지 업로드</h4>
-        <p style="font-size:0.9rem; text-align:center;">
-          썸네일 이미지는 4:3 비율에 최적화되어 있습니다.<br />
-          비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.<br /><br />
-          썸네일 이미지는 이미지가 변경되면 저장버튼을 누르지 않아도 즉시
-          적용됩니다.
+        <p style="text-align:center;">
+          썸네일 이미지는
+          <strong>글자가 삽입되지 않은 4:3 비율의 이미지</strong>에 최적화되어
+          있습니다. <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로
+          보입니다.
         </p>
         <div class="thumb_img_upload">
           <label for="image">
@@ -49,7 +51,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>클래스 타입</h4>
         <select
           id="classtype"
@@ -61,7 +63,7 @@
         </select>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>클래스 카테고리</h4>
         <p>1차 카테고리</p>
         <select
@@ -83,12 +85,13 @@
           type="text"
           class="form-control m-1"
           id="classcategory2"
-          placeholder="짧은 낱말로 2차 카테고리를 입력해주세요 (예)DIY, 책읽기, 다이어트"
+          placeholder="최대 6글자까지 입력 가능합니다 (예)DIY, 책읽기, 다이어트"
           :value="doc.category.c2"
+          maxlength="6"
         />
       </div>
 
-      <div class="input-group onoff-group" id="onoff-group">
+      <div class="input_group onoff-group" id="onoff-group">
         <h4>온라인 / 오프라인</h4>
         <select
           id="onoff"
@@ -100,7 +103,7 @@
         </select>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <h4>클래스 난이도</h4>
         <select
           id="level"

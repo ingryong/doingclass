@@ -9,7 +9,7 @@
         </div>
 
         <!-- 서치바 -->
-        <div class="nav_top2">
+        <div class="nav_top2" style="display:none;">
           <input type="text" placeholder="배우고 싶은 것이 있나요?" /><i
             class="fas fa-search"
           ></i>

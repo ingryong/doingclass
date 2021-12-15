@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="notice-card">
-      <h3>나의 클래스 만들기</h3>
+  <div class="create_container">
+    <div class="notice_card">
+      <h3>나의 클래스 개설하기</h3>
       <p>
         클래스 개설하기에 앞서 만드시려는 클래스의 기본적인 정보를
         알려주세요.<br />
@@ -9,48 +9,49 @@
       </p>
     </div>
 
-    <h3>1단계</h3>
-    <div class="input-group">
+    <div class="input_group">
       <h4>클래스명</h4>
+      <p>클래스명은 <strong>최대 35자</strong>까지 작성 가능합니다.</p>
       <input
         type="text"
         class="form-control m-1"
         id="title"
         placeholder="두잉클래스와 함께하는 영어 기초 다지기"
+        maxlength="35"
       />
     </div>
 
-    <div class="input-group">
+    <div class="input_group">
       <h4>썸네일 이미지 업로드</h4>
       <p>
-        썸네일 이미지는 4:3 비율에 최적화되어 있습니다.
-        <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
+        썸네일 이미지는
+        <strong>글자가 삽입되지 않은 4:3 비율의 이미지</strong>에 최적화되어
+        있습니다. <br />비율에 맞게 이미지를 업로드 하셔야 정상적으로 보입니다.
       </p>
       <div class="class_thumbnail">
-        <img
-          src="@/assets/imgs/PhotoPotrait.svg"
-          v-if="thumbnail === ''"
-          style="border:1px solid #eee;"
-        />
+        <label for="image">
+          <img src="@/assets/imgs/PhotoPotrait.svg" v-if="thumbnail === ''" />
+        </label>
         <img :src="thumbnail" v-if="thumbnail" />
       </div>
       <input
         class="form-control m-1"
         type="file"
         accept="image/*"
+        v-show="false"
         @change="imgUpload"
         id="image"
       />
     </div>
 
-    <div class="input-group">
+    <div class="input_group">
       <h4>클래스 타입</h4>
       <select id="classtype" name="classtype" class="form-control m-1">
         <option value="onlineclass">온라인클래스(VOD)</option>
       </select>
     </div>
 
-    <div class="input-group">
+    <div class="input_group">
       <h4>클래스 카테고리</h4>
       <p>1차 카테고리</p>
       <select
@@ -71,18 +72,19 @@
         type="text"
         class="form-control m-1"
         id="classcategory2"
-        placeholder="짧은 낱말로 2차 카테고리를 입력해주세요 (예)DIY, 책읽기, 다이어트"
+        placeholder="최대 6글자까지 입력 가능합니다. (예)DIY, 책읽기, 다이어트"
+        maxlength="6"
       />
     </div>
 
-    <div class="input-group onoff-group" id="onoff-group">
+    <div class="input_group onoff-group" id="onoff-group">
       <h4>온라인 / 오프라인</h4>
       <select id="onoff" name="onoff" class="form-control m-1">
         <option value="online">온라인만 진행</option>
       </select>
     </div>
 
-    <div class="input-group">
+    <div class="input_group">
       <h4>클래스 난이도</h4>
       <select id="level" name="level" class="form-control m-1">
         <option value="none"
@@ -206,26 +208,88 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.create_container {
   max-width: 700px;
   padding: 10px;
   margin-left: 240px;
-  margin-top: 60px;
+  margin-top: 70px;
 
-  .notice-card {
+  .notice_card {
     width: 100%;
     border: 1px solid #eee;
     box-sizing: border-box;
     padding: 15px;
   }
 
-  h4 {
-    font-size: 1.25rem;
-    margin: auto;
-    text-align: left;
-    padding-left: 10px;
-    font-weight: normal;
-    border-left: 4px solid $cur-title-text;
+  .input_group {
+    padding: 20px 0px;
+
+    h4 {
+      font-size: 1rem;
+      margin: auto;
+      text-align: left;
+      padding-left: 10px;
+      font-weight: normal;
+      border-left: 3px solid $mint;
+    }
+    p {
+      font-size: 0.85rem;
+    }
+
+    .class_thumbnail {
+      margin: 10px;
+      img {
+        width: 240px;
+        height: 180px;
+        object-fit: fill;
+        border-radius: 8px;
+        background-color: $gray-3;
+      }
+    }
+
+    .cur_header {
+      display: flex;
+      justify-content: space-between;
+      h4 {
+        margin-left: 4px;
+      }
+    }
+    .cur_container {
+      display: flex;
+      .cur_left {
+        margin-right: 10px;
+        .check_img {
+          p {
+            padding: 10px;
+            padding-top: 25px;
+            width: 160px;
+            height: 90px;
+            font-size: 0.95rem;
+            text-align: center;
+            margin: 10px 4px;
+            box-sizing: border-box;
+            background-color: #eee;
+            border-radius: 4px;
+          }
+          img {
+            margin: 10px 4px;
+            width: 160px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+        }
+      }
+      .cur_right {
+        ul {
+          li {
+            a {
+              line-height: 1.5rem;
+            }
+          }
+        }
+      }
+    }
   }
 
   .form-control {
@@ -258,14 +322,6 @@ export default {
   .imgs {
     width: 100px;
     height: auto;
-  }
-  .class_thumbnail {
-    margin: 10px;
-    img {
-      width: 240px;
-      height: 180px;
-      object-fit: cover;
-    }
   }
 }
 </style>
