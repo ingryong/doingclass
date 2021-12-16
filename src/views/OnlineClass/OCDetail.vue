@@ -508,6 +508,7 @@ section {
           border-radius: 50%;
           margin-top: 0px;
           background-color: #ccc;
+          object-fit: cover;
         }
         div {
           padding: 0px 14px;

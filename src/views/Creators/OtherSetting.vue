@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 메인 컨텐츠 -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>추가 설정 관리</h3>
         <p>
           해당 클래스의 추가적인 설정을 관리합니다.
@@ -10,7 +10,7 @@
       </div>
 
       <!-- 소개1 -->
-      <div class="input-group">
+      <div class="input_group">
         <h4>
           클래스 오픈 설정
         </h4>

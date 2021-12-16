@@ -23,7 +23,7 @@
     <!-- 
     ---------- 강의 내용 입력 ----------
     -->
-    <div class="container">
+    <div class="create_container">
       <div class="notice-card">
         <h3>{{ curriculum.chapter_name }}</h3>
       </div>
@@ -33,7 +33,8 @@
             type="text"
             class="form-control m-1 width-100"
             id="create_episode_name"
-            placeholder="세부강의의 제목을 입력해주세요"
+            maxlength="35"
+            placeholder="세부강의의 제목을 입력해주세요(최대 35자)"
             :value="episode.episode_name"
           />
         </h4>

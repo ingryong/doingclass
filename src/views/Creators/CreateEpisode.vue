@@ -25,19 +25,20 @@
     <!-- 
     ---------- 강의 내용 입력 ----------
     -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>{{ class_info.title }}</h3>
         <h4>{{ curriculum.chapter_name }}</h4>
       </div>
-      <div class="input-group">
+      <div class="input_group">
         <p>세부 강의 제목 입력</p>
         <h4>
           <input
             type="text"
             class="form-control m-1 width-100"
             id="create_episode_name"
-            placeholder="세부강의의 제목을 입력해주세요"
+            maxlength="35"
+            placeholder="세부강의의 제목을 입력해주세요(최대 35자)"
           />
         </h4>
 

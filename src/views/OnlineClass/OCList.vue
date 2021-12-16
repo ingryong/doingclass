@@ -224,7 +224,7 @@ export default {
   .none_class {
     margin: auto;
     margin-top: 50px;
-    font-size: 2rem;
+    font-size: 1.35rem;
     color: $gray-2;
     text-align: center;
   }

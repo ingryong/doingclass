@@ -508,6 +508,7 @@ textarea {
   }
   .banner_right_top {
     grid-area: right;
+    height: 150px;
   }
   .banner_right_bottom1 {
     grid-area: right1;

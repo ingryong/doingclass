@@ -3,18 +3,19 @@
     <!-- 
     ---------- 강의 내용 입력 ----------
     -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>챕터 수정</h3>
       </div>
-      <div class="input-group">
+      <div class="input_group">
         <p>챕터 제목</p>
         <h4>
           <input
             type="text"
             class="form-control m-1 width-100"
             id="update_chapter_name"
-            placeholder="세부강의의 제목을 입력해주세요"
+            maxlength="35"
+            placeholder="세부강의의 제목을 입력해주세요(최대 35자)"
             :value="chapter.chapter_name"
           />
         </h4>

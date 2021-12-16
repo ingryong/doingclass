@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 메인 컨텐츠 -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>4. 크리에이터 소개</h3>
         <p>
           클래스를 수강하려는 수강생들에게 클래스의 정보를 입력해주세요.<br />
@@ -11,7 +11,7 @@
       </div>
 
       <!-- 소개1 -->
-      <div class="input-group">
+      <div class="input_group">
         <h4>
           클래스 전용 프로필 네임
         </h4>

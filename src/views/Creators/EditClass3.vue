@@ -8,15 +8,17 @@
         <div class="white-bg">
           <span @click="chap_modal = false">닫기</span>
           <h4>새로운 챕터명 입력</h4>
-          <input
-            id="creat_chapter_name"
-            type="text"
-            style="display:inline; width:90%;"
-            placeholder="챕터명을 입력해주세요"
-          />
-          <button class="btn-m btn-blue" @click="chap_upload()">
-            생성하기
-          </button>
+          <div class="input_border_box">
+            <input
+              id="creat_chapter_name"
+              type="text"
+              maxlength="35"
+              placeholder="챕터명을 입력해주세요(최대 35자)"
+            />
+            <button class="btn-m btn-blue" @click="chap_upload()">
+              생성하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -24,8 +26,8 @@
     <!-- 
     ---------- 메인 컨텐츠 ----------
     -->
-    <div class="container">
-      <div class="notice-card">
+    <div class="create_container">
+      <div class="notice_card">
         <h3>3. 커리큘럼</h3>
         <p>
           클래스를 수강하려는 수강생들에게 클래스의 정보를 입력해주세요.<br />
@@ -33,7 +35,7 @@
         </p>
       </div>
 
-      <div class="input-group">
+      <div class="input_group">
         <p
           style="margin:auto; color:#06f; cursor:pointer;"
           @click="chap_modal = true"
@@ -46,7 +48,7 @@
       ---------- 소개부분 ----------
       -->
       <div id="cur_area" v-for="(cur, cur_num) in curriculum" :key="cur_num">
-        <div class="input-group">
+        <div class="input_group">
           <div class="cur_header">
             <h4>{{ cur.chapter_name }}</h4>
             <router-link :to="`/creators/editchap/${url}/${cur.curriculum_id}`"
@@ -57,7 +59,11 @@
             <div class="cur_left">
               <div class="check_img">
                 <p class="chap_img" v-if="!cur.chapter_img">
-                  챕터 이미지를<br />등록 해주세요.
+                  <router-link
+                    :to="`/creators/editchap/${url}/${cur.curriculum_id}`"
+                  >
+                    챕터 이미지를<br />등록 해주세요.
+                  </router-link>
                 </p>
                 <img
                   class="chap_img"
@@ -88,9 +94,18 @@
           </div>
         </div>
       </div>
+      <div class="input_group">
+        <p
+          style="margin:auto; color:#06f; cursor:pointer; text-align:center; border:1px solid #eee; padding:20px 0px; border-radius:4px;"
+          @click="chap_modal = true"
+        >
+          +커리큘럼 챕터 추가하기
+        </p>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -183,15 +198,52 @@ export default {
     background-color: white;
     border-radius: 8px;
     padding: 20px;
+
+    h4 {
+      margin-top: 0px;
+    }
     span {
-      display: block;
+      display: inline-block;
+      float: right;
       text-align: right;
       cursor: pointer;
+      font-size: 0.85rem;
     }
     input {
       height: 20px;
       padding: 10px;
     }
+  }
+}
+#cur_area {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0px 20px;
+  margin-bottom: 10px;
+}
+.input_border_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  input {
+    display: block;
+    width: 64%;
+    border: none;
+  }
+  button {
+    display: block;
+    width: 29%;
+    float: right;
+    background: none;
+  }
+  button:hover {
+    background: $blue;
+    color: white;
   }
 }
 </style>
