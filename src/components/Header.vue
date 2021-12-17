@@ -23,14 +23,21 @@
         <div class="nav_top3" v-if="$store.state.user !== null">
           <router-link to="/creators/myclass">크리에이터 센터</router-link>
           <router-link to="/myclass">
-            <span><i class="fas fa-book"></i> 내 클래스</span>
+            <span>
+              <font-awesome-icon :icon="['fas', 'book']" />
+              내 클래스
+            </span>
           </router-link>
           <div>
             <img
               v-if="$store.state.user.photoURL"
               :src="$store.state.user.photoURL"
             />
-            <a><i v-if="!$store.state.user.photoURL" class="fas fa-user"/></a>
+            <a
+              ><font-awesome-icon
+                v-if="!$store.state.user.photoURL"
+                :icon="['fas', 'user']"
+            /></a>
           </div>
           <router-link to="/profile">
             {{ $store.state.user.displayName }}

@@ -4,7 +4,8 @@
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-coins" style="color:#999;"></i> 머니 클래스
+          <font-awesome-icon :icon="['fas', 'coins']" style="color:#999;" />
+          머니 클래스
         </span>
         <span class="sub_title">들으면 돈이 되는 클래스</span>
       </p>
@@ -43,7 +44,8 @@
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-briefcase" style="color:#999;"></i> 커리어 클래스
+          <font-awesome-icon :icon="['fas', 'briefcase']" style="color:#999;" />
+          커리어 클래스
         </span>
         <span class="sub_title">각 분야별 전문가의 커리어 클래스</span>
       </p>
@@ -82,7 +84,8 @@
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-palette" style="color:#999;"></i> 취미 클래스
+          <font-awesome-icon :icon="['fas', 'palette']" style="color:#999;" />
+          취미 클래스
         </span>
         <span class="sub_title">삶의 질을 높이는 취미 클래스</span>
       </p>
@@ -121,7 +124,8 @@
     <div class="oc_oclist">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-running" style="color:#999;"></i> 건강 클래스
+          <font-awesome-icon :icon="['fas', 'running']" style="color:#999;" />
+          건강 클래스
         </span>
         <span class="sub_title">튼튼한 내 몸을 위한 건강 클래스</span>
       </p>

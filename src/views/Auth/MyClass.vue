@@ -3,7 +3,8 @@
     <div class="oc_oclist" v-if="!MyClass">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-book" style="color:#999;"></i> 내 클래스
+          <font-awesome-icon :icon="['fas', 'book']" style="color:#999;" />
+          내 클래스
         </span>
         <span> 현재 수강중인 나의 클래스 </span>
       </p>
@@ -14,7 +15,8 @@
     <div class="oc_oclist" v-if="MyClass">
       <p class="listTitle">
         <span class="title">
-          <i class="fas fa-book" style="color:#999;"></i> 내 클래스
+          <font-awesome-icon :icon="['fas', 'book']" style="color:#999;" /> 내
+          클래스
         </span>
         <span> 현재 수강중인 나의 클래스 </span>
       </p>

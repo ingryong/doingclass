@@ -5,15 +5,27 @@
       <section class="learning_main_left">
         <span>카테고리1 </span> | <span>카테고리2 </span>
         <h1>{{ classDetails.title }}</h1>
-        <span><i class="fas fa-heart" style="color:red;"></i> 123</span> |
-        <span><i class="fas fa-users"></i>123명 수강중</span>
+        <span>
+          <font-awesome-icon :icon="['fas', 'heart']" style="color:red;" /> 123
+        </span>
+        |
+        <span
+          ><font-awesome-icon :icon="['fas', 'users']" style="color:#999;" />
+          123명 수강중
+        </span>
         <img
           :src="classDetails.thumbnail"
           style="display:block; width:600px; height:450px; background-color:#ccc;"
         />
         <p>학습페이지 메인 공지사항</p>
         <div class="learning_main_curriculum">
-          <h3>학습하기</h3>
+          <h3>
+            <font-awesome-icon
+              :icon="['fas', 'chalkboard-teacher']"
+              style="color:#999;"
+            />
+            학습하기
+          </h3>
           <div
             class="cur_container"
             v-for="(cur, cur_num) in curriculum"
@@ -34,7 +46,10 @@
                       v-if="epi.curriculum_id === cur.curriculum_id"
                     >
                       {{ epi.episode_name }}
-                      <i class="fas fa-play-circle" style="color:#13b896;"></i>
+                      <font-awesome-icon
+                        :icon="['fas', 'play-circle']"
+                        style="color:#13b896;"
+                      />
                     </span>
                   </router-link>
                 </li>
