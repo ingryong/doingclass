@@ -33,11 +33,12 @@
               v-if="$store.state.user.photoURL"
               :src="$store.state.user.photoURL"
             />
-            <a
-              ><font-awesome-icon
+            <a>
+              <font-awesome-icon
                 v-if="!$store.state.user.photoURL"
                 :icon="['fas', 'user']"
-            /></a>
+              />
+            </a>
           </div>
           <router-link to="/profile">
             {{ $store.state.user.displayName }}

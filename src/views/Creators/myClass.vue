@@ -41,7 +41,7 @@
             <router-link
               class="btn-l btn-gray class_setting_button"
               :to="`/creators/editclass1/${list.id}`"
-              >클래스 관리 <i class="fas fa-cog"></i>
+              >클래스 관리 <font-awesome-icon :icon="['fas', 'cog']" />
             </router-link>
           </div>
         </div>

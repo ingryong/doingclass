@@ -11,7 +11,7 @@
         |
         <span
           ><font-awesome-icon :icon="['fas', 'users']" style="color:#999;" />
-          123명 수강중
+          {{ classDetails.users }}명 수강중
         </span>
         <img
           :src="classDetails.thumbnail"

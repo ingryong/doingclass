@@ -54,7 +54,8 @@ export default {
       db: this.$firebase.firestore(),
       user: this.$store.state.user,
       url: this.$route.params.id,
-      classDetails: ""
+      classDetails: "",
+      users_num: 0
     };
   },
   async mounted() {
@@ -63,6 +64,7 @@ export default {
       .doc(this.url)
       .onSnapshot(result => {
         this.classDetails = result.data();
+        this.users_num = result.data().users;
       });
   },
   methods: {
@@ -85,6 +87,11 @@ export default {
           c2: this.classDetails.category.c2
         })
         .then(() => {
+          this.db
+            .collection("onlineclass")
+            .doc(this.url)
+            .update({ user: this.users_num + 1 });
+          alert("구매가 완료되었습니다. 홈으로 이동합니다.");
           this.$router.push(`/`);
         })
         .catch(error => {

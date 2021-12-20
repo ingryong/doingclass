@@ -167,6 +167,7 @@ export default {
           thumbnail: this.thumbnail,
           classopen: false,
           first_episode: "",
+          users: 0,
           price: 0,
           class_dec: {
             dec1: {
