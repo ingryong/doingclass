@@ -3,16 +3,9 @@
     <div class="blank-70"></div>
     <container class="learning_container">
       <section class="learning_main_left">
-        <span>카테고리1 </span> | <span>카테고리2 </span>
+        <span>{{ classDetails.category.c1 }} </span> |
+        <span>{{ classDetails.category.c2 }} </span>
         <h1>{{ classDetails.title }}</h1>
-        <span>
-          <font-awesome-icon :icon="['fas', 'heart']" style="color:red;" /> 123
-        </span>
-        |
-        <span
-          ><font-awesome-icon :icon="['fas', 'users']" style="color:#999;" />
-          {{ classDetails.users }}명 수강중
-        </span>
         <img
           :src="classDetails.thumbnail"
           style="display:block; width:600px; height:450px; background-color:#ccc;"
@@ -60,10 +53,21 @@
       </section>
       <section class="learning_main_right">
         <div class="learning_side_window">
-          <a @click="continueClass">
-            계속 수강하기
-          </a>
+          <div>
+            <span>
+              <font-awesome-icon :icon="['fas', 'heart']" style="color:red;" />
+              123
+            </span>
+            |
+            <span>
+              <font-awesome-icon :icon="['fas', 'users']" style="color:#999;" />
+              {{ classDetails.users }}명 수강중
+            </span>
+          </div>
           <span>평생 수강 가능</span>
+          <a @click="continueClass">
+            이어서 수강하기
+          </a>
         </div>
       </section>
     </container>
@@ -165,6 +169,9 @@ export default {
 
   .learning_main_left {
     width: 600px;
+    h1 {
+      margin-top: 0;
+    }
 
     .cur_container {
       padding-bottom: 10px;
@@ -201,7 +208,8 @@ export default {
   .learning_main_right {
     width: 300px;
     .learning_side_window {
-      margin-top: 105px;
+      position: fixed;
+      margin-top: 70px;
       border: 1px solid #f1f1f1;
       border-radius: 4px;
       background-color: #f1f1f1;
@@ -209,7 +217,8 @@ export default {
       a {
         display: block;
         width: 260px;
-        padding: 20px 80px;
+        margin: 10px 0px;
+        padding: 20px 0px;
         border-radius: 4px;
         box-sizing: border-box;
         background-color: $mint;
