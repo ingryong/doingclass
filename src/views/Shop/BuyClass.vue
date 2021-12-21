@@ -35,8 +35,14 @@
           <div>toss</div>
           <div>paypal</div>
         </div>
-        <div style="margin-top:30px;">
+        <div style="margin-top:30px;" v-if="learning_data === ''">
           <a class="btn btn-l btn-blue" @click="buy_class()">결제하기</a>
+        </div>
+        <div style="margin-top:30px;" v-if="learning_data === true">
+          <p style="color:red; text-align:center;">
+            이미 수강중인 클래스 입니다.
+          </p>
+          <a class="btn btn-l btn-gray" style="cursor:default;">결제하기</a>
         </div>
       </div>
     </div>
@@ -55,16 +61,32 @@ export default {
       user: this.$store.state.user,
       url: this.$route.params.id,
       classDetails: "",
-      users_num: 0
+      users_num: 0,
+      learning_data: ""
     };
   },
   async mounted() {
+    /* 
+      클래스 정보 가져오기
+    */
     await this.db
       .collection("onlineclass")
       .doc(this.url)
       .onSnapshot(result => {
         this.classDetails = result.data();
         this.users_num = result.data().users;
+      });
+
+    /* 
+      유저의 해당 클래스 정보 가져오기
+      */
+    await this.db
+      .collection("users")
+      .doc(this.user.uid)
+      .collection("myclass")
+      .doc(this.url)
+      .onSnapshot(result => {
+        this.learning_data = result.data().learning;
       });
   },
   methods: {
@@ -90,7 +112,7 @@ export default {
           this.db
             .collection("onlineclass")
             .doc(this.url)
-            .update({ user: this.users_num + 1 });
+            .update({ users: this.users_num + 1 });
           alert("구매가 완료되었습니다. 홈으로 이동합니다.");
           this.$router.push(`/`);
         })
