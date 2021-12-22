@@ -2,11 +2,14 @@
   <div>
     <div id="learning-nav">
       <div class="logo">
-        <span>Doing Class</span>
+        <router-link to="/"><span>Doing Class</span></router-link>
       </div>
       <div class="profile">
         <router-link to="/myclass">
-          <span><i class="fas fa-book"></i> 내 클래스</span>
+          <span
+            ><font-awesome-icon :icon="['fas', 'book']"></font-awesome-icon> 내
+            클래스</span
+          >
         </router-link>
         <div>
           <img
@@ -14,7 +17,10 @@
             :src="$store.state.user.photoURL"
           />
           <router-link to="/profile">
-            <i v-if="!$store.state.user.photoURL" class="fas fa-user" />
+            <font-awesome-icon
+              :icon="['fas', 'user']"
+              v-if="!$store.state.user.photoURL"
+            />
           </router-link>
         </div>
         <router-link to="/profile">
@@ -50,6 +56,8 @@ export default {
   .logo {
     display: inline-block;
     margin: auto 14px;
+    cursor: pointer;
+
     span {
       padding: 6px 8px;
       background-color: $black;
@@ -64,6 +72,16 @@ export default {
     flex-direction: row;
     align-items: center;
     font-weight: normal;
+    font-size: 0.9rem;
+    color: #666;
+
+    span {
+      color: #666;
+      margin-right: 10px;
+    }
+    a {
+      color: #666;
+    }
 
     div {
       width: 30px;
@@ -81,6 +99,7 @@ export default {
         background-color: white;
       }
       a {
+        color: #666;
         svg {
           padding-top: 2px;
           padding-left: 2.5px;

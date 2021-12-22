@@ -8,7 +8,8 @@
       @click="slide_off()"
       style="cursor:pointer;"
     >
-      <i class="fas fa-caret-square-left"></i>
+      <font-awesome-icon :icon="['fas', 'caret-square-left']">
+      </font-awesome-icon>
     </div>
     <div
       ref="on_button"
@@ -16,7 +17,8 @@
       @click="slide_on()"
       style="cursor:pointer;"
     >
-      <i class="fas fa-caret-square-right"></i>
+      <font-awesome-icon :icon="['fas', 'caret-square-right']">
+      </font-awesome-icon>
     </div>
 
     <container class="learning_class_container">

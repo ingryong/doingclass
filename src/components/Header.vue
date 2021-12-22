@@ -49,7 +49,9 @@
       <!-- 하단메뉴 -->
       <div class="nav_btm">
         <div class="nav_btm1">
-          <a @click="open_drawer"><i class="fas fa-bars"></i></a>
+          <a @click="open_drawer"
+            ><font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon
+          ></a>
         </div>
         <div class="nav_btm2">
           <MenuList />
