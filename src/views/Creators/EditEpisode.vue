@@ -33,29 +33,28 @@
             type="text"
             class="form-control m-1 width-100"
             id="create_episode_name"
-            maxlength="35"
-            placeholder="세부강의의 제목을 입력해주세요(최대 35자)"
+            maxlength="40"
+            placeholder="세부강의의 제목을 입력해주세요(최대 40자)"
             :value="episode.episode_name"
           />
         </h4>
 
-        <div class="video area">
-          <div
-            @click="video_modal = true"
-            style="border:1px solid #ccc; text-align:center; border-radius:4px; padding:20px; cursor:pointer; margin-bottom:10px;"
-          >
+        <div class="video_area">
+          <div class="video_upload_button" @click="video_modal = true">
             영상 URL 올리기
           </div>
-          <iframe
-            v-if="episode.video_url"
-            width="100%"
-            height="282"
-            :src="video_url"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <div class="iframe_box" v-show="video_url">
+            <iframe
+              class="video_iframe"
+              width="100%"
+              height="282"
+              :src="video_url"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
         <textarea
           name="dec"

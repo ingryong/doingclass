@@ -51,9 +51,9 @@
         <div class="input_group">
           <div class="cur_header">
             <h4>{{ cur.chapter_name }}</h4>
-            <router-link :to="`/creators/editchap/${url}/${cur.curriculum_id}`"
-              ><i class="fas fa-cog"></i
-            ></router-link>
+            <router-link :to="`/creators/editchap/${url}/${cur.curriculum_id}`">
+              <font-awesome-icon :icon="['fas', 'cog']" />
+            </router-link>
           </div>
           <div class="cur_container">
             <div class="cur_left">
@@ -81,7 +81,8 @@
                       `/creators/editepi/${url}/${epi.curriculum_id}/${epi.episode_id}`
                     "
                   >
-                    {{ epi.episode_name }} <i class="far fa-edit"></i>
+                    {{ epi.episode_name }}
+                    <font-awesome-icon :icon="['fas', 'edit']" />
                   </router-link>
                 </li>
               </ul>

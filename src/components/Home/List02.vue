@@ -1,7 +1,10 @@
 <template>
   <div id="home-list02">
     <h1 class="ListTitle">
-      NEW & BEST <span class="sub_title">신규/베스트 VOD</span>
+      NEW & BEST
+      <span class="sub_title">
+        신규/베스트 VOD <font-awesome-icon :icon="['fas', 'ad']" />
+      </span>
     </h1>
     <Carousel
       class="list-carousel-slide01"
@@ -13,12 +16,15 @@
       :nav="false"
       :rewind="true"
     >
-      <img src="@/assets/imgs/home-list01/003.png" />
-      <img src="@/assets/imgs/home-list01/002.png" />
-      <img src="@/assets/imgs/home-list01/001.png" />
-      <img src="@/assets/imgs/home-list01/003.png" />
-      <img src="@/assets/imgs/home-list01/002.png" />
-      <img src="@/assets/imgs/home-list01/001.png" />
+      <router-link to="/ocdetail/qztE9GeYMPUGsdZozlyn">
+        <img src="@/assets/imgs/home-list01/001.png" />
+      </router-link>
+      <router-link to="/ocdetail/QcYhm1CCWbDnAN2W9tOk">
+        <img src="@/assets/imgs/home-list01/005.png" />
+      </router-link>
+      <router-link to="/ocdetail/qoKWcOAJVyIRkHALUnXr">
+        <img src="@/assets/imgs/home-list01/008.jpg" />
+      </router-link>
     </Carousel>
   </div>
 </template>
