@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { store } from "../store/index";
 
 import Login from "@/views/Auth/Login.vue";
 import Join from "@/views/Auth/Join.vue";
@@ -73,7 +74,15 @@ const routes = [
       {
         path: "/shopping/:id",
         name: "buyclass",
-        component: BuyClass
+        component: BuyClass,
+        beforeEnter: (to, from, next) => {
+          // 로그인된 유저만 접근 가능
+          // 만약 로그인 상태라면
+          if (store.state.user) {
+            return next();
+          }
+          alert("로그인이 필요한 서비스입니다.");
+        }
       }
     ]
   },
@@ -81,6 +90,15 @@ const routes = [
     path: "/learningclass",
     name: "learningclass",
     component: LearningClassLayout,
+    beforeEnter: (to, from, next) => {
+      // 로그인된 유저만 접근 가능
+      // 만약 로그인 상태라면
+      if (store.state.user) {
+        return next();
+      }
+      alert("로그인이 필요한 서비스입니다.");
+      next("/");
+    },
     children: [
       {
         path: "/learningclass/:id",
@@ -98,6 +116,15 @@ const routes = [
     path: "/creators",
     name: "creators",
     component: CreatorLayout,
+    beforeEnter: (to, from, next) => {
+      // 로그인된 유저만 접근 가능
+      // 만약 로그인 상태라면
+      if (store.state.user) {
+        return next();
+      }
+      alert("로그인이 필요한 서비스입니다.");
+      next("/");
+    },
     children: [
       {
         path: "/creators/myclass",
