@@ -54,7 +54,15 @@ const routes = [
       {
         path: "/myclass",
         name: "MyClass",
-        component: MyClass
+        component: MyClass,
+        beforeEnter: (to, from, next) => {
+          // 로그인된 유저만 접근 가능
+          // 만약 로그인 상태라면
+          if (store.state.user) {
+            return next();
+          }
+          alert("로그인이 필요한 서비스입니다.");
+        }
       },
       {
         path: "/join",

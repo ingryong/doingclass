@@ -401,7 +401,7 @@ section {
     }
     img:hover {
       animation-duration: 1s;
-      animation-name: fadeOut;
+      animation-name: ImagefadeOut;
       animation-fill-mode: both;
     }
 

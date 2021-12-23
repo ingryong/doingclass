@@ -244,6 +244,15 @@ symbol {
 --- animation ---
 */
 
+@keyframes ImagefadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
