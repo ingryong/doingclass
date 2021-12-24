@@ -22,10 +22,11 @@ vue.js와 firebase를 사용하여 웹 서비스를 운영하고 있습니다.
 ## 1-2. 학습 페이지
 
 - 학습할 클래스를 구매한 뒤 학습을 진행할 수 있는 페이지이다.
+- 로그인 후 이용 가능한 서비스이다.
 - 마지막으로 들었던 학습페이지의 위치를 자동으로 저장하며 다시 '학습하기'로 이동했을 때 마지막으로 들렀던 페이지로 이동된다.
 
-  <img src="/src/assets/imgs/readme/1-2.png" width="600">
   <img src="/src/assets/imgs/readme/1-2-2.png" width="600">
+  <img src="/src/assets/imgs/readme/1-2.png" width="600">
 
 ## 1-3. 크리에이터 센터 페이지
 
