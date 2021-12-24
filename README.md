@@ -17,6 +17,7 @@ vue.js와 firebase를 사용하여 웹 서비스를 운영하고 있습니다.
 - 클래스 리스트에서 크리에이터 이미지와 이름은 크리에이터가 변경하면 즉시 바뀔 수 있도록 되어있다.
 
   <img src="/src/assets/imgs/readme/1-1.png" width="600">
+  <img src="/src/assets/imgs/readme/1-1-2.png" width="600">
 
 ## 1-2. 학습 페이지
 
@@ -24,6 +25,7 @@ vue.js와 firebase를 사용하여 웹 서비스를 운영하고 있습니다.
 - 마지막으로 들었던 학습페이지의 위치를 자동으로 저장하며 다시 '학습하기'로 이동했을 때 마지막으로 들렀던 페이지로 이동된다.
 
   <img src="/src/assets/imgs/readme/1-2.png" width="600">
+  <img src="/src/assets/imgs/readme/1-2-2.png" width="600">
 
 ## 1-3. 크리에이터 센터 페이지
 
