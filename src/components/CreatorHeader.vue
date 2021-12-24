@@ -16,7 +16,10 @@
                 v-if="$store.state.user.photoURL"
                 :src="$store.state.user.photoURL"
               />
-              <i v-if="!$store.state.user.photoURL" class="fas fa-user" />
+              <font-awesome-icon
+                :icon="['fas', 'user']"
+                v-if="!$store.state.user.photoURL"
+              />
             </router-link>
           </div>
           <router-link to="/profile">

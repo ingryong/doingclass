@@ -145,7 +145,7 @@
               @input="mixinAutoResize"
             ></textarea>
             <a @click="qna_upload()">
-              <i class="fas fa-paper-plane"></i>
+              <font-awesome-icon :icon="['fas', 'paper-plane']" />
             </a>
           </div>
           <div

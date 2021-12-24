@@ -7,7 +7,10 @@
           v-show="$store.state.user.photoURL"
           :src="$store.state.user.photoURL"
         />
-        <i v-show="!$store.state.user.photoURL" class="fas fa-user" />
+        <font-awesome-icon
+          :icon="['fas', 'user']"
+          v-show="!$store.state.user.photoURL"
+        />
       </label>
       <input
         class="img_upload"
