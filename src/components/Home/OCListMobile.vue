@@ -80,6 +80,7 @@ export default {
     grid-gap: 10px;
 
     li {
+      padding-bottom: 14px;
       .list_profile {
         position: relative;
         margin-top: -60px;

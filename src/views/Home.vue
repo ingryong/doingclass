@@ -2,7 +2,8 @@
   <div>
     <TitleBaner></TitleBaner>
     <div id="home-list02-bg">
-      <HomeList02></HomeList02>
+      <HomeList02 v-show="pageWidth > 800"></HomeList02>
+      <HomeList02Mobile v-show="pageWidth < 800"></HomeList02Mobile>
     </div>
     <HomeOCList
       v-bind:openClassList="openClassList"
@@ -17,19 +18,27 @@
 
 <script>
 import HomeList02 from "@/components/Home/List02";
+import HomeList02Mobile from "@/components/Home/List02Mobile";
 import TitleBaner from "@/components/Home/TitleBaner";
 import HomeOCList from "@/components/Home/OCList";
 import HomeOCListMoible from "@/components/Home/OCListMobile";
 import OnlineClass from "@/assets/data/onlineclass";
 
 export default {
+  components: {
+    HomeList02,
+    TitleBaner,
+    HomeOCList,
+    HomeOCListMoible,
+    HomeList02Mobile
+  },
   data() {
     return {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
       OnlineClass: OnlineClass,
       openClassList: "",
-      pageWidth: ""
+      pageWidth: window.innerWidth
     };
   },
   async mounted() {
@@ -44,10 +53,21 @@ export default {
           this.openClassList = allDatas;
         });
       });
-
-    this.pageWidth = window.innerWidth;
   },
-  components: { HomeList02, TitleBaner, HomeOCList, HomeOCListMoible }
+  created() {
+    // 구성 요소 생성시 Vue 메서드가 등록되고 브라우저 창의 크기가 조정되면 myEventHandler가 트리거되며 구성 요소가 삭제되면 메모리가 확보됩니다
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  destroyed() {
+    // 반응형 너비 관련 코드
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  methods: {
+    myEventHandler() {
+      // 반응형 너비 관련 코드
+      this.pageWidth = window.innerWidth;
+    }
+  }
 };
 </script>
 
