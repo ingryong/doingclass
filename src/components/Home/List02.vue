@@ -38,6 +38,7 @@ export default { components: { Carousel } };
 <style lang="scss">
 #home-list02 {
   @include content-area2;
+  width: 100%;
   padding: 50px 10px;
   text-align: left;
   overflow: hidden;

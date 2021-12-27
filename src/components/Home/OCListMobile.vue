@@ -1,5 +1,5 @@
 <template>
-  <div class="home_oclist">
+  <div class="home_oclist_mobile">
     <p class="listTitle">
       <span class="title">
         <i class="fas fa-book" style="color:#999;"></i> 온라인 클래스
@@ -48,8 +48,8 @@ export default {
 </script>
 
 <style lang="scss">
-.home_oclist {
-  @include content-area;
+.home_oclist_mobile {
+  width: 100%;
   padding: 30px 10px;
   margin-bottom: 30px;
 
@@ -71,12 +71,12 @@ export default {
   }
 
   ul {
-    @include content-area;
+    width: 100%;
     padding-left: 0px;
     padding-right: 0px;
     display: grid;
-    grid: ". . . .";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid: ". .";
+    grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
 
     li {

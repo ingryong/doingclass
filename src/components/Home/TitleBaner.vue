@@ -63,7 +63,7 @@ export default { components: { Carousel } };
   .carousel_section {
     margin: auto;
     width: 100%;
-    height: 500px;
+    padding: 100px 0px;
 
     .btn-lg {
       padding: 10px 30px;
@@ -78,8 +78,10 @@ export default { components: { Carousel } };
     }
 
     .noBorder {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
       min-width: 600px;
-      height: 100%;
       margin: auto;
       user-select: auto;
 
@@ -116,6 +118,20 @@ export default { components: { Carousel } };
           margin: auto;
         }
       }
+    }
+  }
+}
+@media (max-width: 680px) {
+  #main_carousel {
+    width: 100%;
+    margin: auto;
+
+    .noBorder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
+      user-select: auto;
     }
   }
 }

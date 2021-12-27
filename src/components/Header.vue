@@ -175,4 +175,19 @@ export default {
     }
   }
 }
+
+@media (max-width: 680px) {
+  .nav_top {
+    width: 100%;
+    max-width: 100% !important;
+    height: 70px;
+    padding: 0px 14px;
+  }
+  .nav_btm {
+    width: 100%;
+    max-width: 100 !important;
+    height: 30px;
+    padding: 0px 14px;
+  }
+}
 </style>
