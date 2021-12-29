@@ -71,7 +71,9 @@ export default {
 
 <style lang="scss">
 .oc_oclist {
-  @include content-area;
+  max-width: 1200px;
+  min-width: 800px;
+  margin: auto;
   padding: 30px 10px;
   margin-bottom: 30px;
 
@@ -165,6 +167,23 @@ export default {
       animation-name: scaleUp;
       animation-duration: 0.5s;
       animation-fill-mode: both;
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .oc_oclist {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+
+    ul {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+      grid: ". .";
+      grid-template-columns: 1fr 1fr;
+      margin: auto;
     }
   }
 }

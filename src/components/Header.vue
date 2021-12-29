@@ -15,42 +15,70 @@
           ></i>
         </div>
 
-        <!-- 로그인 / 로그아웃 -->
+        <!-- 로그인 전 -->
         <div class="nav_top3" v-if="$store.state.user === null">
           <router-link to="/login"> 로그인 </router-link>
           <router-link to="/join"> 회원가입 </router-link>
         </div>
-        <div class="nav_top3" v-if="$store.state.user !== null">
-          <router-link to="/creators/myclass">크리에이터 센터</router-link>
-          <router-link to="/myclass">
-            <span>
-              <font-awesome-icon :icon="['fas', 'book']" />
-              내 클래스
-            </span>
-          </router-link>
-          <div>
-            <img
-              v-if="$store.state.user.photoURL"
-              :src="$store.state.user.photoURL"
-            />
+
+        <!-- 로그인 후 -->
+        <div
+          class="nav_top3"
+          v-if="$store.state.user !== null"
+          @click="drop_down_menu"
+        >
+          <div class="profile_img_circle">
             <a>
-              <font-awesome-icon
-                v-if="!$store.state.user.photoURL"
-                :icon="['fas', 'user']"
+              <img
+                v-if="$store.state.user.photoURL"
+                :src="$store.state.user.photoURL"
               />
+              <a>
+                <font-awesome-icon
+                  v-if="!$store.state.user.photoURL"
+                  :icon="['fas', 'user']"
+                />
+              </a>
             </a>
           </div>
-          <router-link to="/profile">
+          <a style="text-align:center;">
             {{ $store.state.user.displayName }}
-          </router-link>
+            <font-awesome-icon
+              :icon="['fas', 'caret-down']"
+              v-show="drop_down === false"
+            />
+            <font-awesome-icon
+              :icon="['fas', 'caret-up']"
+              v-show="drop_down === true"
+            />
+          </a>
+
+          <!-- 닉네임 클릭 후 뜨는 메뉴 -->
+          <div class="profile_menu" id="drop_down_window">
+            <ul>
+              <li>
+                <router-link to="/creators/myclass"
+                  >크리에이터 센터</router-link
+                >
+              </li>
+              <li>
+                <router-link to="/myclass">
+                  내 클래스
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/profile">프로필 관리</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <!-- 하단메뉴 -->
       <div class="nav_btm">
         <div class="nav_btm1">
-          <a @click="open_drawer"
-            ><font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon
+          <a @click="open_drawer">
+            <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon
           ></a>
         </div>
         <div class="nav_btm2">
@@ -69,7 +97,8 @@ export default {
   name: "App",
   data() {
     return {
-      drawer: false
+      drawer: false,
+      drop_down: false
     };
   },
   components: {
@@ -79,6 +108,15 @@ export default {
     open_drawer() {
       document.getElementById("Drawer").style = "display: block;";
       document.getElementById("Drawer_Content").style = "display: block;";
+    },
+    drop_down_menu() {
+      if (this.drop_down === false) {
+        document.getElementById("drop_down_window").style = "display : block;";
+        this.drop_down = true;
+      } else if (this.drop_down === true) {
+        document.getElementById("drop_down_window").style = "display : none;";
+        this.drop_down = false;
+      }
     }
   }
 };
@@ -130,7 +168,7 @@ export default {
       a:nth-child(2) {
         margin-right: 10px;
       }
-      div {
+      .profile_img_circle {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -155,6 +193,28 @@ export default {
           }
         }
       }
+    }
+  }
+
+  /* 프로필 클릭하면 나오는 메뉴 */
+  .profile_menu {
+    display: none;
+    position: absolute;
+    padding: 0px 10px;
+    margin-left: -60px;
+    top: 54px;
+    width: 150px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    li {
+      padding: 4px 0px;
+      text-align: center;
+    }
+    li:hover {
+      background-color: #eee;
+      border-radius: 4px;
     }
   }
 
@@ -188,6 +248,11 @@ export default {
     max-width: 100 !important;
     height: 30px;
     padding: 0px 14px;
+  }
+
+  /* 프로필 클릭하면 나오는 메뉴 */
+  .profile_menu {
+    right: 10px;
   }
 }
 </style>

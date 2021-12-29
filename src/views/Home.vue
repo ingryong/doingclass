@@ -2,16 +2,16 @@
   <div>
     <TitleBaner></TitleBaner>
     <div id="home-list02-bg">
-      <HomeList02 v-show="pageWidth > 800"></HomeList02>
-      <HomeList02Mobile v-show="pageWidth < 800"></HomeList02Mobile>
+      <HomeList02 v-show="pageWidth > 680"></HomeList02>
+      <HomeList02Mobile v-show="pageWidth < 680"></HomeList02Mobile>
     </div>
     <HomeOCList
       v-bind:openClassList="openClassList"
-      v-show="pageWidth > 800"
+      v-show="pageWidth > 680"
     ></HomeOCList>
     <HomeOCListMoible
       v-bind:openClassList="openClassList"
-      v-show="pageWidth < 800"
+      v-show="pageWidth < 680"
     ></HomeOCListMoible>
   </div>
 </template>

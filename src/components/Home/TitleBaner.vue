@@ -59,27 +59,6 @@ export default { components: { Carousel } };
 </script>
 
 <style lang="scss">
-@media (max-width: 680px) {
-  #main_carousel {
-    width: 100%;
-    margin: auto;
-
-    .noBorder {
-      tr {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: auto;
-        user-select: auto;
-
-        td {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
-
 .title-baner {
   .carousel_section {
     margin: auto;
@@ -136,6 +115,26 @@ export default { components: { Carousel } };
         a > img {
           width: 90%;
           margin: auto;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 680px) {
+  #main_carousel {
+    width: 100%;
+    margin: auto;
+
+    .noBorder {
+      tr {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        user-select: auto;
+
+        td {
+          width: 100%;
         }
       }
     }
