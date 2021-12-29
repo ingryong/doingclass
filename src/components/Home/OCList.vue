@@ -35,15 +35,8 @@
 </template>
 
 <script>
-import OnlineClass from "@/assets/data/onlineclass.js";
-
 export default {
-  props: ["openClassList"],
-  data() {
-    return {
-      OnlineClass: OnlineClass
-    };
-  }
+  props: ["openClassList"]
 };
 </script>
 
