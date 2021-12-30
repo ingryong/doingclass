@@ -1,6 +1,11 @@
 <template>
   <div class="login">
     <h1>Login</h1>
+    <p style="text-align:center;">
+      테스트 계정외의<br />
+      정상적인 회원가입 절차를 통해서도<br />서비스를 이용 가능합니다.<br /><br />테스트계정
+      : test@gmail.com / 123123
+    </p>
     <div class="login_group">
       <div class="input_group f-column m-auto">
         <input
