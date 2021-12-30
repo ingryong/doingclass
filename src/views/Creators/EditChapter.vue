@@ -47,7 +47,7 @@
       </div>
 
       <!-- 
-    ---------- 돌아가기/저장하기 버튼 ----------
+    ---------- 돌아가기/저장하기/삭제하기 버튼 ----------
     -->
       <router-link
         tag="button"
@@ -57,7 +57,14 @@
         돌아가기
       </router-link>
       <button class="btn-m btn-blue m-1" id="send" @click="chapter_upload()">
-        강의 저장하기
+        챕터 저장하기
+      </button>
+      <button
+        class="btn-m btn-red m-1"
+        id="delete_chap"
+        @click="chapter_delete()"
+      >
+        챕터 삭제하기
       </button>
     </div>
   </div>
@@ -149,6 +156,28 @@ export default {
           });
         }
       );
+    },
+    /*
+    ---------- 챕터 삭제하기 ---------
+    */
+    async chapter_delete() {
+      if (
+        confirm("정말 삭제하시겠습니까? 챕터 안의 강의도 함께 삭제됩니다.") ===
+        true
+      ) {
+        await this.db
+          .collection("onlineclass")
+          .doc(this.url)
+          .collection("curriculum")
+          .doc(this.cur_id)
+          .delete()
+          .then(() => {
+            alert("삭제되었습니다.");
+            this.$router.push(`/creators/editclass3/${this.url}`);
+          });
+      } else {
+        return false;
+      }
     }
   }
 };
@@ -180,5 +209,8 @@ export default {
       border-radius: 4px;
     }
   }
+}
+#delete_chap {
+  float: right;
 }
 </style>

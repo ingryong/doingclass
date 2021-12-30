@@ -68,7 +68,7 @@
       </div>
 
       <!-- 
-    ---------- 돌아가기/저장하기 버튼 ----------
+    ---------- 돌아가기/저장하기/삭제하기 버튼 ----------
     -->
       <router-link
         tag="button"
@@ -79,6 +79,13 @@
       </router-link>
       <button class="btn-m btn-blue m-1" id="send" @click="episode_upload()">
         강의 저장하기
+      </button>
+      <button
+        class="btn-m btn-red m-1"
+        id="delete_epi"
+        @click="episode_delete()"
+      >
+        강의 삭제하기
       </button>
     </div>
   </div>
@@ -184,9 +191,33 @@ export default {
         .catch(error => {
           console.log("error updateing document:", error);
         });
+    },
+
+    /*
+    ---------- 챕터 삭제하기 ---------
+    */
+    async episode_delete() {
+      if (confirm("정말 삭제하시겠습니까?") === true) {
+        await this.db
+          .collection("onlineclass")
+          .doc(this.url)
+          .collection("curriculum")
+          .doc(this.epi_id)
+          .delete()
+          .then(() => {
+            alert("삭제되었습니다.");
+            this.$router.push(`/creators/editclass3/${this.url}`);
+          });
+      } else {
+        return false;
+      }
     }
   }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#delete_epi {
+  float: right;
+}
+</style>

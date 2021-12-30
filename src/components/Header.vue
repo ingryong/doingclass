@@ -3,9 +3,9 @@
     <div id="nav">
       <div class="nav_top">
         <div class="nav_top1">
-          <router-link to="/"
-            ><img class="nav_logo" src="@/assets/imgs/logo_color.png"
-          /></router-link>
+          <router-link to="/">
+            <img class="nav_logo" src="@/assets/imgs/logo_color.png" />
+          </router-link>
         </div>
 
         <!-- 서치바 -->
@@ -27,6 +27,7 @@
           v-if="$store.state.user !== null"
           @click="drop_down_menu"
         >
+          <router-link to="/creators/myclass"> 크리에이터 센터 </router-link>
           <div class="profile_img_circle">
             <a>
               <img
@@ -69,6 +70,10 @@
               <li>
                 <router-link to="/profile">프로필 관리</router-link>
               </li>
+              <hr />
+              <li>
+                <a @click="signOut()">로그아웃</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -92,6 +97,8 @@
 
 <script>
 import MenuList from "@/components/MenuList.vue";
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth();
 
 export default {
   name: "App",
@@ -117,6 +124,17 @@ export default {
         document.getElementById("drop_down_window").style = "display : none;";
         this.drop_down = false;
       }
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          // sign-out successful
+          this.$router.replace("/");
+        })
+        .catch(error => {
+          // an error happened
+          console.log(error);
+        });
     }
   }
 };
@@ -201,7 +219,7 @@ export default {
     display: none;
     position: absolute;
     padding: 0px 10px;
-    margin-left: -60px;
+    margin-left: 40px;
     top: 54px;
     width: 150px;
     background-color: #fff;
@@ -237,22 +255,32 @@ export default {
 }
 
 @media (max-width: 680px) {
-  .nav_top {
-    width: 100%;
-    max-width: 100% !important;
-    height: 70px;
-    padding: 0px 14px;
-  }
-  .nav_btm {
-    width: 100%;
-    max-width: 100 !important;
-    height: 30px;
-    padding: 0px 14px;
-  }
+  #nav {
+    .nav_top {
+      width: 100%;
+      max-width: 100% !important;
+      height: 70px;
+      padding: 0px 10px;
 
-  /* 프로필 클릭하면 나오는 메뉴 */
-  .profile_menu {
-    right: 10px;
+      .nav_logo {
+        height: 26px;
+      }
+    }
+    .nav_btm {
+      width: 100%;
+      max-width: 100 !important;
+      height: 30px;
+      padding: 0px 14px;
+
+      #nav_menu {
+        margin-left: 0;
+      }
+    }
+
+    /* 프로필 클릭하면 나오는 메뉴 */
+    .profile_menu {
+      right: 10px;
+    }
   }
 }
 </style>
