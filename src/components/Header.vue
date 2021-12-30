@@ -58,9 +58,9 @@
           <div class="profile_menu" id="drop_down_window">
             <ul>
               <li>
-                <router-link to="/creators/myclass"
-                  >크리에이터 센터</router-link
-                >
+                <router-link to="/creators/myclass">
+                  크리에이터 센터
+                </router-link>
               </li>
               <li>
                 <router-link to="/myclass">
@@ -68,11 +68,15 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/profile">프로필 관리</router-link>
+                <router-link to="/profile">
+                  프로필 관리
+                </router-link>
               </li>
               <hr />
               <li>
-                <a @click="signOut()">로그아웃</a>
+                <a @click="signOut()">
+                  로그아웃
+                </a>
               </li>
             </ul>
           </div>
@@ -83,8 +87,8 @@
       <div class="nav_btm">
         <div class="nav_btm1">
           <a @click="open_drawer">
-            <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon
-          ></a>
+            <font-awesome-icon :icon="['fas', 'bars']"></font-awesome-icon>
+          </a>
         </div>
         <div class="nav_btm2">
           <MenuList />
@@ -229,6 +233,10 @@ export default {
     li {
       padding: 4px 0px;
       text-align: center;
+
+      a {
+        width: 100%;
+      }
     }
     li:hover {
       background-color: #eee;
