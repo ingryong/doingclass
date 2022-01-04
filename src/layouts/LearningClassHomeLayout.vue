@@ -4,28 +4,62 @@
       <div class="logo">
         <router-link to="/"><span>Doing Class</span></router-link>
       </div>
-      <div class="profile">
+      <div class="profile" @click="drop_down_menu">
         <router-link to="/myclass">
           <span
             ><font-awesome-icon :icon="['fas', 'book']"></font-awesome-icon> 내
             클래스</span
           >
         </router-link>
-        <div>
+        <div class="profile_imgs">
           <img
             v-if="$store.state.user.photoURL"
             :src="$store.state.user.photoURL"
           />
-          <router-link to="/profile">
+          <a>
             <font-awesome-icon
               :icon="['fas', 'user']"
               v-if="!$store.state.user.photoURL"
             />
-          </router-link>
+          </a>
         </div>
-        <router-link to="/profile">
+        <a style="text-align:center;">
           {{ $store.state.user.displayName }}
-        </router-link>
+          <font-awesome-icon
+            :icon="['fas', 'caret-down']"
+            v-show="drop_down === false"
+          />
+          <font-awesome-icon
+            :icon="['fas', 'caret-up']"
+            v-show="drop_down === true"
+          />
+        </a>
+        <!-- 닉네임 클릭 후 뜨는 메뉴 -->
+        <div class="profile_menu" id="drop_down_window">
+          <ul>
+            <li>
+              <router-link to="/creators/myclass">
+                크리에이터 센터
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/myclass">
+                내 클래스
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/profile">
+                프로필 관리
+              </router-link>
+            </li>
+            <hr />
+            <li>
+              <a @click="signOut()">
+                로그아웃
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <router-view :key="$route.fullPath" />
@@ -33,8 +67,38 @@
 </template>
 
 <script>
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth();
+
 export default {
-  name: "Creators"
+  name: "Creators",
+  data() {
+    return {
+      drop_down: false
+    };
+  },
+  methods: {
+    drop_down_menu() {
+      if (this.drop_down === false) {
+        document.getElementById("drop_down_window").style = "display : block;";
+        this.drop_down = true;
+      } else if (this.drop_down === true) {
+        document.getElementById("drop_down_window").style = "display : none;";
+        this.drop_down = false;
+      }
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          // sign-out successful
+          this.$router.replace("/");
+        })
+        .catch(error => {
+          // an error happened
+          console.log(error);
+        });
+    }
+  }
 };
 </script>
 
@@ -75,6 +139,32 @@ export default {
     font-size: 0.9rem;
     color: #666;
 
+    /* 프로필 클릭하면 나오는 메뉴 */
+    .profile_menu {
+      display: none;
+      position: absolute;
+      padding: 0px 10px;
+      margin-left: 22px;
+      top: 54px;
+      width: 150px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+
+      li {
+        padding: 4px 0px;
+        text-align: center;
+
+        a {
+          width: 100%;
+        }
+      }
+      li:hover {
+        background-color: #eee;
+        border-radius: 4px;
+      }
+    }
+
     span {
       color: #666;
       margin-right: 10px;
@@ -83,7 +173,7 @@ export default {
       color: #666;
     }
 
-    div {
+    .profile_imgs {
       width: 30px;
       height: 30px;
       border-radius: 50%;

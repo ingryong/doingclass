@@ -1,5 +1,5 @@
 <img src="/src/assets/imgs/logo_color.png" width="300">
-last update : 2021.12.23
+last update : 2022.01.03
 
 # 1. 프로젝트 소개
 
@@ -42,7 +42,7 @@ vue.js와 firebase를 사용하여 웹 서비스를 운영하고 있습니다.
   <img src="/src/assets/imgs/readme/1-3-1.png" width="600">
   <img src="/src/assets/imgs/readme/1-3-2.png" width="600">
 
-# 2. 작업할 것(2021.12.23 기준 수정할 사항)
+# 2. 작업할 것(2022.01.03 기준 수정할 사항)
 
 ## 2-1. header
 
@@ -50,12 +50,12 @@ vue.js와 firebase를 사용하여 웹 서비스를 운영하고 있습니다.
 
 ### default-header
 
-- [ ] doingclass 로고 교체하기
-- [ ] 우측 상단의 프로필이미지/이름 눌렀을 때 바로 아래에 플로팅 메뉴가 나타나 '정보수정'과 '로그아웃'이 나타날 수 있게 개선하기
+- [x] doingclass 로고 교체하기 -> 기존 유지
+- [x] 우측 상단의 프로필이미지/이름 눌렀을 때 바로 아래에 플로팅 메뉴가 나타나 '정보수정'과 '로그아웃'이 나타날 수 있게 개선하기
 
 ### learningClass-header
 
-- [ ] 우측 상단의 텍스트를 다른 헤더와 동일하게 수정하기
+- [x] 우측 상단의 텍스트를 다른 헤더와 동일하게 수정하기
 - [x] 좌측 doingclass로고를 누르면 홈 화면으로 돌아갈 수 있도록 수정하기
 - [ ] 우측 로고 옆에 바로 이전 페이지로 이동할 수 있는 버튼 생성하기
 
