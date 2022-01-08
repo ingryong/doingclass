@@ -46,7 +46,7 @@ export default {
 
 <style>
 #footer {
-  max-width: 100%;
+  max-width: 1200px;
   padding: 10px;
   margin: auto;
   bottom: 0;

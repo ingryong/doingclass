@@ -135,6 +135,7 @@
           <div style="height:50px;"></div>
         </div> -->
 
+        <!-- FaQ 작성하기 -->
         <h3>클래스 질의응답</h3>
         <div class="class_faq_board">
           <p>클래스 문의 작성</p>
@@ -143,8 +144,9 @@
               id="create_qna_description"
               placeholder="클래스 문의 내용을 입력해주세요"
               @input="mixinAutoResize"
-            ></textarea>
-            <a @click="qna_upload()">
+            >
+            </textarea>
+            <a class="faq_send" @click="qna_upload()">
               <font-awesome-icon :icon="['fas', 'paper-plane']" />
             </a>
           </div>
@@ -153,16 +155,25 @@
             v-for="(qna, qna_num) in qna"
             :key="qna_num"
           >
+            <!-- FaQ 리스트 보기 -->
             <div class="class_faq_top">
-              <img :scr="qna.photoURL" />
+              <a class="faq_writer_img" v-show="qna.photoURL === null">
+                <font-awesome-icon :icon="['fas', 'user']" />
+              </a>
+              <a class="faq_writer_img" v-show="qna.photoURL === !null">
+                <img :scr="qna.photoURL" />
+              </a>
               <div>
-                <span>{{ qna.displayName }}</span
-                ><span>{{ qna.create_date }}</span>
+                <span>{{ qna.displayName }}</span>
+                <span style="color:#999; font-size:0.9rem;">{{
+                  qna.create_date
+                }}</span>
               </div>
             </div>
             <div
               class="class_faq_bottom"
               v-html="handleNewLine(qna.description)"
+              style="padding:10px;"
             ></div>
 
             <!-- 대댓글 부분
@@ -573,42 +584,65 @@ section {
       }
     }
   }
+  /*-- Faq 질문입력 --*/
   .class_faq_board {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+
     .class_faq_write {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       width: 100%;
       border: 1px solid #ccc;
       border-radius: 30px;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
+      padding: 10px;
       textarea {
-        width: 88%;
-        margin: 20px;
-        margin-bottom: 0px;
+        width: 90%;
         border: none;
+        padding: 10px;
+        padding-bottom: 0px;
+        border-radius: 10px;
       }
-      svg {
-        position: absolute;
-        margin-top: 20px;
-        color: $blue;
-        font-size: 1.2rem;
+      .faq_send {
+        width: 10%;
+        margin: auto;
+        text-align: center;
+        svg {
+          color: $blue;
+          font-size: 1.4rem;
+        }
       }
     }
     .class_faq_container {
       width: 100%;
-      padding: 30px 10px;
-      border-top: 1px solid #ccc;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
       .class_faq_top {
         display: flex;
         flex-direction: row;
-        img {
+        .faq_writer_img {
           width: 44px;
           height: 44px;
           border-radius: 50%;
           background-color: #ccc;
           margin-right: 10px;
+          overflow: hidden;
+          img {
+            width: 44px;
+            height: 44px;
+          }
+          svg {
+            padding-left: 4px;
+            padding-top: 4px;
+            font-size: 40px;
+            color: white;
+          }
         }
         div {
           display: flex;
@@ -621,7 +655,7 @@ section {
       }
       .class_faq_bottom {
         width: 100%;
-        margin: 20px;
+        margin: 10px;
         margin-left: 0px;
       }
       .class_faq_reply_container {

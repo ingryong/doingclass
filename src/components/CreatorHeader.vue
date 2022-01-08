@@ -35,7 +35,11 @@
           </a>
         </span>
         <!-- 닉네임 클릭 후 뜨는 메뉴 -->
-        <div class="profile_menu" id="drop_down_window">
+        <div
+          class="profile_menu"
+          id="drop_down_window"
+          v-show="drop_down === true"
+        >
           <ul>
             <li>
               <router-link to="/">
@@ -135,8 +139,7 @@ export default {
     font-weight: normal;
 
     /* 프로필 클릭하면 나오는 메뉴 */
-    .profile_menu {
-      display: none;
+    #drop_down_window {
       position: absolute;
       padding: 0px 10px;
       margin-left: 40px;

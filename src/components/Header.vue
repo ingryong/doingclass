@@ -22,13 +22,9 @@
         </div>
 
         <!-- 로그인 후 -->
-        <div
-          class="nav_top3"
-          v-if="$store.state.user !== null"
-          @click="drop_down_menu"
-        >
+        <div class="nav_top3" v-if="$store.state.user !== null">
           <router-link to="/creators/myclass"> 크리에이터 센터 </router-link>
-          <div class="profile_img_circle">
+          <div class="profile_img_circle" @click="drop_down_menu">
             <a>
               <img
                 v-if="$store.state.user.photoURL"
@@ -42,7 +38,7 @@
               </a>
             </a>
           </div>
-          <a style="text-align:center;">
+          <a style="text-align:center;" @click="drop_down_menu">
             {{ $store.state.user.displayName }}
             <font-awesome-icon
               :icon="['fas', 'caret-down']"
