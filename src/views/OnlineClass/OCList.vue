@@ -35,7 +35,7 @@ export default {
       healthClassList: ""
     };
   },
-  async mounted() {
+  async created() {
     await this.db
       .collection("onlineclass")
       .where("classopen", "==", true)

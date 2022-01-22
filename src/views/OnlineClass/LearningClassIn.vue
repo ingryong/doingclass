@@ -103,7 +103,7 @@ export default {
       scrollPosition: null
     };
   },
-  async mounted() {
+  async created() {
     // learning_episode import
     await this.db
       .collection("onlineclass")

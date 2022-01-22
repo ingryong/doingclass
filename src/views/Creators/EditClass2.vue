@@ -266,7 +266,7 @@ export default {
       header_img4: ""
     };
   },
-  mounted() {
+  created() {
     /*
     ---------- 커리큘럼 불러오기 ---------
     */

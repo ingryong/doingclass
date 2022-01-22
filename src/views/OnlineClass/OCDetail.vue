@@ -265,7 +265,7 @@ export default {
       scrollPosition: null
     };
   },
-  async mounted() {
+  async created() {
     await this.db
       .collection("onlineclass")
       .doc(this.url)

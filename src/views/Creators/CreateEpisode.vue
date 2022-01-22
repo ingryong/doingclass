@@ -108,7 +108,7 @@ export default {
       video_modal: false
     };
   },
-  async mounted() {
+  async created() {
     /*
     ---------- 클래스정보 불러오기 ---------
     */

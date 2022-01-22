@@ -84,7 +84,7 @@ export default {
       img: "../../assets/imgs/PhotoPotrait.svg"
     };
   },
-  async mounted() {
+  async created() {
     /*
     ---------- 챕터(type:"chapter")불러오기 ---------
     */

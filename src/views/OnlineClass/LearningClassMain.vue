@@ -94,7 +94,7 @@ export default {
       scrollPosition: null
     };
   },
-  async mounted() {
+  async created() {
     // usersDB import
     await this.db
       .collection("users")

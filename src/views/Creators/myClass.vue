@@ -60,7 +60,7 @@ export default {
       doc: ""
     };
   },
-  async mounted() {
+  async created() {
     await this.db
       .collection("onlineclass")
       .where("creator_uid", "==", this.user.uid)

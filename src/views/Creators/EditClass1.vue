@@ -152,7 +152,7 @@ export default {
       url: this.$route.params.id
     };
   },
-  mounted() {
+  created() {
     this.db
       .collection("onlineclass")
       .doc(this.url)

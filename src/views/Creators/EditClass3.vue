@@ -125,7 +125,7 @@ export default {
       chapid: ""
     };
   },
-  async mounted() {
+  async created() {
     /*
     ---------- 챕터 불러오기 ---------
     */

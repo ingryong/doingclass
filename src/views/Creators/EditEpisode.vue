@@ -107,7 +107,7 @@ export default {
       video_modal: false
     };
   },
-  async mounted() {
+  async created() {
     /*
     ---------- 챕터(type:"chapter")/세부강의(type:"episode") 불러오기 ---------
     */

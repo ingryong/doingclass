@@ -42,7 +42,7 @@ export default {
       MyClass: ""
     };
   },
-  async mounted() {
+  async created() {
     await this.db
       .collection("users")
       .doc(this.user.uid)

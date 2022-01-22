@@ -82,7 +82,7 @@ export default {
       profile_img: ""
     };
   },
-  mounted() {
+  created() {
     this.db
       .collection("onlineclass")
       .doc(this.url)

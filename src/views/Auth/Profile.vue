@@ -64,7 +64,7 @@ export default {
       userphonenumber: ""
     };
   },
-  async mounted() {
+  async created() {
     this.profile = await this.$store.state.user;
   },
   methods: {

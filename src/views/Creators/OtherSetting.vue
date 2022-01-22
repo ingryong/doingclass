@@ -44,7 +44,7 @@ export default {
       doc: ""
     };
   },
-  mounted() {
+  created() {
     this.db
       .collection("onlineclass")
       .doc(this.url)
