@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
+// vuex-persistedstate를 사용하여 화면 리로드 시 store의 데이터가 소실되어 생기는 문제를 보완
 
 Vue.use(Vuex);
 

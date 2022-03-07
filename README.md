@@ -45,7 +45,7 @@ https://doingcode.firebaseapp.com/
   <img src="/src/assets/imgs/readme/1-3-1.png" width="600">
   <img src="/src/assets/imgs/readme/1-3-2.png" width="600">
 
-# 2. 작업할 것(2022.01.03 기준 수정할 사항)
+# 2. 작업할 것
 
 ## 2-1. header
 
