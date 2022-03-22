@@ -23,26 +23,30 @@
                 <p>
                   <span class="fs-16">DOING CREATOR CENTER</span>
                   <br /><br />
-                  <span class="fs-24"
-                    ><strong>온라인 강의를 게시하고 관리하세요!</strong></span
-                  >
+                  <span class="fs-24">
+                    <strong>온라인 강의를 게시하고 관리하세요! </strong>
+                  </span>
                   <br />
                   <br />
                   <br />
                 </p>
                 <p>
-                  <span class="fs-18"
-                    ><router-link class="btn-lg" to="/creators/myclass"
-                      >크리에이터센터 이동하기 &gt;</router-link
-                    ></span
-                  >
+                  <span class="fs-18">
+                    <router-link class="btn-lg" to="/creators/myclass">
+                      크리에이터센터 이동하기 &gt;
+                    </router-link>
+                  </span>
                 </p>
                 <br style="user-select: auto;" />
               </td>
               <td class="banner_right">
-                <a href="/"
-                  ><img src="~@/assets/imgs/home_banner01.jpg" class="fr-dib"
-                /></a>
+                <a href="/">
+                  <img
+                    src="~@/assets/imgs/home_banner01.jpg"
+                    class="fr-dib"
+                    alt="배너 이미지"
+                  />
+                </a>
               </td>
             </tr>
           </tbody>

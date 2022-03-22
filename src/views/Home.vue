@@ -41,8 +41,8 @@ export default {
       pageWidth: window.innerWidth
     };
   },
-  async mounted() {
-    await this.db
+  mounted() {
+    this.db
       .collection("onlineclass")
       .where("classopen", "==", true)
       .onSnapshot(querySnapshot => {

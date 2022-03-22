@@ -17,13 +17,13 @@
       :rewind="true"
     >
       <router-link to="/ocdetail/qztE9GeYMPUGsdZozlyn">
-        <img src="@/assets/imgs/home-list01/001.png" />
+        <img src="@/assets/imgs/home-list01/001.png" alt="new&best 리스트" />
       </router-link>
       <router-link to="/ocdetail/QcYhm1CCWbDnAN2W9tOk">
-        <img src="@/assets/imgs/home-list01/005.png" />
+        <img src="@/assets/imgs/home-list01/005.png" alt="new&best 리스트" />
       </router-link>
       <router-link to="/ocdetail/qoKWcOAJVyIRkHALUnXr">
-        <img src="@/assets/imgs/home-list01/008.jpg" />
+        <img src="@/assets/imgs/home-list01/008.jpg" alt="new&best 리스트" />
       </router-link>
     </Carousel>
   </div>

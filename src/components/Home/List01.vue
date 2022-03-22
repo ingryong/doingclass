@@ -13,15 +13,33 @@
       :nav="false"
       :rewind="true"
     >
-      <a><img src="@/assets/imgs/home-list01/001.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/002.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/003.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/004.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/005.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/006.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/007.png"/></a>
-      <a><img src="@/assets/imgs/home-list01/008.jpg"/></a>
-      <a><img src="@/assets/imgs/home-list01/009.jpg"/></a>
+      <a>
+        <img src="@/assets/imgs/home-list01/001.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/002.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/003.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/004.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/005.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/006.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/007.png" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/008.jpg" alt="클래스 리스트" />
+      </a>
+      <a>
+        <img src="@/assets/imgs/home-list01/009.jpg" alt="클래스 리스트" />
+      </a>
     </Carousel>
   </div>
 </template>

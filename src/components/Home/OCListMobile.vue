@@ -9,9 +9,13 @@
     <ul>
       <li v-for="list in this.openClassList" :key="list.id">
         <router-link :to="`/ocdetail/${list.id}`">
-          <img class="list_sumbnail" :src="list.thumbnail" />
+          <img
+            class="list_sumbnail"
+            :src="list.thumbnail"
+            alt="온라인클래스 섬네일"
+          />
           <div class="list_profile">
-            <img :src="list.profile_img" />
+            <img :src="list.profile_img" alt="강사 프로필 사진" />
             <span>{{ list.profile_name }}</span>
           </div>
           <span class="ctg"

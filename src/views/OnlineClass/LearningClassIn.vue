@@ -72,7 +72,8 @@
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-          ></iframe>
+          >
+          </iframe>
         </div>
         <p
           v-html="handleNewLine(learningEpisode.episode_description)"
