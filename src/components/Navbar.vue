@@ -112,6 +112,16 @@
             <li class="nav-item">
               <a class="nav-link" href="/myclass">내 클래스</a>
             </li>
+            <hr />
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/creators/myclass"
+              >
+                크리에이터 센터 이동하기 >
+              </a>
+            </li>
           </ul>
           <form class="d-flex">
             <input
@@ -141,15 +151,6 @@ export default {
     MenuList
   },
   methods: {
-    drop_down_menu() {
-      if (this.drop_down === false) {
-        document.getElementById("drop_down_window").style = "display : block;";
-        this.drop_down = true;
-      } else if (this.drop_down === true) {
-        document.getElementById("drop_down_window").style = "display : none;";
-        this.drop_down = false;
-      }
-    },
     signOut() {
       signOut(auth)
         .then(() => {

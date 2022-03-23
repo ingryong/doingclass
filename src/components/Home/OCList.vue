@@ -79,7 +79,7 @@ export default {
     li {
       .list_profile {
         position: relative;
-        margin-top: -60px;
+        margin-top: -50px;
         margin-bottom: 4px;
         display: flex;
         flex-direction: row;
