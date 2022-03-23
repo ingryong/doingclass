@@ -23,23 +23,12 @@ export default {
 <style lang="scss">
 #nav_menu {
   display: flex;
-  margin-left: 40px;
+  margin: 0;
+  margin-left: 10px;
 
   li {
     list-style: none;
-    padding: 14px 16px;
-  }
-
-  li.on {
-    border-bottom: 4px solid #000;
-  }
-}
-
-#nav {
-  .nav_logo {
-    height: 32px;
-  }
-  .nav_btm2 {
+    padding: 0px 10px;
     a {
       color: #2c3e50;
       font-size: 1rem;
@@ -51,6 +40,15 @@ export default {
     }
   }
 
+  li.on {
+    border-bottom: 4px solid #000;
+  }
+}
+
+#nav {
+  .nav_logo {
+    height: 32px;
+  }
   a.router-link-exact-active {
     color: #000;
     font-weight: bold;

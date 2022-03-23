@@ -1,0 +1,223 @@
+<template>
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <!-- nav 상단 -->
+    <div class="container-fluid">
+      <!-- 로고이미지 -->
+      <router-link class="navbar-brand" to="/">
+        <img
+          height="28"
+          src="@/assets/imgs/logo_color.png"
+          alt="Doingclass_logo"
+        />
+      </router-link>
+
+      <!-- 로그인 전 -->
+      <div class="nav_auth" v-if="$store.state.user === null">
+        <router-link class="nav-item" to="/login"> 로그인 </router-link>
+        <router-link class="nav-item" to="/join"> 회원가입 </router-link>
+      </div>
+
+      <!-- 로그인 후 -->
+      <div class="nav_auth" v-if="$store.state.user !== null">
+        <router-link to="/creators/myclass">
+          크리에이터 센터
+        </router-link>
+        <div class="profile_img_circle" @click="drop_down_menu">
+          <a>
+            <img
+              v-if="$store.state.user.photoURL"
+              :src="$store.state.user.photoURL"
+            />
+            <a>
+              <font-awesome-icon
+                v-if="!$store.state.user.photoURL"
+                :icon="['fas', 'user']"
+              />
+            </a>
+          </a>
+        </div>
+        <span class="dropdown" style="text-align:center;">
+          <a
+            class=" dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ $store.state.user.displayName }}
+          </a>
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+            style="left:unset; margin-top: 12px;"
+          >
+            <li>
+              <router-link class="dropdown-item" to="/creators/myclass">
+                크리에이터 센터
+              </router-link>
+            </li>
+            <li>
+              <router-link class="dropdown-item" to="/myclass">
+                내 클래스
+              </router-link>
+            </li>
+            <li>
+              <router-link class="dropdown-item" to="/profile">
+                프로필관리
+              </router-link>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" @click="signOut()">로그아웃</a></li>
+          </ul>
+        </span>
+      </div>
+    </div>
+
+    <!-- nav 하단 -->
+    <div class="container-fluid justify-content-start align-middle">
+      <!-- 사이드바 -->
+      <button
+        class="navbar-toggler border-0"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Doing Class</h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/oclist">온라인 클래스</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/myclass">내 클래스</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+      <MenuList class="align-middle overflow-auto" width="300" />
+    </div>
+  </nav>
+</template>
+
+<script>
+import MenuList from "@/components/MenuList.vue";
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth();
+export default {
+  name: "Navbar",
+  components: {
+    MenuList
+  },
+  methods: {
+    drop_down_menu() {
+      if (this.drop_down === false) {
+        document.getElementById("drop_down_window").style = "display : block;";
+        this.drop_down = true;
+      } else if (this.drop_down === true) {
+        document.getElementById("drop_down_window").style = "display : none;";
+        this.drop_down = false;
+      }
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          // sign-out successful
+          this.$router.replace("/");
+        })
+        .catch(error => {
+          // an error happened
+          console.log(error);
+        });
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+nav {
+  background: white;
+  .nav_auth {
+    display: flex;
+    align-items: center;
+    a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: $gray-4;
+    }
+    span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: $gray-4;
+    }
+    a:first-child {
+      margin-right: 10px;
+    }
+    a:nth-child(2) {
+      margin-right: 10px;
+    }
+    .profile_img_circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 6px;
+      background-color: $gray-4;
+      img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        object-position: center;
+        border: 0px;
+        background-color: white;
+      }
+      a {
+        svg {
+          padding-top: 2px;
+          padding-left: 2.5px;
+          font-size: 1.9rem;
+          color: white;
+          text-align: center;
+        }
+      }
+    }
+    .dropdown-menu {
+      margin-top: 12px;
+      border-radius: 10px;
+      text-align: center;
+      right: 0;
+    }
+  }
+}
+</style>

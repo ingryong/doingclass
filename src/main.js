@@ -5,6 +5,9 @@ import store from "./store";
 import axios from "axios";
 import "@/plugins/firebase";
 
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // 설치했던 fontawesome-svg-core와 vue-fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";

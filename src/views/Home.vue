@@ -2,23 +2,22 @@
   <div>
     <TitleBaner></TitleBaner>
     <div id="home-list02-bg">
-      <HomeList02 v-show="pageWidth > 680"></HomeList02>
-      <HomeList02Mobile v-show="pageWidth < 680"></HomeList02Mobile>
+      <NewBest v-show="pageWidth > 680"></NewBest>
+      <NewBestMobile v-show="pageWidth < 680"></NewBestMobile>
     </div>
-    <HomeOCList
-      v-bind:openClassList="openClassList"
-      v-show="pageWidth > 680"
-    ></HomeOCList>
+    <HomeOCList v-bind:openClassList="openClassList" v-show="pageWidth > 680">
+    </HomeOCList>
     <HomeOCListMoible
       v-bind:openClassList="openClassList"
       v-show="pageWidth < 680"
-    ></HomeOCListMoible>
+    >
+    </HomeOCListMoible>
   </div>
 </template>
 
 <script>
-import HomeList02 from "@/components/Home/List02";
-import HomeList02Mobile from "@/components/Home/List02Mobile";
+import NewBest from "@/components/Home/New&Best";
+import NewBestMobile from "@/components/Home/New&Best_M";
 import TitleBaner from "@/components/Home/TitleBaner";
 import HomeOCList from "@/components/Home/OCList";
 import HomeOCListMoible from "@/components/Home/OCListMobile";
@@ -26,11 +25,11 @@ import OnlineClass from "@/assets/data/onlineclass";
 
 export default {
   components: {
-    HomeList02,
+    NewBest,
     TitleBaner,
     HomeOCList,
     HomeOCListMoible,
-    HomeList02Mobile
+    NewBestMobile
   },
   data() {
     return {
@@ -75,14 +74,6 @@ export default {
 #home-list01-bg {
   background: white;
   padding-bottom: 50px;
-}
-.ListTitle {
-  text-align: left;
-
-  .sub_title {
-    font-size: 1.1rem;
-    font-weight: 400;
-  }
 }
 #home-list02-bg {
   background: $gray-1;
