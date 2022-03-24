@@ -22,7 +22,7 @@
         <router-link to="/creators/myclass">
           크리에이터 센터
         </router-link>
-        <div class="profile_img_circle" @click="drop_down_menu">
+        <div class="profile_img_circle">
           <a>
             <img
               v-if="$store.state.user.photoURL"
@@ -136,7 +136,7 @@
           </form>
         </div>
       </div>
-      <MenuList class="align-middle overflow-auto" width="300" />
+      <MenuList class="align-middle overflow-auto nav-menu" width="300" />
     </div>
   </nav>
 </template>
@@ -218,6 +218,14 @@ nav {
       border-radius: 10px;
       text-align: center;
       right: 0;
+    }
+  }
+  #nav_menu {
+    a {
+      color: #2c3e50;
+    }
+    a:hover {
+      color: #000;
     }
   }
 }

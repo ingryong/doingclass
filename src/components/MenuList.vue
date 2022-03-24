@@ -29,15 +29,6 @@ export default {
   li {
     list-style: none;
     padding: 0px 10px;
-    a {
-      color: #2c3e50;
-      font-size: 1rem;
-      font-weight: 400;
-      text-decoration: none;
-    }
-    a:hover {
-      color: #000;
-    }
   }
 
   li.on {

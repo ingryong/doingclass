@@ -18,15 +18,15 @@
       </div>
       <div class="right">
         <h3>CORPORATION</h3>
-        <span
-          ><strong>주식회사 OOO</strong> |
-          <strong>사업자등록번호</strong> 111-11-11111</span
-        >
+        <span>
+          <strong>주식회사 OOO</strong> |
+          <strong>사업자등록번호</strong> 111-11-11111
+        </span>
         <span
           ><strong>대표자명</strong> 백철우 |
-          <strong>통신판매업신고번호</strong> 2021-다산-0000호</span
-        >
-        <span>서울시 강남구 강남대로 123-123 강남타워 5층</span>
+          <strong>통신판매업신고번호</strong> 2021-다산-0000호
+        </span>
+        <span class="mb-2"> 서울시 강남구 강남대로 123-123 강남타워 5층</span>
         <h3>INFORMATION</h3>
         <span>이용약관 ㅣ 개인정보처리방침 ㅣ 사업자정보확인</span>
       </div>
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #footer {
   max-width: 1200px;
   padding: 10px;
@@ -61,6 +61,7 @@ export default {
   padding-right: 10px;
 }
 #footer h3 {
+  font-size: 1.4rem;
   color: #fff;
   text-align: left;
 }

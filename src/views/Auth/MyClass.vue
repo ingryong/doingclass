@@ -54,7 +54,6 @@ export default {
         querySnapshot.forEach(doc => {
           learningData.push(doc.data());
           this.MyClass = learningData;
-          console.log(this.MyClass);
         });
       });
   }
