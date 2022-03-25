@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import MenuList from "@/components/MenuList.vue";
+import MenuList from "@/components/Navbar/MenuList.vue";
 export default {
   name: "App",
   components: {

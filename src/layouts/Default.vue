@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+import Navbar from "@/components/Navbar/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import store from "../store";
 import "@/plugins/firebase";

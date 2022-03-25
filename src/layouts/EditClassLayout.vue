@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <CreatorHeader></CreatorHeader>
+      <CreatorNavbar></CreatorNavbar>
       <!-- 왼쪽 사이드바 -->
       <div id="creators-left-side">
         <router-link class="backpage" :to="`/creators/myclass`"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import CreatorHeader from "@/components/CreatorHeader.vue";
+import CreatorNavbar from "@/components/Navbar/CreatorNavbar.vue";
 
 export default {
   name: "Creators",
@@ -56,7 +56,7 @@ export default {
     };
   },
   components: {
-    CreatorHeader
+    CreatorNavbar
   }
 };
 </script>

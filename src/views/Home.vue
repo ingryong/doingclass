@@ -5,12 +5,9 @@
       <NewBest v-show="pageWidth > 680"></NewBest>
       <NewBestMobile v-show="pageWidth < 680"></NewBestMobile>
     </div>
-    <HomeOCList v-bind:openClassList="openClassList" v-show="pageWidth > 680">
+    <HomeOCList :openClassList="openClassList" v-show="pageWidth > 680">
     </HomeOCList>
-    <HomeOCListMoible
-      v-bind:openClassList="openClassList"
-      v-show="pageWidth < 680"
-    >
+    <HomeOCListMoible :openClassList="openClassList" v-show="pageWidth < 680">
     </HomeOCListMoible>
   </div>
 </template>
@@ -21,7 +18,6 @@ import NewBestMobile from "@/components/Home/New&Best_M";
 import TitleBaner from "@/components/Home/TitleBaner";
 import HomeOCList from "@/components/Home/OCList";
 import HomeOCListMoible from "@/components/Home/OCListMobile";
-import OnlineClass from "@/assets/data/onlineclass";
 
 export default {
   components: {
@@ -35,7 +31,6 @@ export default {
     return {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
-      OnlineClass: OnlineClass,
       openClassList: "",
       pageWidth: window.innerWidth
     };

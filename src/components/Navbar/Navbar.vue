@@ -12,25 +12,22 @@
       </router-link>
 
       <!-- 로그인 전 -->
-      <div class="nav_auth" v-if="$store.state.user === null">
+      <div class="nav_auth" v-if="user === null">
         <router-link class="nav-item" to="/login"> 로그인 </router-link>
         <router-link class="nav-item" to="/join"> 회원가입 </router-link>
       </div>
 
       <!-- 로그인 후 -->
-      <div class="nav_auth" v-if="$store.state.user !== null">
+      <div class="nav_auth" v-if="user !== null">
         <router-link to="/creators/myclass">
           크리에이터 센터
         </router-link>
         <div class="profile_img_circle">
           <a>
-            <img
-              v-if="$store.state.user.photoURL"
-              :src="$store.state.user.photoURL"
-            />
+            <img v-if="user.photoURL" :src="user.photoURL" />
             <a>
               <font-awesome-icon
-                v-if="!$store.state.user.photoURL"
+                v-if="!user.photoURL"
                 :icon="['fas', 'user']"
               />
             </a>
@@ -45,7 +42,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {{ $store.state.user.displayName }}
+            {{ user.displayName }}
           </a>
           <ul
             class="dropdown-menu"
@@ -142,26 +139,18 @@
 </template>
 
 <script>
-import MenuList from "@/components/MenuList.vue";
-import { getAuth, signOut } from "firebase/auth";
-const auth = getAuth();
+import MenuList from "@/components/Navbar/MenuList.vue";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Navbar",
   components: {
     MenuList
   },
+  computed: {
+    ...mapState(["user"])
+  },
   methods: {
-    signOut() {
-      signOut(auth)
-        .then(() => {
-          // sign-out successful
-          this.$router.replace("/");
-        })
-        .catch(error => {
-          // an error happened
-          console.log(error);
-        });
-    }
+    ...mapActions(["signOut"])
   }
 };
 </script>

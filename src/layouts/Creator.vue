@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CreatorHeader></CreatorHeader>
+    <CreatorNavbar></CreatorNavbar>
     <div id="creators-left-side">
       <h5>클래스 관리</h5>
       <ul>
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import CreatorHeader from "@/components/CreatorHeader.vue";
+import CreatorNavbar from "@/components/Navbar/CreatorNavbar.vue";
 
 export default {
   name: "Creators",
   components: {
-    CreatorHeader
+    CreatorNavbar
   }
 };
 </script>

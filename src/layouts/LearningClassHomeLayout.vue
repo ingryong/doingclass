@@ -67,8 +67,7 @@
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
-const auth = getAuth();
+import { mapActions } from "vuex";
 
 export default {
   name: "Creators",
@@ -78,6 +77,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["signOut"]),
     drop_down_menu() {
       if (this.drop_down === false) {
         document.getElementById("drop_down_window").style = "display : block;";
@@ -86,17 +86,6 @@ export default {
         document.getElementById("drop_down_window").style = "display : none;";
         this.drop_down = false;
       }
-    },
-    signOut() {
-      signOut(auth)
-        .then(() => {
-          // sign-out successful
-          this.$router.replace("/");
-        })
-        .catch(error => {
-          // an error happened
-          console.log(error);
-        });
     }
   }
 };
