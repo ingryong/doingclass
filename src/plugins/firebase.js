@@ -30,6 +30,8 @@ firebase.auth().onAuthStateChanged(user => {
   // 조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어있는 user의 key값을 이용해 불러옴
   store.commit("setUser", user);
   store.dispatch("getUser", user);
+  store.commit("setDB", firebase.firestore());
+  store.commit("setStorage", firebase.storage());
 });
 
 Vue.prototype.$firebase = firebase;

@@ -1,16 +1,10 @@
 <template>
   <div class="profile-container">
-    <h1>{{ profile.displayName }}님의 Profile</h1>
+    <h1>{{ user.displayName }}님의 Profile</h1>
     <div class="profile_group f-column m-auto">
       <label for="profile-img" class="profile-img">
-        <img
-          v-show="$store.state.user.photoURL"
-          :src="$store.state.user.photoURL"
-        />
-        <font-awesome-icon
-          :icon="['fas', 'user']"
-          v-show="!$store.state.user.photoURL"
-        />
+        <img v-show="user.photoURL" :src="user.photoURL" />
+        <font-awesome-icon :icon="['fas', 'user']" v-show="!user.photoURL" />
       </label>
       <input
         class="img_upload"
@@ -20,15 +14,13 @@
         v-show="false"
         @change="imgUpload"
       />
-      <a v-show="$store.state.user.photoURL" @click="imgDelete"
-        >기본 이미지로</a
-      >
+      <a v-show="user.photoURL" @click="imgDelete">기본 이미지로</a>
       <input
         id="profile_email"
         type="text"
         class="form-control"
         ref="useremail"
-        v-model="profile.email"
+        v-model="user.email"
         disabled
       />
       <input
@@ -37,7 +29,7 @@
         class="form-control"
         placeholder="이름"
         ref="username"
-        v-model="profile.displayName"
+        v-model="user.displayName"
         value=""
         maxlength="8"
       />
@@ -50,35 +42,22 @@
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
-const auth = getAuth();
+import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
     // 현재 컴포넌트에서 사용할 데이터셋
     return {
-      storage: this.$firebase.storage(),
-      profile: "",
       username: "",
       userpw: "",
       userphonenumber: ""
     };
   },
-  async created() {
-    this.profile = await this.$store.state.user;
+  computed: {
+    ...mapState(["storage", "user"])
   },
   methods: {
-    signOut() {
-      signOut(auth)
-        .then(() => {
-          // sign-out successful
-          this.$router.replace("/");
-        })
-        .catch(error => {
-          // an error happened
-          console.log(error);
-        });
-    },
+    ...mapActions(["signOut"]),
     /*
     ---------- 이미지 추가하기 ---------
     */
@@ -98,13 +77,11 @@ export default {
         // 성공시 동작하는 함수
         () => {
           uploadImg.snapshot.ref.getDownloadURL().then(url => {
-            this.profile
+            this.user
               .updateProfile({
                 photoURL: url
               })
-              .then(() => {
-                this.$router.push(`/profile`);
-              })
+              .then(() => {})
               .catch(error => {
                 console.log("error updateing document:", error);
               });
@@ -116,7 +93,7 @@ export default {
     ---------- 이미지 삭제하기 ---------
     */
     imgDelete() {
-      this.profile
+      this.user
         .updateProfile({
           photoURL: ""
         })
@@ -129,7 +106,7 @@ export default {
     ---------- 프로필 수정하기 ---------
     */
     saveProfile() {
-      this.profile
+      this.user
         .updateProfile({
           displayName: document.getElementById("profile_name").value
         })

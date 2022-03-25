@@ -33,17 +33,15 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      db: this.$firebase.firestore(),
-      user: this.$store.state.user,
-      storage: this.$firebase.storage(),
       MyClass: ""
     };
   },
-  async created() {
-    await this.db
+  created() {
+    this.db
       .collection("users")
       .doc(this.user.uid)
       .collection("myclass")
@@ -56,6 +54,9 @@ export default {
           this.MyClass = learningData;
         });
       });
+  },
+  computed: {
+    ...mapState(["user", "db", "storage"])
   }
 };
 </script>
