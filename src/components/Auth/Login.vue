@@ -1,36 +1,38 @@
 <template>
-  <div class="login">
-    <h1>Login</h1>
-    <p style="text-align:center;">
-      테스트 계정외의<br />
-      정상적인 회원가입 절차를 통해서도<br />서비스를 이용 가능합니다.<br /><br />테스트계정
-      : test@gmail.com / 123123
-    </p>
-    <div class="login_group">
-      <div class="input_group f-column m-auto">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="이메일"
-          ref="user_id"
-          v-model="user_id"
-          v-on:keyup.enter="login"
-        />
-        <input
-          type="password"
-          class="form-control"
-          placeholder="비밀번호"
-          ref="user_pw"
-          v-model="user_pw"
-          v-on:keyup.enter="login"
-        />
-      </div>
-      <div class="btn_group">
-        <button class="btn-l" @click="login">로그인</button>
-      </div>
-      <div class="flex between">
-        <a href="/join">회원가입</a>
-        <span>비밀번호 찾기</span>
+  <div class="container py-5">
+    <div class="card p-4 border-0">
+      <h1 class="text-center py-2">Login</h1>
+      <p style="text-align:center;">
+        테스트 계정외의<br />
+        정상적인 회원가입 절차를 통해서도<br />서비스를 이용 가능합니다.<br /><br />테스트계정
+        : test@gmail.com / 123123
+      </p>
+      <div class="login_group">
+        <div class="d-grid py-1">
+          <input
+            type="text"
+            class="form-control py-2 px-3"
+            placeholder="이메일"
+            ref="user_id"
+            v-model="user_id"
+            v-on:keyup.enter="login"
+          />
+          <input
+            type="password"
+            class="form-control py-2 px-3 mt-2"
+            placeholder="비밀번호"
+            ref="user_pw"
+            v-model="user_pw"
+            v-on:keyup.enter="login"
+          />
+        </div>
+        <div class="d-grid py-2">
+          <button class="btn btn-lg btn-dark" @click="login">로그인</button>
+        </div>
+        <div class="flex between">
+          <a href="/join">회원가입</a>
+          <span>비밀번호 찾기</span>
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +42,7 @@
     script
 -->
 <script>
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
   data() {
@@ -89,63 +91,14 @@ export default {
             }
           }
         });
-    },
-    signout() {
-      signOut()
-        .then(function() {
-          // sign-out successful
-          this.$router.replace("/");
-        })
-        .catch(function(error) {
-          // an error happened
-          console.log(error);
-        });
     }
   }
 };
 </script>
 
-<!-- 
-    scss 
--->
 <style lang="scss">
-.login {
-  padding: 40px 0px;
-  padding-bottom: 100px;
-  background: #f1f1f1;
-
-  h1 {
-    font-size: 3rem;
-    text-align: center;
-  }
-
-  .login_group {
-    width: 340px;
-    margin: auto;
-
-    .input_group {
-      input {
-        line-height: 1.6;
-        padding: 8px 20px;
-        border: 1px solid $gray-1;
-        border-radius: 0px;
-        font-size: 1rem;
-      }
-    }
-    .btn_group {
-      padding: 10px 0px;
-      margin: auto;
-      button {
-        background-color: #222;
-        color: #fff;
-        border: 1px solid #222;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #000;
-        border: 1px solid #000;
-      }
-    }
-  }
+.login_group {
+  width: 340px;
+  margin: auto;
 }
 </style>

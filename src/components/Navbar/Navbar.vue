@@ -101,23 +101,41 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <router-link class="nav-link" aria-current="page" to="/">
+                <font-awesome-icon
+                  :icon="['fas', 'house']"
+                  style="color:#999;"
+                />
+                Home
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/oclist">온라인 클래스</a>
+              <router-link class="nav-link" to="/oclist">
+                <font-awesome-icon
+                  :icon="['fas', 'book']"
+                  style="color:#999;"
+                />
+                온라인 클래스
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/myclass">내 클래스</a>
+              <router-link class="nav-link" to="/myclass">
+                <font-awesome-icon
+                  :icon="['fas', 'circle-play']"
+                  style="color:#999;"
+                />
+                내 클래스
+              </router-link>
             </li>
             <hr />
             <li class="nav-item">
-              <a
+              <router-link
                 class="nav-link active"
                 aria-current="page"
-                href="/creators/myclass"
+                to="/creators/myclass"
               >
                 크리에이터 센터 이동하기 >
-              </a>
+              </router-link>
             </li>
           </ul>
           <form class="d-flex">
@@ -195,10 +213,11 @@ nav {
       a {
         svg {
           padding-top: 2px;
-          padding-left: 2.5px;
+          padding-left: 1px;
           font-size: 1.9rem;
           color: white;
           text-align: center;
+          border: none;
         }
       }
     }

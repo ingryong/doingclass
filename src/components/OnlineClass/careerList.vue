@@ -20,8 +20,8 @@
             <img :src="list.profile_img" />
             <span>{{ list.profile_name }}</span>
           </div>
-          <span class="ctg"
-            >{{ list.category.c1 }} | {{ list.category.c2 }}
+          <span class="ctg">
+            {{ list.category.c1 }} | {{ list.category.c2 }}
           </span>
           <span class="tt">{{ list.title }}</span>
           <p style="padding-block-start:0px;">

@@ -48,6 +48,7 @@ export default {
 #footer {
   max-width: 1200px;
   padding: 10px;
+  padding-top: 30px;
   margin: auto;
   bottom: 0;
   display: flex;

@@ -1,11 +1,11 @@
 <template>
-  <div class="join">
-    <h1>SignUp</h1>
+  <div class="container py-5">
+    <h1 class="text-center py-2">SignUp</h1>
     <div class="login_group">
-      <div class="input_group f-column m-auto">
+      <div class="d-grid py-1">
         <input
           type="email"
-          class="form-control"
+          class="form-control py-2 px-3"
           placeholder="이메일"
           ref="user_id"
           v-model="user_id"
@@ -13,14 +13,14 @@
         />
         <input
           type="password"
-          class="form-control"
+          class="form-control py-2 px-3 mt-2"
           placeholder="비밀번호"
           ref="user_pw"
           v-model="user_pw"
         />
         <input
           type="password"
-          class="form-control"
+          class="form-control py-2 px-3 mt-2"
           placeholder="비밀번호 확인"
           ref="confirm"
           v-model="confirm"
@@ -29,15 +29,15 @@
         <input
           id="input-name"
           type="text"
-          class="form-control"
+          class="form-control py-2 px-3 mt-2"
           placeholder="이름(닉네임)"
           ref="displayname"
           v-model="displayname"
           v-on:keyup.enter="signup"
         />
       </div>
-      <div class="btn_group">
-        <button class="btn-l" @click="signup">회원가입</button>
+      <div class="d-grid py-2">
+        <button class="btn btn-lg btn-dark" @click="signup">회원가입</button>
       </div>
       <div class="flex between">
         <a href="/login">로그인</a>
@@ -120,43 +120,8 @@ export default {
 </script>
 
 <style lang="scss">
-.join {
-  padding: 40px 0px;
-  padding-bottom: 100px;
-  background: #f1f1f1;
-
-  h1 {
-    font-size: 3rem;
-    text-align: center;
-  }
-
-  .login_group {
-    width: 340px;
-    margin: auto;
-
-    .input_group {
-      input {
-        line-height: 1.6;
-        padding: 8px 20px;
-        border: 1px solid $gray-1;
-        border-radius: 0px;
-        font-size: 1rem;
-      }
-    }
-    .btn_group {
-      padding: 10px 0px;
-      margin: auto;
-      button {
-        background-color: #222;
-        color: #fff;
-        border: 1px solid #222;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #000;
-        border: 1px solid #000;
-      }
-    }
-  }
+.login_group {
+  width: 340px;
+  margin: auto;
 }
 </style>
