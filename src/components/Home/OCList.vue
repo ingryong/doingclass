@@ -1,11 +1,10 @@
 <template>
   <div class="home_oclist">
-    <p class="listTitle">
-      <span class="title">
-        <i class="fas fa-book" style="color:#999;"></i> 온라인 클래스
-      </span>
-      <span class="sub_title">온라인 VOD 클래스</span>
-    </p>
+    <h1 class="fs-3 mt-4">
+      <i class="fas fa-book" style="color:#999;"></i>
+      <strong> 온라인 클래스 </strong>
+      <span class="fs-6">온라인 VOD 클래스</span>
+    </h1>
     <ul>
       <li v-for="list in this.openClassList" :key="list.id">
         <router-link :to="`/ocdetail/${list.id}`">
@@ -50,15 +49,6 @@ export default {
   padding: 30px 10px;
   margin-bottom: 30px;
 
-  .listTitle {
-    .title {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .sub_title {
-      font-size: 0.9rem;
-    }
-  }
   .none_class {
     margin: auto;
     margin-top: 50px;

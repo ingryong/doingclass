@@ -37,8 +37,13 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      MyClass: ""
+      MyClass: "",
+      db: this.$firebase.firestore(),
+      storage: this.$firebase.storage()
     };
+  },
+  computed: {
+    ...mapState(["user"])
   },
   created() {
     this.db
@@ -54,9 +59,6 @@ export default {
           this.MyClass = learningData;
         });
       });
-  },
-  computed: {
-    ...mapState(["user", "db", "storage"])
   }
 };
 </script>

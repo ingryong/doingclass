@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 머니클래스 -->
-    <MoneyList v-bind:moneyClassList="moneyClassList"></MoneyList>
+    <MoneyList :moneyClassList="moneyClassList"></MoneyList>
     <!-- 커리어클래스 -->
-    <CareerList v-bind:careerClassList="careerClassList"></CareerList>
+    <CareerList :careerClassList="careerClassList"></CareerList>
     <!-- 취미클래스 -->
-    <HobbyList v-bind:HobbyClassList="HobbyClassList"></HobbyList>
+    <HobbyList :HobbyClassList="HobbyClassList"></HobbyList>
     <!-- 건강클래스 -->
-    <HealthList v-bind:healthClassList="healthClassList"></HealthList>
+    <HealthList :healthClassList="healthClassList"></HealthList>
   </div>
 </template>
 
@@ -35,8 +35,8 @@ export default {
       healthClassList: ""
     };
   },
-  async created() {
-    await this.db
+  created() {
+    this.db
       .collection("onlineclass")
       .where("classopen", "==", true)
       .onSnapshot(querySnapshot => {

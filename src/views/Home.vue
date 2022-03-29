@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       db: this.$firebase.firestore(),
-      storage: this.$firebase.storage(),
       openClassList: "",
       pageWidth: window.innerWidth
     };
