@@ -1,23 +1,10 @@
 <template>
   <section>
     <!-- 상단 타이틀 배너 컨테이너 -->
-    <header class="title_container">
-      <div class="detail_title_banner">
-        <div class="banner_left">
-          <img :src="classDetails.header_img.header_img1" />
-        </div>
-        <div class="banner_right_top">
-          <img :src="classDetails.header_img.header_img2" />
-        </div>
-        <div class="banner_right_bottom1">
-          <img :src="classDetails.header_img.header_img3" />
-        </div>
-        <div class="banner_right_bottom2">
-          <img :src="classDetails.header_img.header_img4" />
-        </div>
-      </div>
-    </header>
-
+    <TitleBanner :classDetails="classDetails" v-if="windowWidth >= 900">
+    </TitleBanner>
+    <TitleBannerMobile :classDetails="classDetails" v-if="windowWidth < 900">
+    </TitleBannerMobile>
     <article class="detail_container" style="padding:0px 8px;">
       <!-- 메인 컨텐츠 컨테이너 -->
       <div class="left_container">
@@ -81,7 +68,7 @@
         <!-- 강의 커리큘럼 -->
         <div class="description_container">
           <h4>4. 강의 커리큘럼</h4>
-          <p style="margin-top:-20px;">
+          <p>
             강의를 수강하게 되면 배울 수 있는 커리큘럼 입니다.
           </p>
           <div
@@ -90,10 +77,10 @@
             :key="cur_num"
           >
             <p class="cur_title">#{{ cur.cur_id }} {{ cur.chapter_name }}</p>
-            <ul style="display:flex;">
-              <li>
+            <div class="mb-4 d-flex">
+              <div class="col-3">
                 <img class="cur_img" :src="cur.chapter_img" />
-              </li>
+              </div>
               <ul class="cur_study_container">
                 <li v-for="(epi, epi_num) in episode" :key="epi_num">
                   <span
@@ -103,14 +90,24 @@
                   >
                 </li>
               </ul>
-            </ul>
+            </div>
           </div>
         </div>
         <!-- 크리에이터 소개 -->
         <div class="description_container">
           <h4>크리에이터 소개</h4>
-          <div class="creator_container" style="flex;">
-            <img :src="classDetails.profile_img" />
+          <div class="creator_container" v-if="windowWidth < 600">
+            <img class="col-4 d-block m-auto" :src="classDetails.profile_img" />
+            <div class="mt-2">
+              <h3>
+                안녕하세요,<br />크리에이터 "{{ classDetails.profile_name }}"
+                입니다.
+              </h3>
+              <p v-html="handleNewLine(classDetails.profile_description)"></p>
+            </div>
+          </div>
+          <div class="creator_container d-flex" v-else-if="windowWidth >= 600">
+            <img class="col-4" :src="classDetails.profile_img" />
             <div>
               <h3>
                 안녕하세요,<br />크리에이터 "{{ classDetails.profile_name }}"
@@ -131,17 +128,27 @@
         v-if="windowWidth >= 900"
       ></FloatWindow>
     </article>
+    <BottomShop
+      :classDetails="classDetails"
+      v-if="windowWidth < 900"
+    ></BottomShop>
   </section>
 </template>
 
 <script>
 import FloatWindow from "@/components/OnlineClassDetail/FloatWindow";
 import DetailReply from "@/components/OnlineClassDetail/DetailReply";
+import TitleBanner from "@/components/OnlineClassDetail/TitleBanner";
+import BottomShop from "@/components/OnlineClassDetail/BottomShop";
+import TitleBannerMobile from "@/components/OnlineClassDetail/TitleBannerMobile";
 import { mapState } from "vuex";
 export default {
   components: {
     FloatWindow,
-    DetailReply
+    DetailReply,
+    TitleBanner,
+    BottomShop,
+    TitleBannerMobile
   },
   data() {
     return {
@@ -223,56 +230,11 @@ export default {
 section {
   background-color: white;
 }
-.title_container {
-  width: 100%;
-  background: #222;
-
-  .detail_title_banner {
-    width: 100%;
-    min-width: 1000px;
-    max-width: 1920px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 50% 25% 25%;
-    grid-template-rows: 250px 250px;
-    grid-template-areas:
-      "left right right"
-      "left right1 right2";
-
-    img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-    img:hover {
-      animation-duration: 1s;
-      animation-name: ImagefadeOut;
-      animation-fill-mode: both;
-    }
-
-    .banner_left {
-      grid-area: left;
-      img {
-        height: 500px;
-      }
-    }
-    .banner_right_top {
-      grid-area: right;
-    }
-    .banner_right_bottom1 {
-      grid-area: right1;
-    }
-    .banner_right_bottom2 {
-      grid-area: right2;
-    }
-  }
-}
 .detail_container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  min-width: 800px;
   max-width: 1150px;
   margin: auto;
   text-align: left;
@@ -282,6 +244,7 @@ section {
 
     .detail_poster_img {
       width: 100%;
+      padding-bottom: 50px;
     }
 
     .class_info {
@@ -297,7 +260,7 @@ section {
     }
 
     .description_container {
-      margin-bottom: 100px;
+      margin-bottom: 80px;
       hr {
         margin-top: 50px;
       }
@@ -306,8 +269,10 @@ section {
         padding: 20px 20px;
       }
       h4 {
+        padding: 10px 0px;
         font-size: 1.4rem;
         color: $dct-title;
+        font-weight: bold;
       }
       img {
         width: 100%;
@@ -324,10 +289,10 @@ section {
         }
         .cur_img {
           object-fit: cover;
-          width: 220px;
-          height: 123.75px;
+          max-width: 220px;
+          max-height: 300px;
+          overflow: auto;
           border-radius: 4px;
-          background-color: #ccc;
         }
 
         .cur_study_container {
@@ -345,7 +310,6 @@ section {
       }
 
       .creator_container {
-        display: flex;
         padding-bottom: 30px;
         img {
           width: 230px;
@@ -365,7 +329,7 @@ section {
       }
 
       .detail_description {
-        padding: 0px 10px;
+        padding: 20px 10px;
       }
     }
   }

@@ -28,7 +28,7 @@
       </p>
       <p class="detail_learningdays">
         <span>수강기간</span>
-        <span>구매 후 {{ classDetails.learningdays }}일간 무제한 수강</span>
+        <span>구매 후 평생 무제한 수강</span>
       </p>
       <router-link
         class="btn-l btn-mint"
