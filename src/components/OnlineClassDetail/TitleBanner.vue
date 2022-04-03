@@ -1,6 +1,6 @@
 <template>
   <header class="title_container">
-    <div class="detail_title_banner">
+    <div class="detail_title_banner" v-if="classDetails.header_img">
       <div class="banner_left">
         <img :src="classDetails.header_img.header_img1" />
       </div>

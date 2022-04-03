@@ -1,7 +1,7 @@
 <template>
   <aside class="right_container">
     <div id="side_content" class="float_window">
-      <p class="window_category">
+      <p class="window_category" v-if="classDetails.category">
         <span>
           {{ classDetails.category.c1 }} · {{ classDetails.category.c2 }}
         </span>

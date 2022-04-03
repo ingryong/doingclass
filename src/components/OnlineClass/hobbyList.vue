@@ -12,7 +12,7 @@
       <h3>등록된 클래스가 없습니다.</h3>
     </div>
     <!-- 클래스 리스트 -->
-    <ul>
+    <ul v-if="hobbyClassList">
       <li v-for="list in hobbyClassList" :key="list.id">
         <router-link :to="`/ocdetail/${list.id}`">
           <img class="list_sumbnail" :src="list.thumbnail" />

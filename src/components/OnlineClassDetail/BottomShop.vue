@@ -109,6 +109,12 @@
 export default {
   props: {
     classDetails: Object
+  },
+  filters: {
+    comma: function(val) {
+      var num = Number(val);
+      return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,");
+    }
   }
 };
 </script>

@@ -28,11 +28,11 @@ export default {
     return {
       db: this.$firebase.firestore(),
       storage: this.$firebase.storage(),
-      openClassList: "",
-      moneyClassList: "",
-      careerClassList: "",
-      hobbyClassList: "",
-      healthClassList: ""
+      openClassList: [],
+      moneyClassList: [],
+      careerClassList: [],
+      hobbyClassList: [],
+      healthClassList: []
     };
   },
   created() {
