@@ -2,13 +2,13 @@
   <div class="gray_body">
     <div class="buy_container">
       <div class="buy_item">
-        <h3>주문 정보</h3>
+        <h4>주문 정보</h4>
         <p>{{ classDetails.title }}</p>
         <img :src="classDetails.thumbnail" style="width:250px;" />
         <hr />
       </div>
       <div class="buy_item">
-        <h3>결제 금액</h3>
+        <h4>결제 금액</h4>
         <p class="buy_price">
           <span>상품 금액</span
           ><span>{{ classDetails.price + classDetails.price * 0.3 }}원</span>
@@ -26,23 +26,95 @@
         <hr />
       </div>
       <div class="buy_item">
-        <h3>결제 방식</h3>
-        <div class="buy_type_grid">
-          <div>카드결제</div>
-          <div>무통장 입금</div>
-          <div>네이버 페이</div>
-          <div>카카오 페이</div>
-          <div>toss</div>
-          <div>paypal</div>
+        <h4>결제 방식</h4>
+        <div
+          id="buy-btn-group"
+          class="btn-group d-flex flex-wrap"
+          role="group"
+          aria-label="cash type"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-card"
+            autocomplete="off"
+            value="btn-card"
+            checked
+          />
+          <label class="btn btn-outline-dark" for="btn-card">
+            카드결제
+          </label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-bank"
+            value="btn-bank"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-dark" for="btn-bank">
+            무통장 입금
+          </label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-npay"
+            value="btn-npay"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-dark" for="btn-npay">
+            네이버 페이
+          </label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-kpay"
+            value="btn-kpay"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-dark" for="btn-kpay">
+            카카오 페이
+          </label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-toss"
+            value="btn-toss"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-dark" for="btn-toss">
+            toss
+          </label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="buytype-group"
+            id="btn-paypal"
+            value="btn-paypal"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-dark" for="btn-paypal">
+            paypal
+          </label>
         </div>
-        <div style="margin-top:30px;" v-if="learning_data === ''">
-          <a class="btn btn-l btn-blue" @click="buy_class()">결제하기</a>
+        <div class="mt-5" v-if="learning_data === ''">
+          <a class="btn d-block w-100 btn-primary py-3" @click="buy_class()">
+            결제하기
+          </a>
         </div>
-        <div style="margin-top:30px;" v-if="learning_data === true">
-          <p style="color:red; text-align:center;">
-            이미 수강중인 클래스 입니다.
-          </p>
-          <a class="btn btn-l btn-gray" style="cursor:default;">결제하기</a>
+        <div class="mt-5" v-if="learning_data === true">
+          <button class="btn btn-dark d-block w-100 py-3">
+            수강중인 클래스 입니다.
+          </button>
         </div>
       </div>
     </div>
@@ -62,14 +134,15 @@ export default {
       url: this.$route.params.id,
       classDetails: "",
       users_num: 0,
-      learning_data: ""
+      learning_data: "",
+      buytype: ""
     };
   },
-  async mounted() {
-    /* 
+  created() {
+    /*
       클래스 정보 가져오기
     */
-    await this.db
+    this.db
       .collection("onlineclass")
       .doc(this.url)
       .onSnapshot(result => {
@@ -77,10 +150,10 @@ export default {
         this.users_num = result.data().users;
       });
 
-    /* 
+    /*
       유저의 해당 클래스 정보 가져오기
       */
-    await this.db
+    this.db
       .collection("users")
       .doc(this.user.uid)
       .collection("myclass")
@@ -93,8 +166,16 @@ export default {
     /*
     ---------- 결제하기 ---------
     */
-    async buy_class() {
-      await this.db
+    buy_class() {
+      let checkType = document.getElementsByName("buytype-group");
+
+      checkType.forEach(result => {
+        if (result.checked) {
+          return (this.buytype = result.value);
+        }
+      });
+
+      this.db
         .collection("users")
         .doc(this.user.uid)
         .collection("myclass")
@@ -106,7 +187,8 @@ export default {
           class_id: this.url,
           learning: true,
           c1: this.classDetails.category.c1,
-          c2: this.classDetails.category.c2
+          c2: this.classDetails.category.c2,
+          but_type: this.buytype
         })
         .then(() => {
           this.db
@@ -137,27 +219,22 @@ export default {
     box-sizing: border-box;
     padding: 14px;
 
-    .buy_item {
-      .buy_type_grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        column-gap: 4px;
-        row-gap: 4px;
-        div {
-          cursor: pointer;
-          height: 50px;
-          line-height: 50px;
-          text-align: center;
-          background-color: #eee;
-        }
+    #buy-btn-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      column-gap: 4px;
+      row-gap: 4px;
+      label {
+        width: 46%;
+        padding: 10px 0px;
       }
+    }
 
-      .buy_price {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
+    .buy_price {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 }

@@ -24,4 +24,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.description_container {
+  .point {
+    background-color: #fafafa;
+    padding: 20px 20px;
+  }
+  .detail_description {
+    padding: 20px 10px;
+  }
+}
+</style>

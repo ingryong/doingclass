@@ -5,17 +5,17 @@
     <!-- 커리어클래스 -->
     <CareerList :careerClassList="careerClassList"></CareerList>
     <!-- 취미클래스 -->
-    <HobbyList :HobbyClassList="HobbyClassList"></HobbyList>
+    <HobbyList :hobbyClassList="hobbyClassList"></HobbyList>
     <!-- 건강클래스 -->
     <HealthList :healthClassList="healthClassList"></HealthList>
   </div>
 </template>
 
 <script>
-import MoneyList from "@/components/OnlineClass/moneyList";
+import MoneyList from "@/components/OnlineClass/MoneyList";
 import CareerList from "@/components/OnlineClass/careerList";
-import HobbyList from "@/components/OnlineClass/hobbyList";
-import HealthList from "@/components/OnlineClass/healthList";
+import HobbyList from "@/components/OnlineClass/HobbyList";
+import HealthList from "@/components/OnlineClass/HealthList";
 
 export default {
   components: {

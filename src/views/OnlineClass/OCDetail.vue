@@ -5,6 +5,7 @@
     </TitleBanner>
     <TitleBannerMobile :classDetails="classDetails" v-if="windowWidth < 900">
     </TitleBannerMobile>
+
     <article class="detail_container" style="padding:0px 8px;">
       <!-- 메인 컨텐츠 컨테이너 -->
       <div class="left_container">
@@ -24,39 +25,18 @@
           </span>
         </p>
         <hr />
+        <!-- 포스터이미지 -->
         <img class="detail_poster_img" :src="classDetails.poster_img" />
 
         <!-- description 영역 -->
         <ClassDesc :class_dec="classDetails.class_dec"></ClassDesc>
 
         <!-- 강의 커리큘럼 -->
-        <div class="description_container">
-          <h4>강의 커리큘럼</h4>
-          <p>
-            강의를 수강하게 되면 배울 수 있는 커리큘럼 입니다.
-          </p>
-          <div
-            class="cur_container"
-            v-for="(cur, cur_num) in curriculum"
-            :key="cur_num"
-          >
-            <p class="cur_title">#{{ cur.cur_id }} {{ cur.chapter_name }}</p>
-            <div class="mb-4 d-flex">
-              <div class="col-3">
-                <img class="cur_img" :src="cur.chapter_img" />
-              </div>
-              <ul class="cur_study_container">
-                <li v-for="(epi, epi_num) in episode" :key="epi_num">
-                  <span
-                    class="cur_study"
-                    v-if="epi.curriculum_id === cur.curriculum_id"
-                    >{{ epi.episode_name }}</span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <ClassCurriculum
+          :curriculum="curriculum"
+          :episode="episode"
+        ></ClassCurriculum>
+
         <!-- 크리에이터 소개 -->
         <div class="description_container">
           <h4>크리에이터 소개</h4>
@@ -81,6 +61,7 @@
             </div>
           </div>
         </div>
+
         <!-- 댓글 작성하기 -->
         <DetailReply :url="url"></DetailReply>
       </div>
@@ -103,6 +84,7 @@
 import FloatWindow from "@/components/OnlineClassDetail/FloatWindow";
 import DetailReply from "@/components/OnlineClassDetail/DetailReply";
 import TitleBanner from "@/components/OnlineClassDetail/TitleBanner";
+import ClassCurriculum from "@/components/OnlineClassDetail/ClassCurriculum";
 import ClassDesc from "@/components/OnlineClassDetail/ClassDescription";
 import BottomShop from "@/components/OnlineClassDetail/BottomShop";
 import TitleBannerMobile from "@/components/OnlineClassDetail/TitleBannerMobile";
@@ -112,6 +94,7 @@ export default {
     FloatWindow,
     DetailReply,
     TitleBanner,
+    ClassCurriculum,
     ClassDesc,
     BottomShop,
     TitleBannerMobile
@@ -122,8 +105,8 @@ export default {
       storage: this.$firebase.storage(),
       url: this.$route.params.id,
       classDetails: {},
-      curriculum: "",
-      episode: "",
+      curriculum: [],
+      episode: [],
       chapNum: 0,
       epiNum: 0,
       scrollPosition: null,
@@ -230,10 +213,6 @@ section {
       hr {
         margin-top: 50px;
       }
-      .point {
-        background-color: #fafafa;
-        padding: 20px 20px;
-      }
       h4 {
         padding: 10px 0px;
         font-size: 1.4rem;
@@ -243,59 +222,24 @@ section {
       img {
         width: 100%;
       }
+    }
 
-      .cur_container {
-        padding-bottom: 10px;
-
-        .cur_title {
-          font-size: 1.1rem;
-          font-weight: bolder;
-          color: $cur-title-text;
-          margin-bottom: 0px;
-        }
-        .cur_img {
-          object-fit: cover;
-          max-width: 220px;
-          max-height: 300px;
-          overflow: auto;
-          border-radius: 4px;
-        }
-
-        .cur_study_container {
-          width: 100%;
-
-          .cur_study {
-            display: block;
-            border: 1px solid $gray-2;
-            padding: 10px 10px;
-            margin: 0px 0px 5px 5px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-          }
-        }
+    .creator_container {
+      padding-bottom: 30px;
+      img {
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        margin-top: 0px;
+        background-color: #ccc;
+        object-fit: cover;
       }
-
-      .creator_container {
-        padding-bottom: 30px;
-        img {
-          width: 230px;
-          height: 230px;
-          border-radius: 50%;
+      div {
+        padding: 0px 14px;
+        h3 {
           margin-top: 0px;
-          background-color: #ccc;
-          object-fit: cover;
+          font-size: 1.8rem;
         }
-        div {
-          padding: 0px 14px;
-          h3 {
-            margin-top: 0px;
-            font-size: 1.8rem;
-          }
-        }
-      }
-
-      .detail_description {
-        padding: 20px 10px;
       }
     }
   }

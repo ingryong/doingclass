@@ -77,7 +77,7 @@
           </option>
           <option value="money">머니 클래스</option>
           <option value="career">커리어 클래스</option>
-          <option value="healty">건강 클래스</option>
+          <option value="health">건강 클래스</option>
           <option value="hobby">취미 클래스</option>
         </select>
         <p>2차 카테고리</p>
