@@ -5,35 +5,33 @@
       <strong> 온라인 클래스 </strong>
       <span class="fs-6">온라인 VOD 클래스</span>
     </h1>
-    <ul>
-      <li v-for="list in this.openClassList" :key="list.id">
-        <router-link :to="`/ocdetail/${list.id}`">
-          <img
-            class="list_sumbnail"
-            :src="list.thumbnail"
-            alt="온라인클래스 섬네일"
-          />
-          <div class="list_profile">
-            <img :src="list.profile_img" alt="강사 프로필 사진" />
-            <span>{{ list.profile_name }}</span>
-          </div>
-          <span class="ctg"
-            >{{ list.category.c1 }} | {{ list.category.c2 }}
-          </span>
-          <span class="tt">{{ list.title }}</span>
-          <p style="padding-block-start:0px;">
-            <span v-if="list.classopen" class="tag-open">수강 가능</span>
-            <span v-else-if="!list.classopen" class="tag-ready">준비중</span>
-            <span v-if="list.onoff === 'online'" class="tag-coaching"
-              >온라인 강의</span
-            >
-            <span v-if="list.onoff === 'offline'" class="tag-coaching"
-              >오프라인 강의</span
-            >
-          </p>
-        </router-link>
-      </li>
-    </ul>
+    <div style="margin:auto;">
+      <ul>
+        <li v-for="list in openClassList" :key="list.id">
+          <router-link :to="`/ocdetail/${list.id}`">
+            <img :src="list.thumbnail" alt="온라인클래스 섬네일" />
+            <div class="list_profile">
+              <img :src="list.profile_img" alt="강사 프로필 사진" />
+              <span>{{ list.profile_name }}</span>
+            </div>
+            <span class="ctg"
+              >{{ list.category.c1 }} | {{ list.category.c2 }}
+            </span>
+            <span class="tt">{{ list.title }}</span>
+            <p style="padding-block-start:0px;">
+              <span v-if="list.classopen" class="tag-open">수강 가능</span>
+              <span v-else-if="!list.classopen" class="tag-ready">준비중</span>
+              <span v-if="list.onoff === 'online'" class="tag-coaching"
+                >온라인 강의</span
+              >
+              <span v-if="list.onoff === 'offline'" class="tag-coaching"
+                >오프라인 강의</span
+              >
+            </p>
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -61,12 +59,42 @@ export default {
     @include content-area;
     padding-left: 0px;
     padding-right: 0px;
-    display: grid;
-    grid: ". . . .";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
 
     li {
+      width: 240px;
+      margin: 4px;
+
+      a {
+        color: #222;
+      }
+
+      img {
+        width: 240px;
+        height: 180px;
+        border-radius: 6px;
+        object-fit: cover;
+        background: $gray-2;
+      }
+      span {
+        display: block;
+        text-align: left;
+      }
+      p {
+        display: flex;
+        margin: 0px;
+        padding-bottom: 10px;
+      }
+      .ctg {
+        font-size: 0.7rem;
+        margin: 0px 5px;
+      }
+      .tt {
+        font-size: 0.95rem;
+        margin: 0px 5px;
+      }
+
       .list_profile {
         position: relative;
         margin-top: -50px;
@@ -96,34 +124,6 @@ export default {
           margin: auto 0;
           padding-left: 4px;
         }
-      }
-      a {
-        color: #222;
-      }
-
-      img {
-        width: 100%;
-        height: 72%;
-        border-radius: 6px;
-        object-fit: cover;
-        background: $gray-2;
-      }
-      span {
-        display: block;
-        text-align: left;
-      }
-      p {
-        display: flex;
-        margin: 0px;
-        padding-bottom: 10px;
-      }
-      .ctg {
-        font-size: 0.7rem;
-        margin: 0px 5px;
-      }
-      .tt {
-        font-size: 0.95rem;
-        margin: 0px 5px;
       }
     }
     li:hover {

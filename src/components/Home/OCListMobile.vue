@@ -6,13 +6,9 @@
       <span class="fs-6">온라인 VOD 클래스</span>
     </h1>
     <ul>
-      <li v-for="list in this.openClassList" :key="list.id">
+      <li v-for="list in openClassList" :key="list.id">
         <router-link :to="`/ocdetail/${list.id}`">
-          <img
-            class="list_sumbnail"
-            :src="list.thumbnail"
-            alt="온라인클래스 섬네일"
-          />
+          <img :src="list.thumbnail" alt="온라인클래스 섬네일" />
           <div class="list_profile">
             <img :src="list.profile_img" alt="강사 프로필 사진" />
             <span>{{ list.profile_name }}</span>
@@ -61,50 +57,17 @@ export default {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    display: grid;
-    grid: ". .";
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
 
     li {
       padding-bottom: 14px;
-      .list_profile {
-        position: relative;
-        margin-top: -50px;
-        margin-bottom: 4px;
-        display: flex;
-        flex-direction: row;
-        padding: 8px;
-        background: black;
-        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-
-        img {
-          background: linear-gradient(#ccc, #aaa);
-          width: 35px;
-          height: 35px;
-          object-fit: cover;
-          object-position: top;
-          border-radius: 50px;
-          border: 2px solid #fff;
-        }
-        span {
-          color: #fff;
-          font-size: 0.8rem;
-          font-weight: bold;
-          align-items: center;
-          margin: auto 0;
-          padding-left: 4px;
-        }
-      }
-      a {
-        color: #222;
-      }
+      width: 48%;
+      margin: 3px;
 
       img {
         width: 100%;
-        height: 72%;
+        height: 56.5%;
         border-radius: 6px;
         object-fit: cover;
         background: $gray-2;
@@ -127,6 +90,40 @@ export default {
         margin: 0px 5px;
       }
     }
+    .list_profile {
+      position: relative;
+      margin-top: -50px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: row;
+      padding: 8px;
+      background: black;
+      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      img {
+        background: linear-gradient(#ccc, #aaa);
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 50px;
+        border: 2px solid #fff;
+      }
+      span {
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: bold;
+        align-items: center;
+        margin: auto 0;
+        padding-left: 4px;
+      }
+    }
+    a {
+      color: #222;
+    }
+
     li:hover {
       animation-name: scaleUp;
       animation-duration: 0.5s;

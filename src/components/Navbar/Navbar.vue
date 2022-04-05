@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-light bg-light fixed-top w-100">
     <!-- nav 상단 -->
     <div class="container-fluid">
       <!-- 로고이미지 -->
@@ -19,7 +19,7 @@
 
       <!-- 로그인 후 -->
       <div class="nav_auth" v-if="user !== null">
-        <router-link to="/creators/myclass">
+        <router-link to="/creators/myclass" v-if="windowWidth > 500">
           크리에이터 센터
         </router-link>
         <div class="profile_img_circle">
@@ -161,14 +161,30 @@ import MenuList from "@/components/Navbar/MenuList.vue";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "Navbar",
+  data() {
+    return {
+      windowWidth: window.innerWidth
+    };
+  },
   components: {
     MenuList
   },
   computed: {
     ...mapState(["user"])
   },
+  updated() {
+    window.addEventListener("resize", this.setWidth);
+  },
+  destroyed() {
+    // 반응형 너비 관련 코드
+    window.removeEventListener("resize", this.setWidth);
+  },
   methods: {
-    ...mapActions(["signOut"])
+    ...mapActions(["signOut"]),
+    // width 크기 실시간 구하기
+    setWidth() {
+      this.windowWidth = window.innerWidth;
+    }
   }
 };
 </script>

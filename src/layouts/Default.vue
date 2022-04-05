@@ -10,16 +10,9 @@
 <script>
 import Navbar from "@/components/Navbar/Navbar.vue";
 import Footer from "@/components/Footer.vue";
-import store from "../store";
-import "@/plugins/firebase";
 
 export default {
   name: "DefaultLayout",
-  data() {
-    return {
-      store
-    };
-  },
   components: {
     Navbar,
     Footer

@@ -2,12 +2,12 @@
   <div>
     <TitleBaner></TitleBaner>
     <div id="home-list02-bg">
-      <NewBest v-show="pageWidth > 680"></NewBest>
-      <NewBestMobile v-show="pageWidth < 680"></NewBestMobile>
+      <NewBest v-if="pageWidth >= 680"></NewBest>
+      <NewBestMobile v-if="pageWidth < 680"></NewBestMobile>
     </div>
-    <HomeOCList :openClassList="openClassList" v-show="pageWidth > 680">
+    <HomeOCList :openClassList="openClassList" v-if="pageWidth >= 680">
     </HomeOCList>
-    <HomeOCListMoible :openClassList="openClassList" v-show="pageWidth < 680">
+    <HomeOCListMoible :openClassList="openClassList" v-if="pageWidth < 680">
     </HomeOCListMoible>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
       pageWidth: window.innerWidth
     };
   },
-  mounted() {
+  created() {
     this.db
       .collection("onlineclass")
       .where("classopen", "==", true)
@@ -46,8 +46,6 @@ export default {
           this.openClassList = allDatas;
         });
       });
-  },
-  created() {
     // 구성 요소 생성시 Vue 메서드가 등록되고 브라우저 창의 크기가 조정되면 myEventHandler가 트리거되며 구성 요소가 삭제되면 메모리가 확보됩니다
     window.addEventListener("resize", this.myEventHandler);
   },
